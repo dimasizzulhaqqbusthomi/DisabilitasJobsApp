@@ -49,6 +49,7 @@ interface AppContextType {
   setOnboardingStep: (step: number) => void;
   completeOnboarding: () => void;
   applyForJob: (jobId: string, templateText: string) => Promise<void>;
+  cancelApplication: (jobId: string) => Promise<void>;
   submitFeedback: (feedback: Omit<UserFeedback, "submittedAt">) => void;
   showToast: (message: string, type?: "success" | "info" | "warning") => void;
   clearToast: () => void;
@@ -558,6 +559,30 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
     }
   };
+  
+  const cancelApplication = async (jobId: string) => {
+    // Update local state immediately
+    setAppliedJobs(prev => {
+      const next = prev.filter(app => app.jobId !== jobId);
+      localStorage.setItem("app-applications", JSON.stringify(next));
+      return next;
+    });
+
+    // Delete from Supabase if authenticated
+    if (user) {
+      try {
+        const { createClient } = await import("../lib/supabase/client");
+        const supabase = createClient();
+        await supabase
+          .from("job_applications")
+          .delete()
+          .eq("user_id", user.id)
+          .eq("job_id", jobId);
+      } catch (err) {
+        console.error("Failed to delete application from Supabase:", err);
+      }
+    }
+  };
 
 
   const submitFeedback = (feedback: Omit<UserFeedback, "submittedAt">) => {
@@ -875,6 +900,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setOnboardingStep,
         completeOnboarding,
         applyForJob,
+        cancelApplication,
         submitFeedback,
         showToast,
         clearToast,

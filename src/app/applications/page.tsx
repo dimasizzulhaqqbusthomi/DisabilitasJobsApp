@@ -85,12 +85,20 @@ const getInitials = (company: string) =>
   company.replace(/^PT\s+/i, "").split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
 
 function ApplicationCard({ app }: { app: Application }) {
+  const { cancelApplication, showToast } = useAppState();
   const job = JOBS.find(j => j.id === app.jobId);
   if (!job) return null;
 
   const statusConf = STATUS_CONFIG[app.status];
   const currentStep = statusConf.step;
   const isRejected = app.status === "rejected";
+
+  const handleCancel = async (jobId: string) => {
+    if (confirm("Apakah Anda yakin ingin membatalkan lamaran ini?")) {
+      await cancelApplication(jobId);
+      showToast("Lamaran berhasil dibatalkan.", "info");
+    }
+  };
 
   return (
     <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
@@ -167,13 +175,23 @@ function ApplicationCard({ app }: { app: Application }) {
           <Clock className="w-3 h-3" />
           <span>Dikirim {app.appliedAt}</span>
         </div>
-        <Link
-          href={`/chat/${app.jobId}`}
-          className="flex items-center gap-1 text-[9px] font-black text-indigo-600 hover:text-indigo-700 transition-colors"
-        >
-          Chat HRD
-          <ChevronRight className="w-3 h-3" />
-        </Link>
+        <div className="flex items-center gap-3">
+          {app.status !== "accepted" && app.status !== "rejected" && (
+            <button
+              onClick={() => handleCancel(app.jobId)}
+              className="text-[9px] font-black text-rose-500 hover:text-rose-600 transition-colors"
+            >
+              Batalkan Lamaran
+            </button>
+          )}
+          <Link
+            href={`/chat/${app.jobId}`}
+            className="flex items-center gap-1 text-[9px] font-black text-indigo-600 hover:text-indigo-700 transition-colors"
+          >
+            Chat HRD
+            <ChevronRight className="w-3 h-3" />
+          </Link>
+        </div>
       </div>
     </div>
   );
