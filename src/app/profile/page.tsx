@@ -1226,41 +1226,6 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  {/* CARA KERJA EDIT CARD */}
-                  <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-3">
-                    <h3 className="text-xs font-black text-brand-fg flex items-center gap-2 pb-1 border-b border-slate-100">
-                      <span className="w-1 h-3 rounded-full bg-indigo-600 inline-block" />
-                      Cara Kerja Saya
-                    </h3>
-                    <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
-                      Pilih gaya kerja yang membantu kamu bekerja secara optimal.
-                    </p>
-
-                    <div className="grid gap-2 pt-1">
-                      {WORKING_STYLE_OPTIONS.map((opt) => {
-                        const isChecked = workingStyle.includes(opt.key);
-                        return (
-                          <label
-                            key={opt.key}
-                            className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer select-none transition-all text-xs ${isChecked ? "border-indigo-500 bg-indigo-50/55" : "border-slate-100 hover:bg-slate-50"
-                              }`}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={isChecked}
-                              onChange={() => handleToggleWorkingStyle(opt.key)}
-                              className="mt-0.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5 shrink-0"
-                            />
-                            <div className="space-y-0.5">
-                              <span className="font-black text-brand-fg block text-[11px]">{opt.label}</span>
-                              <span className="text-[9px] text-slate-400 font-medium block leading-normal">{opt.desc}</span>
-                            </div>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
-
                   {/* KEBUTUHAN AKSES EDIT CARD */}
                   <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
                     <div>
@@ -1308,6 +1273,43 @@ export default function ProfilePage() {
                       ))}
                     </div>
                   </div>
+
+                  {/* CARA KERJA EDIT CARD */}
+                  <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-3">
+                    <h3 className="text-xs font-black text-brand-fg flex items-center gap-2 pb-1 border-b border-slate-100">
+                      <span className="w-1 h-3 rounded-full bg-indigo-600 inline-block" />
+                      Cara Kerja Saya
+                    </h3>
+                    <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
+                      Pilih gaya kerja yang membantu kamu bekerja secara optimal.
+                    </p>
+
+                    <div className="grid gap-2 pt-1">
+                      {WORKING_STYLE_OPTIONS.map((opt) => {
+                        const isChecked = workingStyle.includes(opt.key);
+                        return (
+                          <label
+                            key={opt.key}
+                            className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer select-none transition-all text-xs ${isChecked ? "border-indigo-500 bg-indigo-50/55" : "border-slate-100 hover:bg-slate-50"
+                              }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => handleToggleWorkingStyle(opt.key)}
+                              className="mt-0.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5 shrink-0"
+                            />
+                            <div className="space-y-0.5">
+                              <span className="font-black text-brand-fg block text-[11px]">{opt.label}</span>
+                              <span className="text-[9px] text-slate-400 font-medium block leading-normal">{opt.desc}</span>
+                            </div>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+
 
                   {/* Submit Button */}
                   <button
