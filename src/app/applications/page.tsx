@@ -86,6 +86,9 @@ const getInitials = (company: string) =>
 
 function ApplicationCard({ app }: { app: Application }) {
   const { cancelApplication, showToast } = useAppState();
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [canceling, setCanceling] = useState(false);
+
   const job = JOBS.find(j => j.id === app.jobId);
   if (!job) return null;
 
@@ -93,11 +96,12 @@ function ApplicationCard({ app }: { app: Application }) {
   const currentStep = statusConf.step;
   const isRejected = app.status === "rejected";
 
-  const handleCancel = async (jobId: string) => {
-    if (confirm("Apakah Anda yakin ingin membatalkan lamaran ini?")) {
-      await cancelApplication(jobId);
-      showToast("Lamaran berhasil dibatalkan.", "info");
-    }
+  const handleCancelConfirm = async () => {
+    setCanceling(true);
+    await cancelApplication(app.jobId);
+    showToast("Lamaran berhasil dibatalkan.", "info");
+    setCanceling(false);
+    setShowCancelModal(false);
   };
 
   return (
@@ -178,7 +182,7 @@ function ApplicationCard({ app }: { app: Application }) {
         <div className="flex items-center gap-3">
           {app.status !== "accepted" && app.status !== "rejected" && (
             <button
-              onClick={() => handleCancel(app.jobId)}
+              onClick={() => setShowCancelModal(true)}
               className="text-[9px] font-black text-rose-500 hover:text-rose-600 transition-colors"
             >
               Batalkan Lamaran
@@ -193,6 +197,47 @@ function ApplicationCard({ app }: { app: Application }) {
           </Link>
         </div>
       </div>
+
+      {/* Custom Confirmation Modal */}
+      {showCancelModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-[32px] w-full max-w-xs p-6 text-center space-y-4 shadow-2xl border border-slate-100 relative">
+            <div className="w-12 h-12 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 mx-auto">
+              <XCircle className="w-6 h-6 animate-pulse" />
+            </div>
+            
+            <div className="space-y-1.5">
+              <h4 className="text-sm font-black text-slate-800">Batalkan Lamaran?</h4>
+              <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
+                Apakah Anda yakin ingin membatalkan lamaran untuk posisi <strong className="text-slate-600">{job.title}</strong> di <strong className="text-slate-600">{job.company}</strong>?
+              </p>
+            </div>
+
+            <div className="flex gap-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => setShowCancelModal(false)}
+                disabled={canceling}
+                className="flex-1 py-3 rounded-xl border border-slate-200 text-[10px] font-black text-slate-500 hover:bg-slate-50 transition-all"
+              >
+                Kembali
+              </button>
+              <button
+                type="button"
+                onClick={handleCancelConfirm}
+                disabled={canceling}
+                className="flex-1 py-3 rounded-xl bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-[10px] font-black text-white shadow-md shadow-rose-500/20 transition-all flex items-center justify-center gap-1.5"
+              >
+                {canceling ? (
+                  <span>Memproses...</span>
+                ) : (
+                  <span>Ya, Batalkan</span>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
