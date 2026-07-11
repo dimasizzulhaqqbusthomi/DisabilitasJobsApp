@@ -530,6 +530,37 @@ export default function ProfilePage() {
             {/* --- SECTION ORDER DISPLAY --- */}
             <div className="px-4 mt-4 z-20 relative space-y-4 max-w-md mx-auto w-full">
 
+              {/* 5. SKILL PASSPORT SUMMARY CARD */}
+              <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-3xl p-5 border border-indigo-400/20 shadow-md text-white space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-black flex items-center gap-2">
+                    <FileCheck className="w-4.5 h-4.5 text-cyan-300" />
+                    Skill Passport
+                  </h3>
+                  <span className="px-2 py-0.5 rounded-full bg-white/20 border border-white/20 text-[9px] font-black">
+                    {progressPercent}% Lengkap
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 bg-white/10 rounded-2xl p-3 shadow-inner text-center">
+                  <div>
+                    <div className="text-lg font-black text-cyan-200">{skillCount}</div>
+                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Skill Terverifikasi</div>
+                  </div>
+                  <div className="border-l border-white/10">
+                    <div className="text-lg font-black text-cyan-200">2</div>
+                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Portofolio</div>
+                  </div>
+                </div>
+
+                <Link
+                  href="/skill-passport"
+                  className="block w-full py-3 rounded-xl bg-white hover:bg-zinc-50 text-indigo-900 text-xs font-black text-center shadow-md shadow-indigo-800/25 transition-all"
+                >
+                  Lihat Skill Passport
+                </Link>
+              </div>
+
               {/* Kesesuaian Profil Kerja Card */}
               <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-5 flex items-center gap-5">
                 {/* donut */}
@@ -659,36 +690,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* 5. SKILL PASSPORT SUMMARY CARD */}
-              <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-3xl p-5 border border-indigo-400/20 shadow-md text-white space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-black flex items-center gap-2">
-                    <FileCheck className="w-4.5 h-4.5 text-cyan-300" />
-                    Skill Passport
-                  </h3>
-                  <span className="px-2 py-0.5 rounded-full bg-white/20 border border-white/20 text-[9px] font-black">
-                    {progressPercent}% Lengkap
-                  </span>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-white/10 rounded-2xl p-3 shadow-inner text-center">
-                  <div>
-                    <div className="text-lg font-black text-cyan-200">{skillCount}</div>
-                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Skill Terverifikasi</div>
-                  </div>
-                  <div className="border-l border-white/10">
-                    <div className="text-lg font-black text-cyan-200">2</div>
-                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Portofolio</div>
-                  </div>
-                </div>
-
-                <Link
-                  href="/skill-passport"
-                  className="block w-full py-3 rounded-xl bg-white hover:bg-zinc-50 text-indigo-900 text-xs font-black text-center shadow-md shadow-indigo-800/25 transition-all"
-                >
-                  Lihat Skill Passport
-                </Link>
-              </div>
 
               {/* 6. KETERAMPILAN KERJA CARD */}
               <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
