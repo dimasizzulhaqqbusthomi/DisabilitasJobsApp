@@ -746,45 +746,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* 7. GAYA KERJA SAYA CARD */}
-              <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-3.5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-black text-brand-fg flex items-center gap-2">
-                    <span className="w-1.5 h-4.5 rounded-full bg-indigo-600 inline-block" />
-                    Gaya Kerja Saya
-                  </h3>
-                  <button
-                    onClick={() => { setIsEditMode(true); setActiveTab("informasi"); }}
-                    className="text-[10px] font-black text-indigo-600 hover:text-indigo-700 flex items-center gap-0.5"
-                  >
-                    Edit &gt;
-                  </button>
-                </div>
-                <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
-                  Gaya kerja yang membantu Anda bekerja secara optimal di perusahaan.
-                </p>
-
-                <div className="grid gap-2.5 pt-1">
-                  {workingStyle.length === 0 ? (
-                    <span className="text-xs italic text-brand-fg/40">Belum ada gaya kerja yang dipilih</span>
-                  ) : (
-                    workingStyle.map((styleKey) => {
-                      const opt = WORKING_STYLE_OPTIONS.find((o) => o.key === styleKey);
-                      if (!opt) return null;
-                      return (
-                        <div key={styleKey} className="p-3 rounded-xl border border-indigo-100 bg-indigo-50/40 flex items-start gap-2.5">
-                          <Check className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
-                          <div>
-                            <span className="block text-xs font-black text-indigo-900">{opt.label}</span>
-                            <span className="block text-[10px] text-brand-fg/70 font-medium leading-relaxed mt-0.5">{opt.desc}</span>
-                          </div>
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-              </div>
-
               {/* 8. KEBUTUHAN AKSES KERJA CARD */}
               <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
                 <div>
@@ -833,6 +794,47 @@ export default function ProfilePage() {
                   )}
                 </div>
               </div>
+
+              {/* 7. GAYA KERJA SAYA CARD */}
+              <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-black text-brand-fg flex items-center gap-2">
+                    <span className="w-1.5 h-4.5 rounded-full bg-indigo-600 inline-block" />
+                    Gaya Kerja Saya
+                  </h3>
+                  <button
+                    onClick={() => { setIsEditMode(true); setActiveTab("informasi"); }}
+                    className="text-[10px] font-black text-indigo-600 hover:text-indigo-700 flex items-center gap-0.5"
+                  >
+                    Edit &gt;
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
+                  Gaya kerja yang membantu Anda bekerja secara optimal di perusahaan.
+                </p>
+
+                <div className="grid gap-2.5 pt-1">
+                  {workingStyle.length === 0 ? (
+                    <span className="text-xs italic text-brand-fg/40">Belum ada gaya kerja yang dipilih</span>
+                  ) : (
+                    workingStyle.map((styleKey) => {
+                      const opt = WORKING_STYLE_OPTIONS.find((o) => o.key === styleKey);
+                      if (!opt) return null;
+                      return (
+                        <div key={styleKey} className="p-3 rounded-xl border border-indigo-100 bg-indigo-50/40 flex items-start gap-2.5">
+                          <Check className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                          <div>
+                            <span className="block text-xs font-black text-indigo-900">{opt.label}</span>
+                            <span className="block text-[10px] text-brand-fg/70 font-medium leading-relaxed mt-0.5">{opt.desc}</span>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+
 
               {/* 9. INFORMASI PRIBADI CARD */}
               <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
