@@ -512,11 +512,11 @@ export default function SkillPassportPage() {
               <div className="border-t border-dashed border-slate-100 pt-3.5 space-y-2.5 text-[11px]">
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                   <div>
-                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Peran Minat</span>
+                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Target Karir</span>
                     <span className="font-extrabold text-brand-fg leading-normal">
                       {currentPersona.targetCareers && currentPersona.targetCareers.length > 0
                         ? currentPersona.targetCareers.join(", ")
-                        : jobPreferences.role}
+                        : "Belum ada target karir yang dipilih"}
                     </span>
                   </div>
                   <div>
@@ -1322,13 +1322,14 @@ export default function SkillPassportPage() {
 
                 {/* Role */}
                 <div className="space-y-1">
-                  <label className="font-black text-slate-400 uppercase tracking-wider text-[9px]">Peran Minat</label>
+                  <label className="font-black text-slate-400 uppercase tracking-wider text-[9px]">Target Karir</label>
                   <input
                     type="text"
                     required
                     value={profileRole}
                     onChange={(e) => setProfileRole(e.target.value)}
                     className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                    placeholder="Contoh: Admin Online, Customer Support"
                   />
                 </div>
 
