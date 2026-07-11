@@ -44,9 +44,11 @@ const DISABILITY_OPTIONS = [
 
 const WORKING_STYLE_OPTIONS = [
   { key: "structured_task", label: "Pekerjaan Terstruktur", desc: "Nyaman dengan tugas yang memiliki langkah dan instruksi jelas." },
-  { key: "independent_work", label: "Fokus Mandiri", desc: "Dapat menyelesaikan pekerjaan dengan sedikit supervisi." },
+  { key: "independent_work", label: "Fokus Mandiri", desc: "Dapat menyelesaikan pekerjaan secara mandiri dengan sedikit supervisi." },
+  { key: "team_collaboration", label: "Kolaborasi Tim", desc: "Nyaman bekerja bersama tim dan berdiskusi." },
+  { key: "initial_guidance", label: "Membutuhkan Arahan Awal", desc: "Lebih optimal dengan panduan saat memulai pekerjaan." },
   { key: "written_communication", label: "Komunikasi Tertulis", desc: "Lebih nyaman menerima instruksi melalui chat atau email." },
-  { key: "team_collaboration", label: "Kolaborasi Tim", desc: "Nyaman bekerja bersama tim dan berdiskusi." }
+  { key: "quiet_environment", label: "Lingkungan Minim Gangguan", desc: "Bekerja lebih optimal pada lingkungan yang tenang." }
 ];
 
 const TARGET_CAREER_OPTIONS = [
