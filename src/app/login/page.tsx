@@ -41,10 +41,10 @@ function LoginForm() {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) { setError(extractErrorMessage(error)); setIsLoading(false); return; }
-      // Gunakan full navigation ke localhost agar cookie session terbaca dengan benar
+      // Gunakan full navigation ke origin saat ini agar cookie session terbaca dengan benar
       // (menghindari masalah RSC fetch gagal akibat cross-origin atau cookie domain)
       const target = redirectTo.startsWith("/") ? redirectTo : "/dashboard";
-      window.location.href = `http://localhost:3000${target}`;
+      window.location.href = `${window.location.origin}${target}`;
     } catch (err: unknown) {
       setError(extractErrorMessage(err));
       setIsLoading(false);
