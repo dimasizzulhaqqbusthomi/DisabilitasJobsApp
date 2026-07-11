@@ -77,7 +77,7 @@ const WORKING_STYLE_OPTIONS = [
 
 
 export default function SkillPassportPage() {
-  const { currentPersona, selectedNeeds, jobPreferences, updatePersona, updatePreferences, showToast } = useAppState();
+  const { currentPersona, selectedNeeds, toggleNeed, jobPreferences, updatePersona, updatePreferences, showToast } = useAppState();
   const { simpleLanguage } = useAccessibility();
   const { user } = useAuth();
 
@@ -531,22 +531,22 @@ export default function SkillPassportPage() {
                     <span className="font-extrabold text-brand-fg leading-normal">{currentPersona.education}</span>
                   </div>
                   <div>
-                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Pengalaman</span>
-                    <span className="font-extrabold text-brand-fg leading-normal">{currentPersona.experience}</span>
+                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Tentang Saya</span>
+                    <span className="font-extrabold text-brand-fg leading-normal block truncate max-w-[150px]" title={currentPersona.bio}>{currentPersona.bio}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* 2. Tentang Saya */}
+          {/* 2. Pengalaman Kerja */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 space-y-2">
             <h3 className="text-xs font-black text-brand-fg flex items-center gap-2">
               <span className="w-1 h-4 rounded-full bg-indigo-500 inline-block shrink-0" />
-              Tentang Saya
+              Pengalaman Kerja
             </h3>
             <p className="text-xs text-brand-fg/70 leading-relaxed font-semibold">
-              {currentPersona.bio}
+              {currentPersona.experience}
             </p>
           </div>
 
@@ -556,26 +556,47 @@ export default function SkillPassportPage() {
               <Accessibility className="w-4 h-4 text-indigo-500 shrink-0" />
               Kebutuhan Akses Kerja
             </h3>
-            <div className="space-y-2">
-              {selectedNeeds.length === 0 ? (
-                <p className="text-xs text-slate-400 italic font-semibold">Belum ada akomodasi yang dipilih.</p>
-              ) : (
-                selectedNeeds.map((needKey) => {
-                  const acc = ACCOMMODATIONS.find(a => a.key === needKey);
-                  if (!acc) return null;
-                  return (
-                    <div key={needKey} className="flex gap-2.5 items-start p-3 rounded-xl bg-indigo-50/20 border border-indigo-100/50 text-xs">
-                      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-1.5" />
-                      <div>
-                        <div className="font-black text-indigo-900">{acc.label}</div>
-                        <p className="text-[10px] text-brand-fg/60 mt-0.5 leading-relaxed font-medium">
-                          {simpleLanguage ? acc.simpleDescription : acc.description}
-                        </p>
-                      </div>
+            <p className="text-[10px] text-slate-400 font-extrabold -mt-1 leading-relaxed">
+              Pilih kebutuhan akses harian Anda untuk membantu pencocokan lowongan secara optimal.
+            </p>
+            <div className="grid grid-cols-1 gap-2 pt-1">
+              {ACCOMMODATIONS.map((acc) => {
+                const isSelected = selectedNeeds.includes(acc.key);
+                return (
+                  <button
+                    key={acc.key}
+                    type="button"
+                    onClick={() => {
+                      toggleNeed(acc.key);
+                      showToast("Kebutuhan akses diperbarui!", "success");
+                    }}
+                    className={`flex gap-3 items-start p-3 rounded-2xl border text-left transition-all ${
+                      isSelected
+                        ? "border-emerald-500 bg-emerald-50/50 shadow-sm ring-1 ring-emerald-500/10"
+                        : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
+                    }`}
+                  >
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                      isSelected
+                        ? "bg-emerald-500 text-white"
+                        : "bg-slate-100 text-slate-400"
+                    }`}>
+                      <Check className="w-4 h-4" />
                     </div>
-                  );
-                })
-              )}
+                    <div className="space-y-0.5 min-w-0 flex-1">
+                      <div className="text-xs font-black text-brand-fg flex items-center gap-1.5">
+                        {acc.label}
+                        {isSelected && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        )}
+                      </div>
+                      <p className="text-[10px] text-slate-400 font-bold leading-normal">
+                        {simpleLanguage ? acc.simpleDescription : acc.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -671,22 +692,22 @@ export default function SkillPassportPage() {
                     }}
                     className={`flex gap-3 items-start p-3 rounded-2xl border text-left transition-all ${
                       isSelected
-                        ? "border-brand-primary/30 bg-brand-primary/[0.03] shadow-sm ring-1 ring-brand-primary/10"
+                        ? "border-indigo-500 bg-indigo-50/50 shadow-sm ring-1 ring-indigo-500/10"
                         : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
                     }`}
                   >
                     <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isSelected
-                        ? "bg-brand-primary text-white"
+                        ? "bg-indigo-600 text-white"
                         : "bg-slate-100 text-slate-400"
                     }`}>
                       <IconComponent className="w-4 h-4" />
                     </div>
-                    <div className="space-y-0.5">
+                    <div className="space-y-0.5 min-w-0 flex-1">
                       <div className="text-xs font-black text-brand-fg flex items-center gap-1.5">
                         {style.label}
                         {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
                         )}
                       </div>
                       <p className="text-[10px] text-slate-400 font-bold leading-normal">
