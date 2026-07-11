@@ -185,7 +185,7 @@ function RegisterForm() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <div className="flex-1 px-6 pt-10 pb-8 overflow-y-auto">
+      <div className="flex-1 px-6 pt-10 pb-24 overflow-y-auto">
 
         {/* Stepper */}
         <div className="flex items-center justify-center gap-0 mb-7">
