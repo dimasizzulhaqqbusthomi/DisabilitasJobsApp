@@ -179,7 +179,7 @@ export default function ChatRoomPage() {
   };
 
   return (
-    <AppLayout showHeader={false} showNav={false} mainClassName="flex-1 overflow-hidden bg-brand-bg relative flex flex-col h-screen">
+    <AppLayout showHeader={false} showNav={false} mainClassName="flex-1 overflow-hidden bg-brand-bg relative flex flex-col h-full">
       <div className="flex flex-col h-full bg-slate-50">
         
         {/* ─── HEADER BAR (Matches User Style Third Screen) ─── */}

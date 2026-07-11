@@ -33,7 +33,7 @@ export default function ChatListPage() {
   }, [searchQuery]);
 
   return (
-    <AppLayout showHeader={false} mainClassName="flex-1 flex flex-col h-screen overflow-hidden bg-brand-bg relative pb-16">
+    <AppLayout showHeader={false} mainClassName="flex-1 flex flex-col h-full overflow-hidden bg-brand-bg relative pb-16">
       {/* Scrollable chat content wrapper */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex flex-col min-h-full">
