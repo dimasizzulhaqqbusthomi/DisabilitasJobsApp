@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc; /* slate-50 */
+  --foreground: #0f172a; /* slate-900 */
+  
+  --primary: #4f46e5; /* indigo-600 */
+  --primary-hover: #4338ca; /* indigo-700 */
+  --primary-light: #e0e7ff; /* indigo-100 */
+  
+  --secondary: #06b6d4; /* cyan-500 */
+  --secondary-hover: #0891b2; /* cyan-600 */
+  --secondary-light: #ecfeff; /* cyan-50 */
+  
+  --accent: #10b981; /* emerald-500 */
+  --accent-light: #d1fae5; /* emerald-100 */
+  
+  --warning: #f59e0b; /* amber-500 */
+  --warning-light: #fef3c7; /* amber-100 */
+  
+  --danger: #ef4444; /* red-500 */
+  --danger-light: #fee2e2; /* red-100 */
+  
+  --border: #e2e8f0; /* slate-200 */
+  --card: #ffffff;
+  
+  --font-scale: 100%;
+}
+
+/* Theme Configuration for Tailwind v4 */
+@theme {
+  --color-brand-bg: var(--background);
+  --color-brand-fg: var(--foreground);
+  --color-brand-primary: var(--primary);
+  --color-brand-primary-hover: var(--primary-hover);
+  --color-brand-primary-light: var(--primary-light);
+  --color-brand-secondary: var(--secondary);
+  --color-brand-secondary-hover: var(--secondary-hover);
+  --color-brand-secondary-light: var(--secondary-light);
+  --color-brand-accent: var(--accent);
+  --color-brand-accent-light: var(--accent-light);
+  --color-brand-warning: var(--warning);
+  --color-brand-warning-light: var(--warning-light);
+  --color-brand-danger: var(--danger);
+  --color-brand-danger-light: var(--danger-light);
+  --color-brand-border: var(--border);
+  --color-brand-card: var(--card);
+
+  /* Force only mobile layouts by making all media breakpoints extremely high */
+  --breakpoint-sm: 99999px;
+  --breakpoint-md: 99999px;
+  --breakpoint-lg: 99999px;
+  --breakpoint-xl: 99999px;
+  --breakpoint-2xl: 99999px;
+}
+
+/* Accessibility settings overrides */
+html.text-large {
+  font-size: 115%; /* Scales all rem font-sizes */
+}
+
+html.text-xlarge {
+  font-size: 130%; /* Scales all rem font-sizes */
+}
+
+/* High Contrast theme definition - using strict accessible guidelines */
+html.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  --primary: #ffff00; /* Pure accessible yellow */
+  --primary-hover: #e6e600;
+  --primary-light: #222200;
+  
+  --secondary: #00ffff; /* Pure accessible cyan */
+  --secondary-hover: #00cccc;
+  --secondary-light: #002222;
+  
+  --accent: #00ff00; /* Pure green */
+  --accent-light: #003300;
+  
+  --warning: #ff8000; /* Orange */
+  --warning-light: #331a00;
+  
+  --danger: #ff3333; /* Bright red */
+  --danger-light: #330000;
+  
+  --border: #ffffff;
+  --card: #000000;
+}
+
+html.high-contrast * {
+  /* Enforce high contrast border and outlines for interactive items */
+  outline-color: var(--primary) !important;
+}
+
+/* Reduced motion accessibility utility */
+html.reduced-motion * {
+  animation-delay: 0s !important;
+  animation-duration: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Reusable custom layouts */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+html.high-contrast .glass-panel {
+  background: #000000;
+  border: 2px solid #ffffff;
+  backdrop-filter: none;
+}
+
+/* Toast animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-toast {
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Nav indicator fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Accessible focus styling */
+*:focus-visible {
+  outline: 4px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Custom Accessibility helper classes */
+.sr-only-focusable:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Hide desktop scrollbars globally to maintain a clean mobile app feel */
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
+
+/* ATS CV A4 Print Styling */
+@media print {
+  /* Collapse non-print elements so they occupy 0px of space */
+  #passport-screen-content,
+  header,
+  nav,
+  aside,
+  .fixed,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  /* Reset constraints only on HTML, Body, and Main layouts */
+  html, body, main {
+    background: white !important;
+    color: #1e293b !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Reset the mobile app container shell wrappers */
+  body > div,
+  body > div > div {
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    position: static !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Display the CV container normally as part of the document flow */
+  #ats-cv-print {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: white !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page size setup to A4 with exactly 3cm margin */
+  @page {
+    size: A4;
+    margin: 3cm;
+  }
+}
