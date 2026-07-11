@@ -1116,7 +1116,28 @@ export default function ProfilePage() {
                       </div>
                     </div>
 
-                    {/* Experience */}
+                    {/* Bio */}
+                    <div className="space-y-1">
+                      <label htmlFor="profile-bio" className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                        Tentang Saya (Bio)
+                      </label>
+                      <textarea
+                        id="profile-bio"
+                        rows={3}
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        placeholder="Ringkasan profesional diri Anda..."
+                        className="w-full px-3.5 py-3 rounded-xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none resize-none h-20"
+                      />
+                    </div>
+                  </div>
+
+                  {/* PENGALAMAN KERJA EDIT CARD */}
+                  <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-3">
+                    <h3 className="text-xs font-black text-brand-fg flex items-center gap-2 pb-1 border-b border-slate-100">
+                      <span className="w-1.5 h-4.5 rounded-full bg-indigo-600 inline-block" />
+                      Pengalaman Kerja
+                    </h3>
                     <div className="space-y-1">
                       <label htmlFor="profile-experience" className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">
                         Pengalaman Kerja
@@ -1132,21 +1153,6 @@ export default function ProfilePage() {
                           className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
                         />
                       </div>
-                    </div>
-
-                    {/* Bio */}
-                    <div className="space-y-1">
-                      <label htmlFor="profile-bio" className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">
-                        Tentang Saya (Bio)
-                      </label>
-                      <textarea
-                        id="profile-bio"
-                        rows={3}
-                        value={bio}
-                        onChange={(e) => setBio(e.target.value)}
-                        placeholder="Ringkasan profesional diri Anda..."
-                        className="w-full px-3.5 py-3 rounded-xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none resize-none h-20"
-                      />
                     </div>
                   </div>
 
