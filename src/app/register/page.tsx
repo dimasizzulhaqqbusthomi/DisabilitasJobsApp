@@ -45,7 +45,7 @@ const SELECT_CLS = "w-full p-3 rounded-xl border border-brand-border bg-white te
 
 function RegisterForm() {
   const router = useRouter();
-  const { updatePreferences, completeOnboarding } = useAppState();
+  const { updatePreferences, completeOnboarding, updatePersona } = useAppState();
   const { user } = useAuth();
 
   const [step, setStep] = useState<Step>(1);
@@ -124,6 +124,7 @@ function RegisterForm() {
           disability_type: disabilityType,
           accessibility_needs: selectedNeeds,
           purpose: purpose,
+          target_careers: [prefRole],
           created_at: new Date().toISOString(),
         });
         if (updateErr) {
@@ -137,13 +138,22 @@ function RegisterForm() {
             disability_type: disabilityType,
             accessibility_needs: selectedNeeds,
             purpose: purpose,
+            target_careers: [prefRole],
           }
         });
       } else {
         // Standard email/password signup flow
         const { data, error: signUpError } = await supabase.auth.signUp({
           email, password,
-          options: { data: { full_name: fullName, disability_type: disabilityType, accessibility_needs: selectedNeeds, purpose } },
+          options: {
+            data: {
+              full_name: fullName,
+              disability_type: disabilityType,
+              accessibility_needs: selectedNeeds,
+              purpose,
+              target_careers: [prefRole],
+            }
+          },
         });
         if (signUpError) { setError(signUpError.message === "{}" ? "Terjadi kesalahan server." : signUpError.message); setIsLoading(false); return; }
         if (data.user) {
@@ -154,10 +164,12 @@ function RegisterForm() {
             disability_type: disabilityType,
             accessibility_needs: selectedNeeds,
             purpose: purpose,
+            target_careers: [prefRole],
             created_at: new Date().toISOString(),
           });
         }
       }
+      updatePersona({ targetCareers: [prefRole] });
       updatePreferences({ role: prefRole, location: prefLocation, type: prefType, salary: prefSalary });
       completeOnboarding();
       router.push("/dashboard");
@@ -296,7 +308,7 @@ function RegisterForm() {
           <div className="space-y-4">
             <div className="mb-4"><h2 className="text-xl font-black text-brand-fg">Preferensi Pekerjaan</h2><p className="text-xs text-brand-fg/50 mt-0.5">Sesuaikan jenis pekerjaan yang ingin Anda temukan.</p></div>
             <div className="space-y-3">
-              <div><label className="block text-xs font-bold text-brand-fg/70 mb-1.5">Bidang Pekerjaan</label>
+              <div><label className="block text-xs font-bold text-brand-fg/70 mb-1.5">Target Karir</label>
                 <select id="pref-role" value={prefRole} onChange={e => setPrefRole(e.target.value)} className={SELECT_CLS}>
                   <option>Admin Online</option><option>Customer Support Chat</option><option>Data Entry Assistant</option><option>Junior Graphic Designer</option><option>Content Admin UMKM</option>
                 </select>
