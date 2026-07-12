@@ -58,8 +58,8 @@ export default function DashboardPage() {
   })).sort((a, b) => b.matchScore - a.matchScore);
 
   const topJobs = scoredJobs.slice(0, 3);
-  const avgMatch = selectedNeeds.length === 0 ? 0
-    : Math.round(scoredJobs.reduce((s, j) => s + j.matchScore, 0) / scoredJobs.length);
+  // Always use real calculated average — score reflects all dimensions (accessibility, skills, portfolio, career)
+  const avgMatch = Math.round(scoredJobs.reduce((s, j) => s + j.matchScore, 0) / scoredJobs.length);
 
   const initials = currentPersona.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
   const skillPct = Math.min(100, Math.round((currentPersona.skills?.length || 0) * 16));
@@ -102,14 +102,8 @@ export default function DashboardPage() {
               {initials}
             </div>
             <div className="flex flex-col flex-1">
-              <span className="text-[10px] text-white/70 font-medium">Selamat datang</span>
+              <span className="text-[10px] text-white/70 font-medium">Selamat datang di Ablework</span>
               <span className="text-base font-black text-white leading-tight">{currentPersona.name}</span>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="text-[9px] text-white/80 font-bold">Profil Kerja:</span>
-                <span className="text-[9px] text-white font-black bg-white/15 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                  {profileCompletionPct}% Lengkap
-                </span>
-              </div>
             </div>
             <Link href="/notifications" aria-label="Notifikasi"
               className="relative w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center hover:bg-white/25 transition-all">
@@ -122,20 +116,24 @@ export default function DashboardPage() {
           <div className="relative z-10 mb-6">
             <p className="text-white/80 text-xs font-medium mb-0.5">Tingkat kecocokan profil Anda</p>
             <h1 className="text-white text-xl font-black leading-snug">
-              {avgMatch === 0 ? "Atur profil aksesibilitasmu" : `${avgMatch}% cocok dengan lowongan`}
+              {avgMatch < 30 ? "Lengkapi profil untuk kecocokan terbaik" : `${avgMatch}% cocok dengan lowongan`}
             </h1>
           </div>
 
           {/* stat pill row */}
           <div className="relative z-10 flex gap-2.5">
             {[
-              { label: "Lowongan Cocok", val: cocok },
-              { label: "Lamaran", val: dikirim },
+              { label: "Lowongan Cocok", val: cocok, href: "/jobs" },
+              { label: "Lamaran", val: dikirim, href: "/applications" },
             ].map(s => (
-              <div key={s.label} className="flex-1 bg-white/15 backdrop-blur-sm border border-white/20 rounded-2xl px-3 py-2.5 text-center">
+              <Link
+                key={s.label}
+                href={s.href}
+                className="flex-1 bg-white/15 backdrop-blur-sm border border-white/20 rounded-2xl px-3 py-2.5 text-center hover:bg-white/25 active:scale-[0.98] transition-all block"
+              >
                 <div className="text-white font-black text-base leading-none">{s.val}</div>
                 <div className="text-white/70 text-[9px] font-semibold mt-0.5 leading-tight">{s.label}</div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -155,17 +153,21 @@ export default function DashboardPage() {
             </div>
             <div className="flex-1 min-w-0">
               <h2 className="font-black text-sm text-brand-fg mb-1">
-                {avgMatch === 0 ? "Belum Ada Kecocokan" : avgMatch >= 70 ? "Profil Sangat Cocok!" : "Profil Cukup Cocok"}
+                {avgMatch < 30
+                  ? "Belum Ada Kecocokan"
+                  : avgMatch >= 70
+                    ? "Profil Sangat Cocok!"
+                    : "Profil Cukup Cocok"}
               </h2>
               <p className="text-[11px] text-brand-fg/60 leading-snug mb-3">
-                {avgMatch === 0
-                  ? "Atur kebutuhan aksesibilitas untuk mendapatkan skor kecocokan lowongan."
+                {avgMatch < 30
+                  ? "Tambahkan skill, portofolio, atau target karir untuk meningkatkan skor kecocokanmu."
                   : `${cocok} dari ${scoredJobs.length} lowongan cocok dengan profil aksesibilitasmu.`}
               </p>
-              <Link href="/profile"
+              <Link href={avgMatch < 30 ? "/skill-passport" : "/profile"}
                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-brand-primary text-white text-[10px] font-bold hover:bg-brand-primary-hover transition-all">
                 <Accessibility className="w-3.5 h-3.5" />
-                {avgMatch === 0 ? "Atur Sekarang" : "Perbarui Profil"}
+                {avgMatch < 30 ? "Lengkapi Profil" : "Perbarui Skill Passport"}
               </Link>
             </div>
           </div>

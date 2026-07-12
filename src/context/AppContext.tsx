@@ -487,6 +487,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         ? prev.filter(k => k !== needKey) 
         : [...prev, needKey];
       localStorage.setItem("app-selectedneeds", JSON.stringify(next));
+      
+      // Keep currentPersona needs list in sync
+      setCurrentPersona(curr => {
+        const updated = { ...curr, needs: next };
+        if (!user) {
+          localStorage.setItem("app-mockpersona-" + curr.id, JSON.stringify(updated));
+        }
+        return updated;
+      });
       return next;
     });
   };
@@ -494,6 +503,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setNeeds = (needs: string[]) => {
     setSelectedNeeds(needs);
     localStorage.setItem("app-selectedneeds", JSON.stringify(needs));
+    
+    // Keep currentPersona needs list in sync
+    setCurrentPersona(curr => {
+      const updated = { ...curr, needs: needs };
+      if (!user) {
+        localStorage.setItem("app-mockpersona-" + curr.id, JSON.stringify(updated));
+      }
+      return updated;
+    });
   };
 
   const updatePreferences = (prefs: Partial<AppContextType["jobPreferences"]>) => {
@@ -697,7 +715,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           targetCareers: (data.target_careers && data.target_careers.length > 0) ? data.target_careers : localTC,
           location: data.location || localLoc,
           portfolios: dbPortfolios,
-          certificates: dbCertificates
+          certificates: dbCertificates,
+          purpose: data.purpose || "",
+          cover: data.cover || ""
         });
         setSelectedNeeds(data.accessibility_needs || []);
       }
@@ -724,6 +744,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (updated.certificates !== undefined) {
         localStorage.setItem("app-certificates-" + prev.id, JSON.stringify(updated.certificates));
       }
+      if (updated.purpose !== undefined) {
+        localStorage.setItem("app-purpose-" + prev.id, updated.purpose);
+      }
+      if (updated.cover !== undefined) {
+        localStorage.setItem("app-cover-" + prev.id, updated.cover);
+      }
       if (!user) {
         localStorage.setItem("app-mockpersona-" + prev.id, JSON.stringify(next));
       }
@@ -747,6 +773,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         if (updated.location !== undefined) dbUpdate.location = updated.location;
         if (updated.portfolios !== undefined) dbUpdate.portfolios = updated.portfolios;
         if (updated.certificates !== undefined) dbUpdate.certificates = updated.certificates;
+        if (updated.purpose !== undefined) dbUpdate.purpose = updated.purpose;
+        if (updated.cover !== undefined) dbUpdate.cover = updated.cover;
+        if (updated.avatar !== undefined) dbUpdate.avatar = updated.avatar;
 
         if (Object.keys(dbUpdate).length > 0) {
           supabase

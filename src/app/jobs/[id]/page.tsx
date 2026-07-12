@@ -259,13 +259,11 @@ export default function JobDetailPage() {
             </div>
           </div>
 
-          {/* Alasan Kecocokan Pekerjaan */}
           <MatchReasonCard
-            skillMatch={matchDetails.skillMatch}
-            accessibilityMatch={matchDetails.accessibilityMatch}
-            workPreferenceMatch={matchDetails.workPreferenceMatch}
-            experienceMatch={matchDetails.experienceMatch}
-            jobInterestMatch={matchDetails.jobInterestMatch}
+            accessibilityScore={matchDetails.accessibilityScore}
+            skillScore={matchDetails.skillScore}
+            portfolioScore={matchDetails.portfolioScore}
+            jobInterestScore={matchDetails.jobInterestScore}
           />
 
           {/* Akomodasi Aksesibilitas */}

@@ -48,6 +48,8 @@ export interface Persona {
   location?: string;
   portfolios?: PortfolioItem[];
   certificates?: CertificateItem[];
+  purpose?: string;
+  cover?: string;
 }
 
 export interface AccommodationType {
@@ -689,6 +691,183 @@ const JOB_REQUIRED_SKILLS: Record<string, string[]> = {
   "8": ["Komunikasi", "Google Workspace", "Admin Online", "Email Writing"]
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SEMANTIC MATCH HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Checks if two strings are semantically related using:
+ * 1. Direct substring containment
+ * 2. Shared significant words (≥4 chars)
+ */
+const semanticContains = (a: string, b: string): boolean => {
+  const al = a.toLowerCase().trim();
+  const bl = b.toLowerCase().trim();
+  if (al.includes(bl) || bl.includes(al)) return true;
+  // Word-level overlap: share at least one significant word
+  const wordsA = al.split(/\W+/).filter(w => w.length >= 4);
+  const wordsB = bl.split(/\W+/).filter(w => w.length >= 4);
+  return wordsA.some(wa => wordsB.some(wb => wa.includes(wb) || wb.includes(wa)));
+};
+
+/**
+ * Synonym / concept expansion map (Indonesian + English).
+ * Key = canonical concept; values = synonyms / related terms.
+ * Used for skill, portfolio, and career matching.
+ */
+const CONCEPT_SYNONYMS: Record<string, string[]> = {
+  // E-commerce / Online Shop
+  "toko online": ["online shop", "e-commerce", "ecommerce", "marketplace", "shopee", "tokopedia", "lazada", "bukalapak", "jualan", "berjualan", "dagang", "perdagangan", "penjualan", "jual beli", "belanja online", "admin online"],
+  "admin online": ["toko online", "online shop", "e-commerce", "marketplace", "jualan online", "admin toko", "pengelola toko"],
+  "jualan": ["sales", "selling", "penjualan", "berjualan", "dagang", "perdagangan", "toko", "online shop", "marketplace"],
+
+  // Data Entry / Spreadsheet
+  "data entry": ["input data", "entri data", "pengisian data", "mengetik data", "spreadsheet", "excel", "google sheets"],
+  "microsoft excel": ["excel", "spreadsheet", "google sheets", "tabel", "pengolahan data", "data entry"],
+  "microsoft office": ["office", "word", "excel", "powerpoint", "google workspace", "google docs"],
+  "google workspace": ["google docs", "google sheets", "google drive", "gmail", "google calendar"],
+
+  // Customer Service / Support
+  "customer service": ["customer support", "cs", "layanan pelanggan", "pelayanan pelanggan", "membalas chat", "chat support", "helpdesk"],
+  "customer support": ["customer service", "cs", "layanan pelanggan", "membalas chat", "chat support"],
+
+  // Design / Creative
+  "desain canva": ["canva", "desain grafis", "graphic design", "konten kreatif", "visual"],
+  "desain grafis": ["graphic design", "canva", "illustrator", "photoshop", "figma", "visual design", "desainer"],
+  "adobe illustrator": ["illustrator", "ai", "vektor", "vector", "desain logo"],
+  "photoshop": ["ps", "adobe ps", "image editing", "edit foto", "foto produk"],
+  "figma": ["ui design", "ux design", "wireframe", "prototyping", "web design"],
+
+  // Social Media / Content
+  "social media": ["medsos", "instagram", "tiktok", "facebook", "twitter", "linkedin", "konten media sosial", "konten sosmed"],
+  "content": ["konten", "social media", "posting", "caption", "copywriting"],
+  "copywriting": ["menulis konten", "caption", "teks iklan", "copy", "penulisan kreatif"],
+
+  // Communication / Writing
+  "komunikasi": ["komunikasi tertulis", "menulis", "email", "chat", "pesan", "korespondensi"],
+  "email writing": ["menulis email", "email bisnis", "korespondensi", "surat resmi"],
+
+  // Admin / Virtual Assistant
+  "virtual assistant": ["asisten virtual", "va", "admin", "personal assistant", "remote assistant"],
+  "admin": ["administrasi", "tata usaha", "sekretaris", "virtual assistant", "back office"],
+
+  // General soft skills
+  "kerjasama tim": ["teamwork", "kolaborasi", "team collaboration", "bekerja tim"],
+  "problem solving": ["pemecahan masalah", "analitis", "analytical", "troubleshooting"],
+};
+
+/**
+ * Expands a term into all its synonyms/related concepts.
+ */
+const expandConcepts = (term: string): string[] => {
+  const tl = term.toLowerCase();
+  const expanded = new Set<string>([tl]);
+  Object.entries(CONCEPT_SYNONYMS).forEach(([canonical, synonyms]) => {
+    const allTerms = [canonical, ...synonyms];
+    // If the term matches any member of this group, add all group members
+    if (allTerms.some(t => semanticContains(tl, t) || semanticContains(t, tl))) {
+      allTerms.forEach(t => expanded.add(t.toLowerCase()));
+    }
+  });
+  return Array.from(expanded);
+};
+
+/**
+ * Returns a [0..1] semantic similarity score between two string lists.
+ * Each item in listA is checked against all expanded forms of listB items.
+ */
+const semanticListOverlap = (listA: string[], listB: string[]): number => {
+  if (listA.length === 0 || listB.length === 0) return 0;
+  const expandedB = listB.flatMap(expandConcepts);
+  let matched = 0;
+  listA.forEach(a => {
+    const expandedA = expandConcepts(a);
+    const found = expandedA.some(ea => expandedB.some(eb => semanticContains(ea, eb)));
+    if (found) matched++;
+  });
+  return matched / listA.length;
+};
+
+/**
+ * Builds a searchable text corpus from a job (title + description + tasks + requirements + facilities).
+ */
+const jobCorpus = (job: Job): string => [
+  job.title,
+  job.description,
+  job.simpleDescription,
+  ...(job.tasks || []),
+  ...(job.simpleTasks || []),
+  ...(job.requirements || []),
+  ...(job.simpleRequirements || []),
+  ...(job.facilities || []),
+  ...(job.notes || []),
+].join(" ").toLowerCase();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PORTFOLIO RELEVANCE SCORING
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Calculates how relevant a user's portfolio is to a job.
+ * Checks portfolio title, role, and tool against the job corpus.
+ * Returns [0..1].
+ */
+const portfolioRelevanceScore = (portfolios: PortfolioItem[], job: Job): number => {
+  if (!portfolios || portfolios.length === 0) return 0.3; // neutral default
+  const corpus = jobCorpus(job);
+  let totalScore = 0;
+
+  portfolios.forEach(port => {
+    const portTerms = [port.title, port.role, port.tool].join(" ").toLowerCase();
+    const portWords = portTerms.split(/\W+/).filter(w => w.length >= 3);
+    const expandedPortTerms = portTerms.split(/\s+/).filter(w => w.length >= 3).flatMap(expandConcepts);
+
+    // Direct word hits in corpus
+    const directHits = portWords.filter(w => corpus.includes(w)).length;
+    const directScore = portWords.length > 0 ? Math.min(directHits / portWords.length, 1) : 0;
+
+    // Semantic / concept hits
+    const semanticHit = expandedPortTerms.some(t => corpus.includes(t));
+    const semanticBoost = semanticHit ? 0.4 : 0;
+
+    totalScore += Math.min(directScore + semanticBoost, 1.0);
+  });
+
+  return Math.min(totalScore / portfolios.length, 1.0);
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACCESSIBILITY SEMANTIC MATCHING
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Known standard accommodation keys that are matched exactly */
+const STANDARD_NEED_KEYS = [
+  "remote", "caption_meeting", "wheelchair_access", "written_instruction",
+  "screen_reader", "quiet_environment", "flexible_hours", "chat_communication"
+];
+
+/**
+ * Maps a custom/non-standard need string to a [0..1] match score against a job.
+ * Searches the job corpus for relevant semantic matches.
+ */
+const customNeedMatchScore = (need: string, job: Job): number => {
+  const corpus = jobCorpus(job);
+  const expanded = expandConcepts(need);
+  // Check if any expanded form appears in job corpus
+  const found = expanded.some(t => corpus.includes(t.toLowerCase()));
+  if (found) return 1.0;
+  // Partial: check individual words of the need
+  const words = need.toLowerCase().split(/\W+/).filter(w => w.length >= 4);
+  if (words.length === 0) return 0;
+  const hits = words.filter(w => corpus.includes(w)).length;
+  return hits / words.length;
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MAIN SCORING FUNCTION
+// New weights: 50% Accessibility | 20% Skills | 20% Portfolio | 10% Target Career
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const calculateMatchDetails = (
   job: Job,
   persona: Persona | null | undefined,
@@ -701,113 +880,106 @@ export const calculateMatchDetails = (
   workPreferenceMatch: boolean;
   experienceMatch: boolean;
   jobInterestMatch: boolean;
+  accessibilityScore: number;
+  skillScore: number;
+  portfolioScore: number;
+  jobInterestScore: number;
 } => {
-  // 1. Skill Compatibility (30%) - dari Keterampilan Kerja
+  // ── 1. ACCESSIBILITY (50%) ────────────────────────────────────────────────
+  // Use selectedNeeds if explicitly provided (even if empty []) — empty means user cleared all needs.
+  // Only fall back to persona?.needs when selectedNeeds is null/undefined (not passed at all).
+  const needs = (selectedNeeds !== null && selectedNeeds !== undefined ? selectedNeeds : (persona?.needs ?? [])) ;
+  let accessibilityScore = 1.0; // default: no needs declared = full score
+
+  if (needs.length > 0) {
+    let totalNeedScore = 0;
+    needs.forEach(need => {
+      if (STANDARD_NEED_KEYS.includes(need)) {
+        // Standard need: exact match against job accommodations
+        if (job.accommodations.includes(need)) {
+          totalNeedScore += 1.0;
+        } else if (
+          (job.type === "remote" || job.accommodations.includes("remote")) &&
+          (need === "wheelchair_access" || need === "quiet_environment" || need === "flexible_hours")
+        ) {
+          // Remote jobs implicitly satisfy mobility-/environment-related needs
+          totalNeedScore += 0.8;
+        } else {
+          totalNeedScore += 0;
+        }
+      } else {
+        // Custom need: semantic search in job corpus
+        totalNeedScore += customNeedMatchScore(need, job);
+      }
+    });
+    accessibilityScore = totalNeedScore / needs.length;
+  }
+
+  const accessibilityMatch = accessibilityScore >= 0.5;
+
+  // ── 2. SKILLS (20%) ───────────────────────────────────────────────────────
   const userSkills = persona?.skills || [];
   const reqSkills = JOB_REQUIRED_SKILLS[job.id] || [];
-  let matchedSkillsCount = 0;
+  let skillScore = 1.0; // default: no required skills = full score
+
   if (reqSkills.length > 0 && userSkills.length > 0) {
-    reqSkills.forEach(js => {
-      const hasMatch = userSkills.some(us => 
-        us.toLowerCase().includes(js.toLowerCase()) || 
-        js.toLowerCase().includes(us.toLowerCase())
-      );
-      if (hasMatch) matchedSkillsCount++;
-    });
+    // Use semantic overlap: each required skill is matched semantically against all user skills
+    skillScore = semanticListOverlap(reqSkills, userSkills);
+  } else if (reqSkills.length > 0 && userSkills.length === 0) {
+    skillScore = 0;
   }
-  const skillScore = reqSkills.length > 0 ? (matchedSkillsCount / reqSkills.length) : 1.0;
-  const skillMatch = matchedSkillsCount > 0 || reqSkills.length === 0;
 
-  // 2. Accessibility Compatibility (30%) - dari Kebutuhan Akses Kerja
-  const needs = selectedNeeds || persona?.needs || [];
-  let matchedNeedsCount = 0;
-  if (needs.length > 0) {
-    needs.forEach(need => {
-      if (job.accommodations.includes(need)) {
-        matchedNeedsCount++;
-      } else if (job.type === "remote" || job.accommodations.includes("remote")) {
-        // For remote jobs, wheelchair access and quiet environments are automatically satisfied
-        if (need === "wheelchair_access" || need === "quiet_environment") {
-          matchedNeedsCount++;
-        }
-      }
-    });
-  }
-  const accessibilityScore = needs.length > 0 ? (matchedNeedsCount / needs.length) : 1.0;
-  const accessibilityMatch = needs.length === 0 || (matchedNeedsCount / needs.length) >= 0.7;
+  const skillMatch = skillScore > 0 || reqSkills.length === 0;
 
-  // 3. Work Preference Compatibility (20%) - dari Cara Kerja Saya (workingStyle)
-  const userWorkingStyles = persona?.workingStyle || [];
-  let workingStyleScore = 1.0;
-  if (userWorkingStyles.length > 0) {
-    let matchedStylesCount = 0;
-    userWorkingStyles.forEach(style => {
-      if (style === "structured_task") {
-        if (job.accommodations.includes("written_instruction") || job.id === "1" || job.id === "3" || job.id === "5") {
-          matchedStylesCount++;
-        }
-      } else if (style === "independent_work") {
-        if (job.type === "remote" || job.accommodations.includes("flexible_hours")) {
-          matchedStylesCount++;
-        }
-      } else if (style === "team_collaboration") {
-        if (job.type !== "remote" || job.id === "1" || job.id === "4") {
-          matchedStylesCount++;
-        }
-      } else if (style === "written_communication") {
-        if (job.accommodations.includes("chat_communication") || job.accommodations.includes("written_instruction") || job.id === "4") {
-          matchedStylesCount++;
-        }
-      } else if (style === "quiet_environment") {
-        if (job.accommodations.includes("quiet_environment") || job.type === "remote") {
-          matchedStylesCount++;
-        }
-      }
-    });
-    workingStyleScore = matchedStylesCount / userWorkingStyles.length;
-  }
-  const workPrefScore = workingStyleScore;
-  const workPreferenceMatch = workPrefScore >= 0.5;
+  // ── 3. PORTFOLIO (20%) ────────────────────────────────────────────────────
+  const portfolios = persona?.portfolios || [];
+  const portfolioScore = portfolioRelevanceScore(portfolios, job);
+  const workPreferenceMatch = portfolioScore >= 0.3; // legacy field reused for portfolio
 
-  // 4. Job Interest Compatibility (10%) - dari Target Karir (targetCareers)
+  // ── 4. TARGET CAREER (10%) ────────────────────────────────────────────────
   const targetCareers = persona?.targetCareers || [];
-  let jobInterestScore = 0.5; // default fallback if empty
+  let jobInterestScore = 0.5; // neutral default when empty
+
   if (targetCareers.length > 0) {
-    const hasMatch = targetCareers.some(career => 
-      job.title.toLowerCase().includes(career.toLowerCase()) || 
-      career.toLowerCase().includes(job.title.toLowerCase())
-    );
-    jobInterestScore = hasMatch ? 1.0 : 0.2;
+    // Build a set of things to match against: job title + job description words + requirements
+    const jobTitleTerms = [job.title];
+    const jobDescWords = jobCorpus(job).split(/\s+/).filter(w => w.length >= 4);
+
+    // For each target career, check if it semantically matches the job
+    const matchCount = targetCareers.filter(career => {
+      const expandedCareer = expandConcepts(career);
+      // Check against job title (semantic)
+      const titleMatch = expandedCareer.some(ec =>
+        jobTitleTerms.some(jt => semanticContains(ec, jt) || semanticContains(jt, ec))
+      );
+      if (titleMatch) return true;
+      // Check against job corpus (broader match)
+      const corpusMatch = expandedCareer.some(ec =>
+        jobDescWords.some(dw => dw.includes(ec) || ec.includes(dw))
+      );
+      return corpusMatch;
+    }).length;
+
+    jobInterestScore = matchCount > 0 ? Math.min(0.5 + (matchCount / targetCareers.length) * 0.5, 1.0) : 0.15;
   }
+
   const jobInterestMatch = jobInterestScore >= 0.5;
 
-  // 5. Experience Compatibility (10%)
+  // ── FINAL WEIGHTED SCORE ──────────────────────────────────────────────────
+  // Weights: Accessibility 50% | Skills 20% | Portfolio 20% | Target Career 10%
+  const overallScore =
+    (accessibilityScore * 0.50) +
+    (skillScore         * 0.20) +
+    (portfolioScore     * 0.20) +
+    (jobInterestScore   * 0.10);
+
+  const score = Math.round(overallScore * 100);
+
+  // experienceMatch is kept for UI compatibility but no longer affects score
   const userExpStr = persona?.experience || "";
   const userLevel = getExperienceLevel(userExpStr);
   const jobLevel = getJobExperienceLevel(job.title);
-  let expScore = 0;
-  if (userLevel === jobLevel) {
-    expScore = 1.0;
-  } else if (userLevel === "Mahir (5+ tahun)") {
-    expScore = 1.0;
-  } else if (userLevel === "Menengah (3-5 tahun)") {
-    if (jobLevel === "Pemula (0-2 tahun)") {
-      expScore = 1.0;
-    } else {
-      expScore = 0.5;
-    }
-  } else { // Pemula
-    if (jobLevel === "Menengah (3-5 tahun)") {
-      expScore = 0.5;
-    } else if (jobLevel === "Mahir (5+ tahun)") {
-      expScore = 0.2;
-    }
-  }
-  const experienceMatch = expScore >= 0.5;
-
-  // Weighted score: 30% Skill + 30% Accessibility + 20% Work Preference + 10% Job Interest + 10% Experience
-  const overallScore = (skillScore * 0.3) + (accessibilityScore * 0.3) + (workPrefScore * 0.2) + (jobInterestScore * 0.1) + (expScore * 0.1);
-  const score = Math.round(overallScore * 100);
+  const experienceMatch = userLevel === jobLevel || userLevel === "Mahir (5+ tahun)";
 
   return {
     score,
@@ -815,7 +987,11 @@ export const calculateMatchDetails = (
     accessibilityMatch,
     workPreferenceMatch,
     experienceMatch,
-    jobInterestMatch
+    jobInterestMatch,
+    accessibilityScore,
+    skillScore,
+    portfolioScore,
+    jobInterestScore
   };
 };
 

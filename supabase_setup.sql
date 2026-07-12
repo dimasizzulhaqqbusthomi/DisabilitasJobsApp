@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   location TEXT,
   portfolios JSONB DEFAULT '[]'::jsonb,
   certificates JSONB DEFAULT '[]'::jsonb,
+  purpose TEXT,
+  cover TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
@@ -38,6 +40,8 @@ ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS target_careers TEXT[] DEFAU
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS location TEXT;
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS portfolios JSONB DEFAULT '[]'::jsonb;
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS certificates JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS purpose TEXT;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS cover TEXT;
 
 -- 3. Aktifkan Row Level Security (RLS) pada tabel profiles
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;

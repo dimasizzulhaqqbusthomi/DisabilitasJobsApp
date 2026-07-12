@@ -85,6 +85,18 @@ export default function SkillPassportPage() {
   const [isAddingSkill, setIsAddingSkill] = useState(false);
   const [newSkillText, setNewSkillText] = useState("");
 
+  // --- Custom Needs & Style States ---
+  const [isAddingCustomNeed, setIsAddingCustomNeed] = useState(false);
+  const [newCustomNeedText, setNewCustomNeedText] = useState("");
+  const [isAddingCustomStyle, setIsAddingCustomStyle] = useState(false);
+  const [newCustomStyleText, setNewCustomStyleText] = useState("");
+
+  // Standard lists mapping for custom filter
+  const standardNeedKeys = ACCOMMODATIONS.map(a => a.key);
+  const customNeeds = selectedNeeds.filter(need => !standardNeedKeys.includes(need));
+  const standardStyleKeys = WORKING_STYLE_OPTIONS.map(s => s.key);
+  const customStyles = (currentPersona.workingStyle || []).filter(style => !standardStyleKeys.includes(style));
+
   // Get portfolios and certificates directly from currentPersona
   const portfolios = currentPersona.portfolios || [];
   const certificates = currentPersona.certificates || [];
@@ -258,6 +270,34 @@ export default function SkillPassportPage() {
     const updatedSkills = currentPersona.skills.filter(s => s !== skillToDelete);
     updatePersona({ skills: updatedSkills });
     showToast("Keahlian dihapus.", "info");
+  };
+
+  const handleAddCustomNeed = () => {
+    if (!newCustomNeedText.trim()) return;
+    const cleanNeed = newCustomNeedText.trim();
+    if (selectedNeeds.includes(cleanNeed)) {
+      showToast("Kebutuhan akses tersebut sudah ada!", "warning");
+      return;
+    }
+    toggleNeed(cleanNeed);
+    setNewCustomNeedText("");
+    setIsAddingCustomNeed(false);
+    showToast("Kebutuhan akses lainnya berhasil ditambahkan!", "success");
+  };
+
+  const handleAddCustomStyle = () => {
+    if (!newCustomStyleText.trim()) return;
+    const cleanStyle = newCustomStyleText.trim();
+    const currentStyles = currentPersona.workingStyle || [];
+    if (currentStyles.includes(cleanStyle)) {
+      showToast("Gaya kerja tersebut sudah ada!", "warning");
+      return;
+    }
+    const nextStyles = [...currentStyles, cleanStyle];
+    updatePersona({ workingStyle: nextStyles });
+    setNewCustomStyleText("");
+    setIsAddingCustomStyle(false);
+    showToast("Gaya kerja lainnya berhasil ditambahkan!", "success");
   };
 
   // Portfolio
@@ -623,42 +663,133 @@ export default function SkillPassportPage() {
               <p className="text-[10px] text-slate-400 font-extrabold -mt-1 leading-relaxed">
                 Pilih kebutuhan akses harian Anda untuk membantu pencocokan lowongan secara optimal.
               </p>
-              <div className="grid grid-cols-1 gap-2 pt-1">
-                {ACCOMMODATIONS.map((acc) => {
-                  const isSelected = selectedNeeds.includes(acc.key);
-                  return (
-                    <button
-                      key={acc.key}
-                      type="button"
-                      onClick={() => {
-                        toggleNeed(acc.key);
-                        showToast("Kebutuhan akses diperbarui!", "success");
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "CARA BEKERJA",
+                    keys: ["remote", "flexible_hours"],
+                  },
+                  {
+                    title: "KOMUNIKASI",
+                    keys: ["caption_meeting", "written_instruction", "chat_communication"],
+                  },
+                  {
+                    title: "LINGKUNGAN",
+                    keys: ["wheelchair_access", "screen_reader", "quiet_environment"],
+                  },
+                ].map((category) => (
+                  <div key={category.title} className="space-y-2">
+                    <div className="text-[10px] font-black text-indigo-600 tracking-wider uppercase mt-1 pl-1">
+                      {category.title}
+                    </div>
+                    {category.keys.map((key) => {
+                      const acc = ACCOMMODATIONS.find((a) => a.key === key);
+                      if (!acc) return null;
+                      const isSelected = selectedNeeds.includes(acc.key);
+                      return (
+                        <button
+                          key={acc.key}
+                          type="button"
+                          onClick={() => {
+                            toggleNeed(acc.key);
+                            showToast("Kebutuhan akses diperbarui!", "success");
+                          }}
+                          className={`w-full flex gap-3 items-start p-3 rounded-2xl border text-left transition-all ${isSelected
+                            ? "border-emerald-500 bg-emerald-50/50 shadow-sm ring-1 ring-emerald-500/10"
+                            : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
+                            }`}
+                        >
+                          <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected
+                            ? "bg-emerald-500 text-white"
+                            : "bg-slate-100 text-slate-400"
+                            }`}>
+                            <Check className="w-4 h-4" />
+                          </div>
+                          <div className="space-y-0.5 min-w-0 flex-1">
+                            <div className="text-xs font-black text-brand-fg flex items-center gap-1.5">
+                              {acc.label}
+                              {isSelected && (
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                              )}
+                            </div>
+                            <p className="text-[10px] text-slate-400 font-bold leading-normal">
+                              {simpleLanguage ? acc.simpleDescription : acc.description}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+
+              {/* Custom Accessibility Needs */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-100">
+                <div className="text-[10px] font-black text-indigo-600 tracking-wider uppercase pl-1">
+                  KEBUTUHAN LAINNYA
+                </div>
+
+                {customNeeds.map((need) => (
+                  <div
+                    key={need}
+                    className="w-full flex gap-3 items-center p-3 rounded-2xl border border-emerald-500 bg-emerald-50/50 shadow-sm ring-1 ring-emerald-500/10 text-left"
+                  >
+                    <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 bg-emerald-500 text-white">
+                      <Check className="w-4 h-4" />
+                    </div>
+                    <div className="space-y-0.5 min-w-0 flex-1">
+                      <div className="text-xs font-black text-brand-fg flex items-center justify-between">
+                        <span className="truncate">{need}</span>
+                        <button
+                          onClick={() => {
+                            toggleNeed(need);
+                            showToast("Kebutuhan akses lainnya dihapus!", "info");
+                          }}
+                          className="text-emerald-600 hover:text-emerald-800 p-1 hover:bg-emerald-100/50 rounded-lg transition-colors"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {!isAddingCustomNeed ? (
+                  <button
+                    onClick={() => setIsAddingCustomNeed(true)}
+                    className="flex items-center gap-1.5 px-3.5 py-2.5 w-full rounded-2xl border border-dashed border-slate-200 hover:border-indigo-500 hover:text-indigo-600 text-xs font-black text-slate-400 transition-all bg-white"
+                    type="button"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Tambah Kebutuhan lainnya</span>
+                  </button>
+                ) : (
+                  <div className="flex gap-2 items-center w-full mt-1 animate-in slide-in-from-top-1 duration-200">
+                    <input
+                      type="text"
+                      value={newCustomNeedText}
+                      onChange={(e) => setNewCustomNeedText(e.target.value)}
+                      placeholder="Ketik kebutuhan akses..."
+                      className="flex-1 px-3.5 py-2.5 rounded-2xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") handleAddCustomNeed();
                       }}
-                      className={`flex gap-3 items-start p-3 rounded-2xl border text-left transition-all ${isSelected
-                          ? "border-emerald-500 bg-emerald-50/50 shadow-sm ring-1 ring-emerald-500/10"
-                          : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
-                        }`}
+                      autoFocus
+                    />
+                    <button
+                      onClick={handleAddCustomNeed}
+                      className="px-3.5 py-2.5 rounded-2xl bg-indigo-600 text-white text-xs font-black shadow-sm shrink-0"
                     >
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected
-                          ? "bg-emerald-500 text-white"
-                          : "bg-slate-100 text-slate-400"
-                        }`}>
-                        <Check className="w-4 h-4" />
-                      </div>
-                      <div className="space-y-0.5 min-w-0 flex-1">
-                        <div className="text-xs font-black text-brand-fg flex items-center gap-1.5">
-                          {acc.label}
-                          {isSelected && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                          )}
-                        </div>
-                        <p className="text-[10px] text-slate-400 font-bold leading-normal">
-                          {simpleLanguage ? acc.simpleDescription : acc.description}
-                        </p>
-                      </div>
+                      Simpan
                     </button>
-                  );
-                })}
+                    <button
+                      onClick={() => setIsAddingCustomNeed(false)}
+                      className="px-2.5 py-2.5 rounded-2xl border border-slate-200 text-xs font-bold text-slate-400 shrink-0"
+                    >
+                      Batal
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -691,13 +822,13 @@ export default function SkillPassportPage() {
                         showToast("Gaya kerja diperbarui!", "success");
                       }}
                       className={`flex gap-3 items-start p-3 rounded-2xl border text-left transition-all ${isSelected
-                          ? "border-indigo-500 bg-indigo-50/50 shadow-sm ring-1 ring-indigo-500/10"
-                          : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
+                        ? "border-indigo-500 bg-indigo-50/50 shadow-sm ring-1 ring-indigo-500/10"
+                        : "border-slate-100 bg-slate-50/20 hover:bg-slate-50/50"
                         }`}
                     >
                       <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isSelected
-                          ? "bg-indigo-600 text-white"
-                          : "bg-slate-100 text-slate-400"
+                        ? "bg-indigo-600 text-white"
+                        : "bg-slate-100 text-slate-400"
                         }`}>
                         <IconComponent className="w-4 h-4" />
                       </div>
@@ -715,6 +846,77 @@ export default function SkillPassportPage() {
                     </button>
                   );
                 })}
+              </div>
+
+              {/* Custom Working Style */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-100 mt-3">
+                <div className="text-[10px] font-black text-indigo-600 tracking-wider uppercase pl-1">
+                  GAYA KERJA LAINNYA
+                </div>
+
+                {customStyles.map((style) => (
+                  <div
+                    key={style}
+                    className="flex gap-3 items-center p-3 rounded-2xl border border-indigo-500 bg-indigo-50/50 shadow-sm ring-1 ring-indigo-500/10 text-left"
+                  >
+                    <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 bg-indigo-600 text-white">
+                      <Check className="w-4 h-4" />
+                    </div>
+                    <div className="space-y-0.5 min-w-0 flex-1">
+                      <div className="text-xs font-black text-brand-fg flex items-center justify-between">
+                        <span className="truncate">{style}</span>
+                        <button
+                          onClick={() => {
+                            const currentStyles = currentPersona.workingStyle || [];
+                            const nextStyles = currentStyles.filter(s => s !== style);
+                            updatePersona({ workingStyle: nextStyles });
+                            showToast("Gaya kerja lainnya dihapus!", "info");
+                          }}
+                          className="text-indigo-600 hover:text-indigo-800 p-1 hover:bg-indigo-100/50 rounded-lg transition-colors"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {!isAddingCustomStyle ? (
+                  <button
+                    onClick={() => setIsAddingCustomStyle(true)}
+                    className="flex items-center gap-1.5 px-3.5 py-2.5 w-full rounded-2xl border border-dashed border-slate-200 hover:border-indigo-500 hover:text-indigo-600 text-xs font-black text-slate-400 transition-all bg-white"
+                    type="button"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Tambah Gaya Kerja lainnya</span>
+                  </button>
+                ) : (
+                  <div className="flex gap-2 items-center w-full mt-1 animate-in slide-in-from-top-1 duration-200">
+                    <input
+                      type="text"
+                      value={newCustomStyleText}
+                      onChange={(e) => setNewCustomStyleText(e.target.value)}
+                      placeholder="Ketik gaya kerja..."
+                      className="flex-1 px-3.5 py-2.5 rounded-2xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") handleAddCustomStyle();
+                      }}
+                      autoFocus
+                    />
+                    <button
+                      onClick={handleAddCustomStyle}
+                      className="px-3.5 py-2.5 rounded-2xl bg-indigo-600 text-white text-xs font-black shadow-sm shrink-0"
+                    >
+                      Simpan
+                    </button>
+                    <button
+                      onClick={() => setIsAddingCustomStyle(false)}
+                      className="px-2.5 py-2.5 rounded-2xl border border-slate-200 text-xs font-bold text-slate-400 shrink-0"
+                    >
+                      Batal
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 

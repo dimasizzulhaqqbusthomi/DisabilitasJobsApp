@@ -12,14 +12,50 @@ import {
   ChevronRight, 
   ChevronLeft, 
   FileText, 
-  Building, 
   MessageSquare, 
   Send, 
   UserCheck,
   Briefcase,
   MapPin,
-  GraduationCap
+  GraduationCap,
+  Star,
+  X,
+  Heart
 } from "lucide-react";
+
+const FEEDBACK_FEATURES = [
+  { id: "recommendation", label: "Rekomendasi pekerjaan sesuai" },
+  { id: "accessibility",  label: "Informasi aksesibilitas" },
+  { id: "skill_passport", label: "Skill Passport" },
+  { id: "apply_easy",    label: "Proses melamar mudah" },
+];
+
+function StarRating({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+  const [hovered, setHovered] = useState(0);
+  return (
+    <div className="flex items-center gap-1.5">
+      {[1, 2, 3, 4, 5].map(i => (
+        <button
+          key={i}
+          type="button"
+          onClick={() => onChange(i)}
+          onMouseEnter={() => setHovered(i)}
+          onMouseLeave={() => setHovered(0)}
+          className="transition-transform hover:scale-110 active:scale-95"
+          aria-label={`Beri ${i} bintang`}
+        >
+          <Star
+            className={`w-8 h-8 transition-colors ${
+              i <= (hovered || value)
+                ? "fill-amber-400 text-amber-400"
+                : "text-slate-200 fill-slate-200"
+            }`}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
 
 /* ─── helper: get company initials (no emoji logo) ─── */
 const getCompanyInitials = (company: string): string => {
@@ -38,6 +74,46 @@ function ApplyContent() {
   const { currentPersona, applyForJob, showToast } = useAppState();
   const { user } = useAuth();
   const { simpleLanguage } = useAccessibility();
+
+  // Feedback modal state
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackStar, setFeedbackStar] = useState(0);
+  const [feedbackFeatures, setFeedbackFeatures] = useState<string[]>([]);
+  const [feedbackNote, setFeedbackNote] = useState("");
+  const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
+  const [feedbackDone, setFeedbackDone] = useState(false);
+  const [appliedJobTitle, setAppliedJobTitle] = useState("");
+
+  const toggleFeature = (id: string) => {
+    setFeedbackFeatures(prev =>
+      prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
+    );
+  };
+
+  const handleSkipFeedback = () => {
+    router.push("/applications");
+  };
+
+  const handleSubmitFeedback = async () => {
+    setFeedbackSubmitting(true);
+    try {
+      const { createClient } = await import("../../lib/supabase/client");
+      const supabase = createClient();
+      await supabase.from("app_feedback").insert({
+        user_id: user?.id ?? null,
+        rating: feedbackStar,
+        helpful_features: feedbackFeatures,
+        note: feedbackNote.trim(),
+        job_title: appliedJobTitle,
+      });
+    } catch (err) {
+      console.error("Failed to save feedback:", err);
+    } finally {
+      setFeedbackSubmitting(false);
+      setFeedbackDone(true);
+      setTimeout(() => router.push("/applications"), 1200);
+    }
+  };
 
   // Selected job details
   const jobIdFromQuery = searchParams ? searchParams.get("jobId") : null;
@@ -87,13 +163,12 @@ function ApplyContent() {
     } else {
       // 1. Register application in state
       applyForJob(activeJob.id, customMessage);
+      setAppliedJobTitle(activeJob.title);
 
       // 2. Auto-send intro message to recruiter in chat
       const introMsg = `Halo! Saya baru saja mengirimkan lamaran untuk posisi **${activeJob.title}** di **${activeJob.company}**. Saya sangat tertarik dan berharap dapat berdiskusi lebih lanjut mengenai peluang ini. Terima kasih!`;
-      const now = new Date().toISOString();
 
       if (user) {
-        // Save to Supabase if authenticated
         try {
           const { createClient } = await import("../../lib/supabase/client");
           const supabase = createClient();
@@ -107,7 +182,6 @@ function ApplyContent() {
           console.error("Failed to send auto chat message:", err);
         }
       } else {
-        // Fallback: store in localStorage for offline/demo mode
         const key = `chat-local-${activeJob.id}`;
         const existing = JSON.parse(localStorage.getItem(key) || "[]");
         existing.push({ sender: "user", text: introMsg, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) });
@@ -115,7 +189,8 @@ function ApplyContent() {
       }
 
       showToast("Lamaran berhasil dikirim! Pesan otomatis ke HRD telah terkirim.", "success");
-      router.push("/applications");
+      // Show feedback modal instead of immediately redirecting
+      setShowFeedback(true);
     }
   };
 
@@ -128,6 +203,128 @@ function ApplyContent() {
   };
 
   return (
+    <>
+    {/* ═══ FEEDBACK OVERLAY ═══ */}
+    {showFeedback && (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-end bg-black/40 backdrop-blur-sm px-4 pb-6">
+        <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden">
+          
+          {feedbackDone ? (
+            /* ── Success state ── */
+            <div className="p-8 flex flex-col items-center gap-3 text-center">
+              <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                <Heart className="w-8 h-8 text-emerald-500 fill-emerald-500" />
+              </div>
+              <h3 className="text-base font-black text-brand-fg">Terima Kasih!</h3>
+              <p className="text-xs text-slate-400 font-medium">Feedback kamu sangat berarti untuk AbleWork 🙌</p>
+            </div>
+          ) : (
+            <>
+              {/* Header */}
+              <div className="relative bg-gradient-to-br from-[#4f46e5] via-[#4338ca] to-[#06b6d4] p-5 text-white">
+                <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/5" />
+                <button
+                  onClick={handleSkipFeedback}
+                  className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/15 flex items-center justify-center hover:bg-white/25 transition-all"
+                  aria-label="Lewati"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-7 h-7 rounded-full bg-emerald-400 flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-xs font-black text-white/80">Lamaran berhasil dikirim</span>
+                </div>
+                <h2 className="text-base font-black leading-snug">Bagaimana pengalaman kamu menggunakan AbleWork?</h2>
+              </div>
+
+              {/* Body */}
+              <div className="p-5 space-y-5">
+                {/* Star Rating */}
+                <div className="space-y-2">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Beri Penilaian</p>
+                  <StarRating value={feedbackStar} onChange={setFeedbackStar} />
+                </div>
+
+                {/* Feature Checkboxes */}
+                <div className="space-y-2">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Apa yang paling membantu?</p>
+                  <div className="grid grid-cols-1 gap-1.5">
+                    {FEEDBACK_FEATURES.map(f => {
+                      const active = feedbackFeatures.includes(f.id);
+                      return (
+                        <button
+                          key={f.id}
+                          type="button"
+                          onClick={() => toggleFeature(f.id)}
+                          className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-left transition-all ${
+                            active
+                              ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-400/20"
+                              : "border-slate-100 bg-slate-50 hover:bg-slate-100"
+                          }`}
+                        >
+                          <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border transition-colors ${
+                            active
+                              ? "bg-indigo-500 border-indigo-500 text-white"
+                              : "bg-white border-slate-200 text-transparent"
+                          }`}>
+                            <Check className="w-3 h-3" />
+                          </div>
+                          <span className={`text-xs font-bold ${ active ? "text-indigo-700" : "text-slate-500" }`}>
+                            {f.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Notes */}
+                <div className="space-y-1.5">
+                  <label htmlFor="feedback-note" className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Masukan (opsional)</label>
+                  <textarea
+                    id="feedback-note"
+                    value={feedbackNote}
+                    onChange={e => setFeedbackNote(e.target.value)}
+                    rows={3}
+                    placeholder="Tuliskan saran atau masukanmu..."
+                    className="w-full p-3 rounded-xl border border-slate-200 bg-white text-xs font-medium text-brand-fg placeholder:text-slate-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none leading-relaxed resize-none"
+                  />
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={handleSkipFeedback}
+                    className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-500 text-xs font-black hover:bg-slate-50 transition-all"
+                  >
+                    Lewati
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmitFeedback}
+                    disabled={feedbackStar === 0 || feedbackSubmitting}
+                    className="flex-2 flex-[2] py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 text-white text-xs font-black flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:from-indigo-700 hover:to-indigo-600"
+                  >
+                    {feedbackSubmitting ? (
+                      <span className="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Send className="w-3.5 h-3.5" />
+                        Kirim Feedback
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    )}
+
     <AppLayout
       showHeader={false}
       mainClassName="flex-1 flex flex-col overflow-hidden bg-brand-bg pb-16"
@@ -437,6 +634,7 @@ function ApplyContent() {
 
       </div>
     </AppLayout>
+    </>
   );
 }
 

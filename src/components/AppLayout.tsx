@@ -56,8 +56,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Lowongan Kerja", href: "/jobs", icon: Briefcase },
-    { name: "Lacak Lamaran", href: "/applications", icon: ClipboardList },
     { name: "Pesan (Chat)", href: "/chat", icon: MessageSquare },
+    { name: "Lacak Lamaran", href: "/applications", icon: ClipboardList },
     { name: "Profil Saya", href: "/profile", icon: User },
     { name: "Skill Passport", href: "/skill-passport", icon: Award },
     { name: "Persiapan Wawancara", href: "/interview-prep", icon: Mic },
@@ -214,8 +214,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
           {[
             { name: "Home", href: "/dashboard", icon: Home },
             { name: "Lowongan", href: "/jobs", icon: Briefcase },
-            { name: "Lamaran", href: "/applications", icon: ClipboardList },
             { name: "Chat", href: "/chat", icon: MessageSquare },
+            { name: "Lamaran", href: "/applications", icon: ClipboardList },
             { name: "Profil", href: "/profile", icon: User }
           ].map((item) => {
             const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));

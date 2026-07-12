@@ -61,7 +61,7 @@ function RegisterForm() {
   const [showCpw, setShowCpw] = useState(false);
 
   // Step 2
-  const [disabilityType, setDisabilityType] = useState("");
+  const [disabilityType, setDisabilityType] = useState("other");
   const [selectedNeeds, setSelectedNeeds] = useState<string[]>([]);
 
   // Step 3
@@ -123,6 +123,7 @@ function RegisterForm() {
           email: user.email,
           disability_type: disabilityType,
           accessibility_needs: selectedNeeds,
+          purpose: purpose,
           created_at: new Date().toISOString(),
         });
         if (updateErr) {
@@ -135,6 +136,7 @@ function RegisterForm() {
             full_name: fullName || user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "User",
             disability_type: disabilityType,
             accessibility_needs: selectedNeeds,
+            purpose: purpose,
           }
         });
       } else {
@@ -146,8 +148,12 @@ function RegisterForm() {
         if (signUpError) { setError(signUpError.message === "{}" ? "Terjadi kesalahan server." : signUpError.message); setIsLoading(false); return; }
         if (data.user) {
           await supabase.from("profiles").upsert({
-            id: data.user.id, full_name: fullName, email,
-            disability_type: disabilityType, accessibility_needs: selectedNeeds,
+            id: data.user.id,
+            full_name: fullName,
+            email,
+            disability_type: disabilityType,
+            accessibility_needs: selectedNeeds,
+            purpose: purpose,
             created_at: new Date().toISOString(),
           });
         }
