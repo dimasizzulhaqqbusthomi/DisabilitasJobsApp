@@ -918,7 +918,7 @@ export const calculateMatchDetails = (
   const accessibilityMatch = accessibilityScore >= 0.5;
 
   // ── 2. SKILLS (20%) ───────────────────────────────────────────────────────
-  const userSkills = persona?.skills || [];
+  const userSkills = (persona?.skills || []).map(s => s.replace("hard:", "").replace("soft:", ""));
   const reqSkills = JOB_REQUIRED_SKILLS[job.id] || [];
   let skillScore = 1.0; // default: no required skills = full score
 

@@ -11,15 +11,14 @@ export const AbleMatchScore: React.FC<AbleMatchScoreProps> = ({ score, className
 
   return (
     <span
-      className={`shrink-0 px-2.5 py-1 rounded-xl text-[10px] font-black leading-none border select-none transition-all ${
-        isNotRecommended
-          ? "bg-rose-50 text-rose-600 border-rose-200"
-          : isGood
+      className={`shrink-0 px-2.5 py-1 rounded-xl text-[10px] font-black leading-none border select-none transition-all ${isNotRecommended
+        ? "bg-amber-50 text-amber-600 border-amber-200"
+        : isGood
           ? "bg-emerald-50 text-emerald-600 border-emerald-200"
           : "bg-indigo-50 text-indigo-600 border-indigo-200"
-      } ${className}`}
+        } ${className}`}
     >
-      {isNotRecommended ? "Tidak Disarankan" : `${score}% Cocok`}
+      {isNotRecommended ? "! Perlu Pertimbangan" : `${score}% Cocok`}
     </span>
   );
 };

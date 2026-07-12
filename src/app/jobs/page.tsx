@@ -124,7 +124,7 @@ export default function JobListPage() {
   };
 
   return (
-    <AppLayout showHeader={false} mainClassName="flex-1 overflow-y-auto overflow-x-hidden pb-24 bg-brand-bg relative">
+    <AppLayout showHeader={false} mainClassName="flex-1 overflow-y-auto overflow-x-hidden pb-24 bg-brand-bg">
       <div className="flex flex-col min-h-screen">
         
         {/* ═══ CUSTOM BLUE GRADIENT HEADER ═══ */}

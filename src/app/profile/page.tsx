@@ -611,13 +611,23 @@ export default function ProfilePage() {
                   <ChevronLeft className="w-5 h-5" />
                 </Link>
                 <h2 className="text-sm font-black text-white tracking-wide">Profil Saya</h2>
-                <button
-                  type="button"
-                  onClick={() => { setIsEditMode(true); setActiveTab("informasi"); }}
-                  className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all shadow-sm"
-                >
-                  <Settings className="w-4.5 h-4.5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => { setIsEditMode(true); setActiveTab("informasi"); }}
+                    className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all shadow-sm"
+                    title="Edit Profil & Password"
+                  >
+                    <Edit2 className="w-4.5 h-4.5" />
+                  </button>
+                  <Link
+                    href="/accessibility"
+                    className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all shadow-sm"
+                    title="Pengaturan Aksesibilitas"
+                  >
+                    <Settings className="w-4.5 h-4.5" />
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -669,7 +679,7 @@ export default function ProfilePage() {
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-600 uppercase bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      Verified
+                      PROFILE VERIFIED
                     </span>
                   </div>
 
@@ -786,74 +796,6 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Section Header: Accessibility Options */}
-                <div className="px-5 py-4 bg-slate-50/50 border-t border-slate-100">
-                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pengaturan Aksesibilitas</h3>
-                </div>
-
-                {/* Bahasa Mudah Toggle */}
-                <div className="flex items-center justify-between py-3.5 px-5 hover:bg-slate-50/30 transition-colors">
-                  <div className="flex items-center gap-4 min-w-0 flex-1">
-                    <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 border border-emerald-100/45 flex items-center justify-center text-emerald-600 shrink-0">
-                      <Sparkles className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="block text-xs font-black text-slate-700">Bahasa Mudah</span>
-                      <span className="block text-[9px] text-slate-400 font-semibold leading-normal">
-                        Gunakan tata bahasa yang lebih ringkas dan sederhana
-                      </span>
-                    </div>
-                  </div>
-                  <ToggleSwitch checked={simpleLanguage} onChange={toggleSimpleLanguage} />
-                </div>
-
-                {/* Kontras Tinggi Toggle */}
-                <div className="flex items-center justify-between py-3.5 px-5 hover:bg-slate-50/30 transition-colors">
-                  <div className="flex items-center gap-4 min-w-0 flex-1">
-                    <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 border border-emerald-100/45 flex items-center justify-center text-emerald-600 shrink-0">
-                      <Eye className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="block text-xs font-black text-slate-700">Kontras Tinggi</span>
-                      <span className="block text-[9px] text-slate-400 font-semibold leading-normal">
-                        Tingkatkan rasio kontras warna untuk keterbacaan
-                      </span>
-                    </div>
-                  </div>
-                  <ToggleSwitch checked={highContrast} onChange={toggleHighContrast} />
-                </div>
-
-                {/* Pembaca Layar Toggle */}
-                <div className="flex items-center justify-between py-3.5 px-5 hover:bg-slate-50/30 transition-colors">
-                  <div className="flex items-center gap-4 min-w-0 flex-1">
-                    <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 border border-emerald-100/45 flex items-center justify-center text-emerald-600 shrink-0">
-                      <FileCheck className="w-4.5 h-4.5" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="block text-xs font-black text-slate-700">Optimalkan Pembaca Layar</span>
-                      <span className="block text-[9px] text-slate-400 font-semibold leading-normal">
-                        Gunakan label deskriptif tambahan untuk screen reader
-                      </span>
-                    </div>
-                  </div>
-                  <ToggleSwitch checked={screenReaderLabels} onChange={toggleScreenReaderLabels} />
-                </div>
-
-                {/* Kurangi Animasi Toggle */}
-                <div className="flex items-center justify-between py-3.5 px-5 hover:bg-slate-50/30 transition-colors">
-                  <div className="flex items-center gap-4 min-w-0 flex-1">
-                    <div className="w-8.5 h-8.5 rounded-xl bg-emerald-50 border border-emerald-100/45 flex items-center justify-center text-emerald-600 shrink-0">
-                      <ZapOff className="w-4 h-4 text-emerald-600" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="block text-xs font-black text-slate-700">Kurangi Gerakan</span>
-                      <span className="block text-[9px] text-slate-400 font-semibold leading-normal">
-                        Nonaktifkan animasi transisi visual yang berlebihan
-                      </span>
-                    </div>
-                  </div>
-                  <ToggleSwitch checked={reducedMotion} onChange={toggleReducedMotion} />
-                </div>
 
                 {/* --- LOG OUT --- */}
                 <button

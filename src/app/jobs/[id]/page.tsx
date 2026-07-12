@@ -248,7 +248,7 @@ export default function JobDetailPage() {
                   Online {recruiter.online} · Aktif di AbleWork
                 </p>
               </div>
-              
+
               <Link
                 href={`/chat/${job.id}`}
                 className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-black flex items-center gap-1 transition-all shadow-md shadow-indigo-600/15 shrink-0"
@@ -270,9 +270,9 @@ export default function JobDetailPage() {
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
               <Accessibility className="w-4 h-4 text-indigo-500 shrink-0" />
-              <span className="text-xs font-black text-brand-fg">Akomodasi Aksesibilitas</span>
+              <span className="text-xs font-black text-brand-fg">Dukungan Kerja</span>
               <span className="ml-auto text-[9px] font-bold text-indigo-500 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                {job.accommodations.filter((k) => selectedNeeds.includes(k)).length}/{job.accommodations.length} Cocok
+                {job.accommodations.filter((k) => selectedNeeds.includes(k)).length} dari {job.accommodations.length} kebutuhan kerja kamu terpenuhi
               </span>
             </div>
             <div className="p-4 flex flex-col gap-2.5">
@@ -283,9 +283,8 @@ export default function JobDetailPage() {
                 return (
                   <div
                     key={accKey}
-                    className={`p-3 rounded-xl border flex items-start gap-3 ${
-                      matched ? "bg-emerald-50 border-emerald-200" : "bg-slate-50 border-slate-100"
-                    }`}
+                    className={`p-3 rounded-xl border flex items-start gap-3 ${matched ? "bg-emerald-50 border-emerald-200" : "bg-slate-50 border-slate-100"
+                      }`}
                   >
                     <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${matched ? "bg-emerald-500" : "bg-slate-300"}`} />
                     <div className="flex-1 min-w-0">
@@ -293,11 +292,6 @@ export default function JobDetailPage() {
                         <span className={`text-xs font-black ${matched ? "text-emerald-700" : "text-brand-fg"}`}>
                           {acc.label}
                         </span>
-                        {matched && (
-                          <span className="text-[8px] font-black text-emerald-600 bg-emerald-100 border border-emerald-200 px-1.5 py-0.5 rounded-full">
-                            ✓ Cocok
-                          </span>
-                        )}
                       </div>
                       <p className="text-[10px] text-brand-fg/60 leading-relaxed">
                         {simpleLanguage ? acc.simpleDescription : acc.description}
@@ -360,7 +354,7 @@ export default function JobDetailPage() {
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
             <h2 className="text-xs font-black text-amber-700 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />
-              Catatan &amp; Risiko Kerja
+              Hal yang Perlu Diperhatikan
             </h2>
             <ul className="space-y-1.5">
               {job.notes.map((note, idx) => (
@@ -395,11 +389,10 @@ export default function JobDetailPage() {
             {/* Save / Bookmark button */}
             <button
               onClick={handleSaveToggle}
-              className={`w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 transition-all ${
-                isSaved
-                  ? "bg-rose-50 border-rose-200 text-rose-500"
-                  : "border-slate-200 bg-white text-slate-400 hover:border-rose-300 hover:text-rose-400"
-              }`}
+              className={`w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 transition-all ${isSaved
+                ? "bg-rose-50 border-rose-200 text-rose-500"
+                : "border-slate-200 bg-white text-slate-400 hover:border-rose-300 hover:text-rose-400"
+                }`}
               aria-label={isSaved ? "Hapus simpanan" : "Simpan lowongan"}
             >
               <Heart className={`w-5 h-5 ${isSaved ? "fill-rose-500 text-rose-500" : ""}`} />

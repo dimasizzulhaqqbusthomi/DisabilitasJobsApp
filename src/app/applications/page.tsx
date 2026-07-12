@@ -147,13 +147,12 @@ function ApplicationCard({ app }: { app: Application }) {
               const isActive = currentStep === stepNum;
               return (
                 <div key={step.key} className="relative z-10 flex flex-col items-center gap-1.5">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all ${
-                    isDone
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all ${isDone
                       ? "bg-indigo-600 border-indigo-600 text-white"
                       : isActive
-                      ? "bg-white border-indigo-500 text-indigo-600 ring-4 ring-indigo-50 shadow-sm"
-                      : "bg-white border-slate-200 text-slate-300"
-                  }`}>
+                        ? "bg-white border-indigo-500 text-indigo-600 ring-4 ring-indigo-50 shadow-sm"
+                        : "bg-white border-slate-200 text-slate-300"
+                    }`}>
                     {isDone ? <CheckCircle2 className="w-3 h-3" /> : step.icon}
                   </div>
                   <span className={`text-[9px] font-black ${isActive ? "text-indigo-600" : isDone ? "text-slate-600" : "text-slate-300"}`}>
@@ -168,7 +167,7 @@ function ApplicationCard({ app }: { app: Application }) {
         <div className="px-4 py-3 flex items-center gap-2">
           <XCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
           <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
-            Mohon maaf, lamaran Anda tidak melanjutkan ke tahap berikutnya. Tetap semangat!
+            Belum Berlanjut Perusahaan memilih kandidat lain untuk posisi ini. Tetap semangat mencari peluang lain.
           </p>
         </div>
       )}
@@ -205,7 +204,7 @@ function ApplicationCard({ app }: { app: Application }) {
             <div className="w-12 h-12 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 mx-auto">
               <XCircle className="w-6 h-6 animate-pulse" />
             </div>
-            
+
             <div className="space-y-1.5">
               <h4 className="text-sm font-black text-slate-800">Batalkan Lamaran?</h4>
               <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
@@ -290,11 +289,10 @@ export default function ApplicationsPage() {
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key as typeof filter)}
-                className={`shrink-0 px-3 py-1.5 rounded-full text-[10px] font-black border transition-all ${
-                  filter === tab.key
+                className={`shrink-0 px-3 py-1.5 rounded-full text-[10px] font-black border transition-all ${filter === tab.key
                     ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
                     : "bg-white text-slate-500 border-slate-200 hover:border-indigo-200 hover:text-indigo-600"
-                }`}
+                  }`}
               >
                 {tab.label}
                 {tab.key === "all" && appliedJobs.length > 0 && (
