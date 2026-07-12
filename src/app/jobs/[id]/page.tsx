@@ -98,7 +98,7 @@ const getRecruiter = (jobId: string) => {
     case "8":
       return { name: "Fajar Nugroho", initials: "FN", phone: "+62 889-5678-9017", waLink: "https://wa.me/6288956789017", online: "15 mnt lalu" };
     default:
-      return { name: "Recruiter AbleWork", initials: "RA", phone: "+62 812-3456-7890", waLink: "https://wa.me/6281234567890", online: "1 jam lalu" };
+      return { name: "Recruiter AksesKerjaMu", initials: "RA", phone: "+62 812-3456-7890", waLink: "https://wa.me/6281234567890", online: "1 jam lalu" };
   }
 };
 
@@ -245,7 +245,7 @@ export default function JobDetailPage() {
                   <span className="text-emerald-600 font-bold text-[11px]">Verified</span>
                 </div>
                 <p className="text-[10px] text-slate-400 font-semibold mt-0.5">
-                  Online {recruiter.online} · Aktif di AbleWork
+                  Online {recruiter.online} · Aktif di AksesKerjaMu
                 </p>
               </div>
 
@@ -403,7 +403,7 @@ export default function JobDetailPage() {
               href={`/apply?jobId=${job.id}`}
               className="flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-sm font-black text-center shadow-lg shadow-indigo-500/30 transition-all flex items-center justify-center"
             >
-              Lamar dengan Skill Passport
+              Lamar dengan Profil Kerja
             </Link>
           </div>
         )}

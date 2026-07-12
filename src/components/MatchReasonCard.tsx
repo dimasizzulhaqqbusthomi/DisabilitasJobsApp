@@ -17,9 +17,9 @@ const getExplanation = (name: string, score: number): string => {
     return "Akomodasi aksesibilitas yang tersedia kurang cocok dengan kebutuhan kamu.";
   }
   if (name === "Skill") {
-    if (score === 0) return "Belum ditemukan skill yang sesuai dari Skill Passport kamu.";
+    if (score === 0) return "Belum ditemukan skill yang sesuai dari Profil Kerja kamu.";
     if (score >= 70) return "Sebagian besar skill kamu sangat cocok dengan syarat pekerjaan ini.";
-    if (score >= 40) return "Beberapa skill di Skill Passport kamu cocok dengan pekerjaan ini.";
+    if (score >= 40) return "Beberapa skill di Profil Kerja kamu cocok dengan pekerjaan ini.";
     return "Hanya sedikit skill kamu yang cocok dengan syarat pekerjaan ini.";
   }
   if (name === "Portfolio") {

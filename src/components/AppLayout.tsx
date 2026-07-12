@@ -59,7 +59,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
     { name: "Pesan (Chat)", href: "/chat", icon: MessageSquare },
     { name: "Lacak Lamaran", href: "/applications", icon: ClipboardList },
     { name: "Profil Saya", href: "/profile", icon: User },
-    { name: "Skill Passport", href: "/skill-passport", icon: Award },
+    { name: "Profil Kerja", href: "/profil-kerja", icon: Award },
     { name: "Persiapan Wawancara", href: "/interview-prep", icon: Mic },
     { name: "Checklist Interview", href: "/interview-checklist", icon: CheckSquare },
     { name: "Aksesibilitas", href: "/accessibility", icon: Settings },
@@ -98,12 +98,12 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
               <Link 
                 href="/" 
                 className="flex items-center gap-2 text-2xl font-black text-brand-primary"
-                aria-label="AbleWork Home"
+                aria-label="AksesKerjaMu Home"
               >
                 <div className="p-1.5 bg-brand-primary text-white rounded-lg" aria-hidden="true">
                   <Accessibility className="w-6 h-6" />
                 </div>
-                <span>Able<span className="text-brand-secondary">Work</span></span>
+                <span>Akses<span className="text-brand-secondary">KerjaMu</span></span>
               </Link>
               <span className="hidden sm:inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full bg-brand-primary-light text-brand-primary dark:bg-zinc-800 dark:text-zinc-200">
                 PROTOTYPE UI
@@ -208,30 +208,51 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
       {/* Mobile Bottom Navigation Bar */}
       {showNav && (
         <nav 
-          className="absolute bottom-0 left-0 right-0 border-t border-brand-border bg-brand-card/95 backdrop-blur-md h-16 flex justify-around items-center z-30 shadow-lg px-2"
+          className="absolute bottom-0 left-0 right-0 bg-brand-card/95 backdrop-blur-md h-[78px] flex justify-around items-center z-30 shadow-[0_-10px_35px_rgba(0,0,0,0.06)] px-4 rounded-t-[32px] overflow-visible pb-2"
           aria-label="Mobile Navigation"
         >
           {[
-            { name: "Home", href: "/dashboard", icon: Home },
+            { name: "Beranda", href: "/dashboard", icon: Home },
             { name: "Lowongan", href: "/jobs", icon: Briefcase },
-            { name: "Chat", href: "/chat", icon: MessageSquare },
+            { name: "Profil Kerja", href: "/profil-kerja", icon: Award },
             { name: "Lamaran", href: "/applications", icon: ClipboardList },
             { name: "Profil", href: "/profile", icon: User }
-          ].map((item) => {
+          ].map((item, index) => {
             const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
             const Icon = item.icon;
+            const isMiddle = index === 2;
+
+            if (isMiddle) {
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="relative flex flex-col items-center justify-end pb-3 w-20 h-full text-[9px] font-extrabold transition-all select-none"
+                >
+                  <div className={`absolute -top-5 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all ${
+                    isActive 
+                      ? "bg-brand-primary text-white shadow-brand-primary/40 scale-105" 
+                      : "bg-brand-primary text-white shadow-brand-primary/30 hover:scale-105 active:scale-95"
+                  }`}>
+                    <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+                  </div>
+                  <span className={`tracking-wide text-center w-full truncate px-1 transition-colors ${
+                    isActive ? "text-brand-primary font-black" : "text-brand-primary font-bold"
+                  }`}>
+                    {item.name}
+                  </span>
+                </Link>
+              );
+            }
+
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`relative flex flex-col items-center justify-center gap-1 w-20 h-full text-[10px] font-bold transition-all ${
+                className={`relative flex flex-col items-center justify-center gap-1 w-20 h-full text-[10px] font-bold transition-all pt-1 pb-3 ${
                   isActive ? "text-brand-primary" : "text-brand-fg/50 hover:text-brand-fg/80"
                 }`}
               >
-                {/* Active Indicator Top Bar */}
-                {isActive && (
-                  <div className="absolute top-0 w-8 h-[3px] bg-brand-primary rounded-b-sm z-40 transition-all duration-300 animate-fade-in" />
-                )}
                 <Icon className={`w-5.5 h-5.5 transition-colors ${isActive ? "text-brand-primary" : "text-zinc-400 dark:text-zinc-500"}`} aria-hidden="true" />
                 <span className="tracking-wide">{item.name}</span>
               </Link>

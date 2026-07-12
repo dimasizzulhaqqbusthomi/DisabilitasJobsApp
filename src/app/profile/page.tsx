@@ -286,7 +286,7 @@ export default function ProfilePage() {
     if (user) {
       setEmail(user.email || "");
     } else {
-      setEmail("mode-simulasi@ablework.com");
+      setEmail("mode-simulasi@akseskerjamu.com");
     }
   }, [currentPersona, user]);
 
@@ -539,7 +539,7 @@ export default function ProfilePage() {
   const avgMatch = selectedNeeds.length === 0 ? 0
     : Math.round(scoredJobs.reduce((s, j) => s + j.matchScore, 0) / scoredJobs.length);
 
-  const getMissingSkillPassportFields = () => {
+  const getMissingProfilKerjaFields = () => {
     const missing = [];
 
     // 1. Profil Dasar (Nama, Pendidikan, Tentang Saya)
@@ -575,10 +575,10 @@ export default function ProfilePage() {
     return missing;
   };
 
-  const PASSPORT_TOTAL = 7;
-  const missingFields = getMissingSkillPassportFields();
-  const completedCount = PASSPORT_TOTAL - missingFields.length;
-  const progressPercent = Math.round((completedCount / PASSPORT_TOTAL) * 100);
+  const PROFIL_KERJA_TOTAL = 7;
+  const missingFields = getMissingProfilKerjaFields();
+  const completedCount = PROFIL_KERJA_TOTAL - missingFields.length;
+  const progressPercent = Math.round((completedCount / PROFIL_KERJA_TOTAL) * 100);
 
   const initials = fullName ? fullName.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase() : "U";
 
@@ -687,13 +687,13 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* --- SKILL PASSPORT SUMMARY CARD --- */}
+            {/* --- PROFIL KERJA SUMMARY CARD --- */}
             <div className="px-5 mt-4 z-20 relative max-w-md mx-auto w-full">
               <div className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-3xl p-5 border border-indigo-400/20 shadow-md text-white space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xs font-black flex items-center gap-2">
                     <FileCheck className="w-4.5 h-4.5 text-cyan-300" />
-                    Skill Passport
+                    Profil Kerja
                   </h3>
                   <span className="px-2 py-0.5 rounded-full bg-white/20 border border-white/20 text-[9px] font-black">
                     {progressPercent}% Lengkap
@@ -702,9 +702,9 @@ export default function ProfilePage() {
 
                 {/* Circular Progress & Missing Fields Detail */}
                 <div className="flex items-center gap-3.5 bg-white/10 rounded-2xl p-4 shadow-inner">
-                  <CircularProgress value={completedCount} max={PASSPORT_TOTAL} />
+                  <CircularProgress value={completedCount} max={PROFIL_KERJA_TOTAL} />
                   <div className="flex-1 min-w-0 text-left">
-                    <div className="text-xs font-black text-white">Kelengkapan Passport</div>
+                    <div className="text-xs font-black text-white">Kelengkapan Profil Kerja</div>
                     {missingFields.length > 0 ? (
                       <div className="mt-1 space-y-0.5">
                         <span className="block text-[8px] text-cyan-200 font-extrabold uppercase tracking-wider">Belum diisi:</span>
@@ -715,7 +715,7 @@ export default function ProfilePage() {
                     ) : (
                       <div className="text-[9px] text-emerald-300 font-black mt-1 uppercase tracking-wider flex items-center gap-1">
                         <Check className="w-3 h-3 shrink-0" />
-                        Passport 100% Lengkap
+                        Profil Kerja 100% Lengkap
                       </div>
                     )}
                   </div>
@@ -733,10 +733,10 @@ export default function ProfilePage() {
                 </div>
 
                 <Link
-                  href="/skill-passport"
+                  href="/profil-kerja"
                   className="block w-full py-3 rounded-xl bg-white hover:bg-zinc-50 text-indigo-900 text-xs font-black text-center shadow-md shadow-indigo-800/25 transition-all"
                 >
-                  Lihat Skill Passport
+                  Lihat Profil Kerja
                 </Link>
               </div>
             </div>

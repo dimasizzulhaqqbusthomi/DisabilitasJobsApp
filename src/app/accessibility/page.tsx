@@ -73,7 +73,7 @@ export default function AccessibilityPage() {
             <div>
               <h3 className="text-sm font-extrabold text-slate-800">Pengaturan Aksesibilitas</h3>
               <p className="text-[11px] text-slate-400 font-semibold mt-1">
-                Sesuaikan pengaturan tampilan untuk mempermudah navigasi Anda di AbleWork.
+                Sesuaikan pengaturan tampilan untuk mempermudah navigasi Anda di AksesKerjaMu.
               </p>
             </div>
 

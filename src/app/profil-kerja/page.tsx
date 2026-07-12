@@ -104,7 +104,7 @@ export default function SkillPassportPage() {
   const parseSkills = (skills: string[] = []) => {
     const hard: string[] = [];
     const soft: string[] = [];
-    
+
     skills.forEach(skill => {
       if (skill.startsWith("hard:")) {
         hard.push(skill.replace("hard:", ""));
@@ -119,7 +119,7 @@ export default function SkillPassportPage() {
         }
       }
     });
-    
+
     return { hard, soft };
   };
 
@@ -288,25 +288,25 @@ export default function SkillPassportPage() {
 
     setActiveModal(null);
     setProfileAvatarFile(null);
-    showToast("Profil Passport berhasil diperbarui!", "success");
+    showToast("Profil Kerja berhasil diperbarui!", "success");
   };
 
   // Skills
   const handleAddSkill = () => {
     if (!newSkillText.trim()) return;
     const cleanSkill = newSkillText.trim();
-    
+
     // Check if duplicate
     const duplicate = currentPersona.skills.some(s => {
       const sClean = s.replace("hard:", "").replace("soft:", "").trim().toLowerCase();
       return sClean === cleanSkill.toLowerCase();
     });
-    
+
     if (duplicate) {
       showToast("Keahlian sudah ada!", "warning");
       return;
     }
-    
+
     const prefixedSkill = `${newSkillType}:${cleanSkill}`;
     const updatedSkills = [...currentPersona.skills, prefixedSkill];
     updatePersona({ skills: updatedSkills });
@@ -549,13 +549,13 @@ export default function SkillPassportPage() {
               >
                 <ChevronLeft className="w-5 h-5" />
               </Link>
-              <span className="text-white/70 text-xs font-semibold tracking-wide">Passport Saya</span>
+              <span className="text-white/70 text-xs font-semibold tracking-wide">Profil Kerja Saya</span>
             </div>
 
             {/* Title row */}
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-black text-white leading-snug mb-1">Skill Passport Saya</h1>
+                <h1 className="text-xl font-black text-white leading-snug mb-1">Profil Kerja Saya</h1>
                 <p className="text-white/70 text-xs leading-relaxed max-w-sm">
                   CV digital inklusif dengan verifikasi keahlian nyata dan deklarasi akomodasi kerja.
                 </p>
@@ -570,7 +570,7 @@ export default function SkillPassportPage() {
             <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
               {/* Passport Header Banner */}
               <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-cyan-500 px-4 py-3 text-white flex items-center justify-between">
-                <span className="text-[10px] font-black tracking-widest uppercase">ABLEWORK PASSPORT</span>
+                <span className="text-[10px] font-black tracking-widest uppercase">PROFIL KERJA AKSESKERJAMU</span>
                 <span className="text-[8px] font-black bg-emerald-500 text-white border border-emerald-400/20 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
                   <BadgeCheck className="w-2.5 h-2.5" />
                   Verified
@@ -583,7 +583,7 @@ export default function SkillPassportPage() {
                 <button
                   onClick={handleOpenEditProfile}
                   className="absolute top-4 right-4 bg-slate-50 hover:bg-indigo-50 border border-slate-100 hover:border-indigo-100 rounded-lg p-1.5 text-slate-500 hover:text-indigo-600 shadow-sm z-10 flex items-center justify-center transition-colors"
-                  title="Edit Profil Passport"
+                  title="Edit Profil Kerja"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
@@ -614,45 +614,41 @@ export default function SkillPassportPage() {
                 </div>
 
                 {/* Grid Metadata Info */}
-                <div className="border-t border-dashed border-slate-100 pt-3.5 space-y-2.5 text-[11px]">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                <div className="border-t border-dashed border-slate-100 pt-3.5 space-y-3.5 text-[11px]">
+                  <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Target Karir</span>
-                      <span className="font-extrabold text-brand-fg leading-normal">
+                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Target Karir</span>
+                      <span className="font-extrabold text-brand-fg leading-tight block">
                         {currentPersona.targetCareers && currentPersona.targetCareers.length > 0
                           ? currentPersona.targetCareers.join(", ")
-                          : "Belum ada target karir yang dipilih"}
+                          : "Belum ada"}
                       </span>
                     </div>
                     <div>
-                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Tipe Kerja</span>
-                      <span className="font-extrabold text-brand-fg leading-normal capitalize">{jobPreferences.type}</span>
+                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Tipe Kerja</span>
+                      <span className="font-extrabold text-brand-fg leading-tight capitalize block">{jobPreferences.type}</span>
+                    </div>
+                    <div>
+                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Pendidikan</span>
+                      <span className="font-extrabold text-brand-fg leading-tight block">{currentPersona.education}</span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                    <div>
-                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Pendidikan</span>
-                      <span className="font-extrabold text-brand-fg leading-normal">{currentPersona.education}</span>
-                    </div>
-                    <div>
-                      <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider">Tentang Saya</span>
-                      <span className="font-extrabold text-brand-fg leading-normal block truncate max-w-[150px]" title={currentPersona.bio}>{currentPersona.bio}</span>
-                    </div>
+                  <div className="border-t border-slate-100 pt-3">
+                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-1">Tentang Saya</span>
+                    <p className="font-extrabold text-brand-fg leading-relaxed">
+                      {currentPersona.bio}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-slate-100 pt-3">
+                    <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-1">Pengalaman Kerja</span>
+                    <p className="font-extrabold text-brand-fg leading-relaxed">
+                      {currentPersona.experience}
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* 2. Pengalaman Kerja */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 space-y-2">
-              <h3 className="text-xs font-black text-brand-fg flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full bg-indigo-500 inline-block shrink-0" />
-                Pengalaman Kerja
-              </h3>
-              <p className="text-xs text-brand-fg/70 leading-relaxed font-semibold">
-                {currentPersona.experience}
-              </p>
             </div>
 
             {/* 4. Keterampilan Kerja */}
@@ -1450,7 +1446,7 @@ export default function SkillPassportPage() {
                       required
                       value={certIssuer}
                       onChange={(e) => setCertIssuer(e.target.value)}
-                      placeholder="Contoh: AbleWork Academy"
+                      placeholder="Contoh: AksesKerjaMu Academy"
                       className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
                     />
                   </div>
@@ -1591,7 +1587,7 @@ export default function SkillPassportPage() {
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <h4 className="text-sm font-black text-brand-fg flex items-center gap-2">
                     <BadgeCheck className="w-4 h-4 text-indigo-500" />
-                    Edit Profil Passport
+                    Edit Profil Kerja
                   </h4>
                   <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600">
                     <X className="w-4 h-4" />
@@ -1675,18 +1671,6 @@ export default function SkillPassportPage() {
                     />
                   </div>
 
-                  {/* Experience */}
-                  <div className="space-y-1">
-                    <label className="font-black text-slate-400 uppercase tracking-wider text-[9px]">Pengalaman Kerja</label>
-                    <input
-                      type="text"
-                      required
-                      value={profileExperience}
-                      onChange={(e) => setProfileExperience(e.target.value)}
-                      className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
-                    />
-                  </div>
-
                   {/* Bio / Tentang Saya */}
                   <div className="space-y-1">
                     <label className="font-black text-slate-400 uppercase tracking-wider text-[9px]">Tentang Saya</label>
@@ -1696,6 +1680,18 @@ export default function SkillPassportPage() {
                       onChange={(e) => setProfileBio(e.target.value)}
                       rows={3}
                       className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none resize-none h-20"
+                    />
+                  </div>
+
+                  {/* Experience */}
+                  <div className="space-y-1">
+                    <label className="font-black text-slate-400 uppercase tracking-wider text-[9px]">Pengalaman Kerja</label>
+                    <input
+                      type="text"
+                      required
+                      value={profileExperience}
+                      onChange={(e) => setProfileExperience(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
                     />
                   </div>
                 </div>

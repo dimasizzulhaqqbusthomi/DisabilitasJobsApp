@@ -45,7 +45,7 @@ const DISABILITY_TEMPLATES: Record<string, { needs: string[]; hint: string }> = 
 
 const PURPOSES = [
   { label: "Cari kerja", Icon: Briefcase, desc: "Temukan lowongan kerja inklusif" },
-  { label: "Buat profil skill", Icon: UserCheck, desc: "Siapkan passport keahlian digital" },
+  { label: "Buat profil skill", Icon: UserCheck, desc: "Siapkan profil kerja digital" },
   { label: "Persiapan interview", Icon: HelpCircle, desc: "Latihan simulasi wawancara" },
 ];
 
@@ -394,7 +394,7 @@ function RegisterForm() {
                 )}
               </div>
             </div>
-            <p className="text-[10px] text-brand-fg/40 leading-relaxed">Dengan mendaftar, Anda menyetujui syarat penggunaan AbleWork. Data aksesibilitas Anda hanya digunakan untuk mencocokkan lowongan kerja.</p>
+            <p className="text-[10px] text-brand-fg/40 leading-relaxed">Dengan mendaftar, Anda menyetujui syarat penggunaan AksesKerjaMu. Data aksesibilitas Anda hanya digunakan untuk mencocokkan lowongan kerja.</p>
           </div>
         )}
 

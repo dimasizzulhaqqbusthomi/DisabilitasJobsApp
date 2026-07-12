@@ -7,12 +7,12 @@ import { useAccessibility } from "../../context/AccessibilityContext";
 import { JOBS, ACCOMMODATIONS, calculateMatchScore } from "../../data/mockData";
 import AppLayout from "../../components/AppLayout";
 import { AbleMatchScore } from "../../components/AbleMatchScore";
-import { 
-  Search, 
-  MapPin, 
-  DollarSign, 
-  Filter, 
-  ChevronRight, 
+import {
+  Search,
+  MapPin,
+  DollarSign,
+  Filter,
+  ChevronRight,
   SlidersHorizontal,
   X,
   Briefcase,
@@ -48,7 +48,7 @@ const getRecruiter = (jobId: string) => {
     case "8":
       return { name: "Fajar Nugroho", initials: "FN", online: "15 mnt lalu" };
     default:
-      return { name: "Recruiter AbleWork", initials: "RA", online: "1 jam lalu" };
+      return { name: "Recruiter AksesKerjaMu", initials: "RA", online: "1 jam lalu" };
   }
 };
 
@@ -77,7 +77,7 @@ export default function JobListPage() {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [selectedLocation, setSelectedLocation] = useState<string>("all");
   const [selectedSalary, setSelectedSalary] = useState<string>("all");
-  
+
   // Custom filter panel visibility
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -88,32 +88,32 @@ export default function JobListPage() {
       const score = calculateMatchScore(job, currentPersona, selectedNeeds, jobPreferences);
       return { ...job, matchScore: score };
     })
-    .filter(job => {
-      // 1. Search Query Match
-      const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            job.company.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      // 2. Type Match
-      const matchesType = selectedType === "all" || job.type === selectedType;
-      
-      // 3. Location Match
-      const matchesLocation = selectedLocation === "all" || 
-                              (selectedLocation === "remote" && job.type === "remote") ||
-                              (selectedLocation === "jakarta" && job.location.includes("Jakarta")) ||
-                              (selectedLocation === "bandung" && job.location.includes("Bandung")) ||
-                              (selectedLocation === "yogyakarta" && job.location.includes("Yogyakarta")) ||
-                              (selectedLocation === "surabaya" && job.location.includes("Surabaya")) ||
-                              (selectedLocation === "semarang" && job.location.includes("Semarang"));
+      .filter(job => {
+        // 1. Search Query Match
+        const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          job.company.toLowerCase().includes(searchQuery.toLowerCase());
 
-      // 4. Salary Match
-      const matchesSalary = selectedSalary === "all" || 
-                            (selectedSalary === "low" && job.salary.includes("3.500.000") || job.salary.includes("3.800.000")) ||
-                            (selectedSalary === "medium" && job.salary.includes("4.200.000") || job.salary.includes("4.500.000")) ||
-                            (selectedSalary === "high" && job.salary.includes("5.000.000") || job.salary.includes("6.500.000"));
+        // 2. Type Match
+        const matchesType = selectedType === "all" || job.type === selectedType;
 
-      return matchesSearch && matchesType && matchesLocation && matchesSalary;
-    })
-    .sort((a, b) => b.matchScore - a.matchScore); // Highest match first
+        // 3. Location Match
+        const matchesLocation = selectedLocation === "all" ||
+          (selectedLocation === "remote" && job.type === "remote") ||
+          (selectedLocation === "jakarta" && job.location.includes("Jakarta")) ||
+          (selectedLocation === "bandung" && job.location.includes("Bandung")) ||
+          (selectedLocation === "yogyakarta" && job.location.includes("Yogyakarta")) ||
+          (selectedLocation === "surabaya" && job.location.includes("Surabaya")) ||
+          (selectedLocation === "semarang" && job.location.includes("Semarang"));
+
+        // 4. Salary Match
+        const matchesSalary = selectedSalary === "all" ||
+          (selectedSalary === "low" && job.salary.includes("3.500.000") || job.salary.includes("3.800.000")) ||
+          (selectedSalary === "medium" && job.salary.includes("4.200.000") || job.salary.includes("4.500.000")) ||
+          (selectedSalary === "high" && job.salary.includes("5.000.000") || job.salary.includes("6.500.000"));
+
+        return matchesSearch && matchesType && matchesLocation && matchesSalary;
+      })
+      .sort((a, b) => b.matchScore - a.matchScore); // Highest match first
   }, [searchQuery, selectedType, selectedLocation, selectedSalary, selectedNeeds]);
 
   const clearFilters = () => {
@@ -126,16 +126,16 @@ export default function JobListPage() {
   return (
     <AppLayout showHeader={false} mainClassName="flex-1 overflow-y-auto overflow-x-hidden pb-24 bg-brand-bg">
       <div className="flex flex-col min-h-screen">
-        
+
         {/* ═══ CUSTOM BLUE GRADIENT HEADER ═══ */}
         <div className="relative bg-gradient-to-br from-[#4f46e5] via-[#4338ca] to-[#06b6d4] pt-8 pb-10 px-5 overflow-hidden select-none shadow-lg">
           {/* decorative wave details */}
           <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
           <div className="absolute top-4 right-20 w-20 h-20 rounded-full bg-white/5 pointer-events-none" />
-          
+
           {/* Top Row: Title + Filter sliders */}
           <div className="flex items-center justify-between mb-6 relative z-10">
-            <Link 
+            <Link
               href="/jobs/saved"
               className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/20 transition-all text-white relative shrink-0"
               aria-label="Lowongan Disimpan"
@@ -147,11 +147,11 @@ export default function JobListPage() {
                 </span>
               )}
             </Link>
-            
+
             <h1 className="text-base font-black text-white tracking-wide">Cari Lowongan</h1>
-            
-            <button 
-              type="button" 
+
+            <button
+              type="button"
               onClick={() => setShowMobileFilters(true)}
               className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/20 transition-all text-white"
               aria-label="Filter"
@@ -179,11 +179,11 @@ export default function JobListPage() {
               </select>
               <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
-                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                 </svg>
               </div>
             </div>
-            
+
             {/* Right portion: Keyword Text Input */}
             <div className="relative flex-1 flex items-center">
               <input
@@ -234,8 +234,8 @@ export default function JobListPage() {
                 </span>
               );
             })}
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={clearFilters}
               className="text-[10px] font-black text-brand-primary hover:underline ml-auto shrink-0 pl-2"
             >
@@ -249,21 +249,21 @@ export default function JobListPage() {
           {/* Header Row */}
           <div className="flex items-center justify-between select-none">
             <h2 className="text-sm font-black text-brand-fg">
-              {searchQuery ? `Hasil: "${searchQuery}"` : "Semua Lowongan"} 
+              {searchQuery ? `Hasil: "${searchQuery}"` : "Semua Lowongan"}
               <span className="text-xs font-bold text-brand-fg/40 ml-1.5">({filteredJobs.length} Lowongan)</span>
             </h2>
-            
+
             {/* Sort Select */}
             <div className="relative shrink-0">
-              <select 
+              <select
                 className="appearance-none bg-white border border-slate-100 px-3 py-1.5 pr-7 rounded-xl text-[10px] font-black text-slate-600 shadow-sm outline-none cursor-pointer"
                 defaultValue="match"
               >
-                <option value="match">Urutan: Cocok</option>
+                <option value="match">Urutan: Kecocokan</option>
                 <option value="newest">Urutan: Terbaru</option>
               </select>
               <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
               </div>
             </div>
           </div>
@@ -339,11 +339,10 @@ export default function JobListPage() {
                     {job.accommodations.slice(0, 3).map((key: string) => {
                       const matched = selectedNeeds.includes(key);
                       return (
-                        <span key={key} className={`px-2 py-0.5 rounded-lg border text-[10px] font-bold ${
-                          matched
+                        <span key={key} className={`px-2 py-0.5 rounded-lg border text-[10px] font-bold ${matched
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                             : "bg-slate-50 text-slate-500 border-slate-200"
-                        }`}>{getAccLabel(key)}</span>
+                          }`}>{getAccLabel(key)}</span>
                       );
                     })}
                   </div>
@@ -374,7 +373,7 @@ export default function JobListPage() {
           <div className="w-80 bg-brand-bg h-full p-6 flex flex-col space-y-6 border-l border-brand-border overflow-y-auto">
             <div className="flex items-center justify-between pb-4 border-b border-brand-border">
               <h2 className="font-extrabold text-sm flex items-center gap-1.5"><Filter className="w-4 h-4" /> Filter Pencarian</h2>
-              <button 
+              <button
                 onClick={() => setShowMobileFilters(false)}
                 className="p-1.5 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
               >
@@ -439,7 +438,7 @@ export default function JobListPage() {
               <div className="space-y-2.5">
                 {ACCOMMODATIONS.map(acc => (
                   <label key={acc.key} className="flex items-start gap-2.5 text-xs text-brand-fg cursor-pointer select-none">
-                    <input 
+                    <input
                       type="checkbox"
                       checked={selectedNeeds.includes(acc.key)}
                       onChange={() => toggleNeed(acc.key)}
@@ -452,13 +451,13 @@ export default function JobListPage() {
             </div>
 
             <div className="flex gap-2 pt-4 mt-auto">
-              <button 
+              <button
                 onClick={clearFilters}
                 className="flex-1 p-2.5 rounded-xl border border-brand-border hover:bg-black/5 text-xs font-bold transition-all"
               >
                 Reset
               </button>
-              <button 
+              <button
                 onClick={() => setShowMobileFilters(false)}
                 className="flex-1 p-2.5 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-bold transition-all"
               >

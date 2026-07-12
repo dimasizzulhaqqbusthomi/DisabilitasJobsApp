@@ -26,7 +26,7 @@ import {
 const FEEDBACK_FEATURES = [
   { id: "recommendation", label: "Rekomendasi pekerjaan sesuai" },
   { id: "accessibility", label: "Informasi aksesibilitas" },
-  { id: "skill_passport", label: "Skill Passport" },
+  { id: "skill_passport", label: "Profil Kerja" },
   { id: "apply_easy", label: "Proses melamar mudah" },
 ];
 
@@ -215,7 +215,7 @@ function ApplyContent() {
                   <Heart className="w-8 h-8 text-emerald-500 fill-emerald-500" />
                 </div>
                 <h3 className="text-base font-black text-brand-fg">Terima Kasih!</h3>
-                <p className="text-xs text-slate-400 font-medium">Feedback kamu sangat berarti untuk AbleWork 🙌</p>
+                <p className="text-xs text-slate-400 font-medium">Feedback kamu sangat berarti untuk AksesKerjaMu 🙌</p>
               </div>
             ) : (
               <>
@@ -235,7 +235,7 @@ function ApplyContent() {
                     </div>
                     <span className="text-xs font-black text-white/80">Lamaran berhasil dikirim</span>
                   </div>
-                  <h2 className="text-base font-black leading-snug">Bagaimana pengalaman kamu menggunakan AbleWork?</h2>
+                  <h2 className="text-base font-black leading-snug">Bagaimana pengalaman kamu menggunakan AksesKerjaMu?</h2>
                 </div>
 
                 {/* Body */}
@@ -354,7 +354,7 @@ function ApplyContent() {
             <div className="relative z-10">
               <h1 className="text-xl font-black text-white leading-snug mb-1">Kirim Lamaran Kerja</h1>
               <p className="text-white/70 text-xs leading-relaxed max-w-sm">
-                Melamar secara inklusif dengan melampirkan Skill Passport digital Anda dan pesan akomodasi.
+                Melamar secara inklusif dengan melampirkan Profil Kerja digital Anda dan pesan akomodasi.
               </p>
             </div>
           </div>
@@ -387,7 +387,7 @@ function ApplyContent() {
                         {isCompleted ? <Check className="w-3.5 h-3.5" /> : s}
                       </div>
                       <span className={`text-[9px] font-black ${isActive ? "text-indigo-600" : "text-slate-400"}`}>
-                        {s === 1 ? "Passport" : s === 2 ? "Akomodasi" : "Kirim"}
+                        {s === 1 ? "Profil Kerja" : s === 2 ? "Akomodasi" : "Kirim"}
                       </span>
                     </div>
                   );
@@ -402,7 +402,7 @@ function ApplyContent() {
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
-                    <h2 className="text-xs font-black text-indigo-600 uppercase tracking-wider">Tahap 1: Konfirmasi Skill Passport</h2>
+                    <h2 className="text-xs font-black text-indigo-600 uppercase tracking-wider">Tahap 1: Konfirmasi Profil Kerja</h2>
                     <p className="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">
                       Informasi profil &amp; skill Anda akan dilampirkan secara otomatis ke pihak perusahaan.
                     </p>
@@ -584,8 +584,8 @@ function ApplyContent() {
                           <UserCheck className="w-4.5 h-4.5 text-emerald-500" />
                         </div>
                         <div className="min-w-0">
-                          <div className="truncate">Skill Passport - {currentPersona.name}.pdf</div>
-                          <div className="text-[8px] font-black text-emerald-600 uppercase tracking-wide">Terverifikasi AbleWork</div>
+                          <div className="truncate">Profil Kerja - {currentPersona.name}.pdf</div>
+                          <div className="text-[8px] font-black text-emerald-600 uppercase tracking-wide">Terverifikasi AksesKerjaMu</div>
                         </div>
                       </div>
                     </div>

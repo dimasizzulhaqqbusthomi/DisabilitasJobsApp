@@ -37,7 +37,7 @@ const INITIAL_MESSAGES_MAP: Record<string, { sender: "recruiter" | "user"; text:
   ],
   "2": [
     { sender: "recruiter", text: "Halo, salam kenal. Saya Beni dari Karya Inklusi. Saya melihat Anda terampil menggunakan Microsoft Excel.", time: "10:10 AM" },
-    { sender: "user", text: "Halo Pak Beni, benar. Saya memiliki sertifikat pengolahan data spreadsheet dari AbleWork Academy.", time: "10:15 AM" },
+    { sender: "user", text: "Halo Pak Beni, benar. Saya memiliki sertifikat pengolahan data spreadsheet dari AksesKerjaMu Academy.", time: "10:15 AM" },
     { sender: "recruiter", text: "Luar biasa. Apakah Anda bersedia untuk interview chat hari Selasa besok jam 10 pagi?", time: "10:20 AM" },
   ],
   "3": [
@@ -67,7 +67,7 @@ export default function ChatRoomPage() {
   const { simpleLanguage } = useAccessibility();
   
   const id = params?.id as string;
-  const recruiter = RECRUITERS[id] || { name: "Recruiter AbleWork", initials: "RA", company: "AbleWork Co", online: true, phone: "+62 812-3456-7890" };
+  const recruiter = RECRUITERS[id] || { name: "Recruiter AksesKerjaMu", initials: "RA", company: "AksesKerjaMu Co", online: true, phone: "+62 812-3456-7890" };
 
   const [messages, setMessages] = useState<{ id?: string; sender: "recruiter" | "user"; text: string; time: string }[]>([]);
   const [inputText, setInputText] = useState("");

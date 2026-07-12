@@ -9,7 +9,7 @@ import AppLayout from "../../components/AppLayout";
 import { AbleMatchScore } from "../../components/AbleMatchScore";
 import {
   Briefcase, Award, Send, ChevronRight,
-  Bell, Accessibility, MapPin, Zap, Sparkles, Mic
+  Bell, Accessibility, MapPin, Zap, Sparkles, Mic, MessageSquare
 } from "lucide-react";
 
 /* ─── helpers ─────────────────────────────────────────────── */
@@ -31,7 +31,7 @@ const getRecruiter = (id: string) => ({
   "3": { initials: "YP", name: "Yudi P." },
   "4": { initials: "LM", name: "Lina M." },
   "5": { initials: "DL", name: "Dewi L." },
-}[id] ?? { initials: "AW", name: "AbleWork" });
+}[id] ?? { initials: "AKM", name: "AksesKerjaMu" });
 
 /* ─── Donut ring component ─────────────────────────────────── */
 function DonutRing({ pct, size = 88, stroke = 9 }: { pct: number; size?: number; stroke?: number }) {
@@ -96,15 +96,20 @@ export default function DashboardPage() {
           <div className="absolute top-4 right-20 w-20 h-20 rounded-full bg-white/5" />
           <div className="absolute bottom-10 left-[-20px] w-32 h-32 rounded-full bg-cyan-400/10" />
 
-          {/* top row: avatar + greeting + bell */}
+          {/* top row: avatar + greeting + chat + bell */}
           <div className="flex items-center gap-3 relative z-10 mb-8">
             <div className="w-11 h-11 rounded-full bg-white/20 border border-white/25 flex items-center justify-center text-sm font-black text-white shrink-0">
               {initials}
             </div>
             <div className="flex flex-col flex-1">
-              <span className="text-[10px] text-white/70 font-medium">Selamat datang di Ablework</span>
+              <span className="text-[10px] text-white/70 font-medium">Selamat datang di AksesKerjaMu</span>
               <span className="text-base font-black text-white leading-tight">{currentPersona.name}</span>
             </div>
+            <Link href="/chat" aria-label="Pesan (Chat)"
+              className="relative w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center hover:bg-white/25 transition-all">
+              <MessageSquare className="w-5 h-5 text-white" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[8px] font-black rounded-full flex items-center justify-center border-2 border-[#4338ca] animate-pulse">3</span>
+            </Link>
             <Link href="/notifications" aria-label="Notifikasi"
               className="relative w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center hover:bg-white/25 transition-all">
               <Bell className="w-5 h-5 text-white" />
@@ -114,16 +119,16 @@ export default function DashboardPage() {
 
           {/* headline */}
           <div className="relative z-10 mb-6">
-            <p className="text-white/80 text-xs font-medium mb-0.5">Tingkat kecocokan profil Anda</p>
+            <p className="text-white/80 text-xs font-medium mb-0.5">Tingkat Kecocokan Kerja Anda</p>
             <h1 className="text-white text-xl font-black leading-snug">
-              {avgMatch < 30 ? "Lengkapi profil untuk kecocokan terbaik" : `${avgMatch}% cocok dengan lowongan`}
+              {avgMatch < 30 ? "Lengkapi profil untuk Kecocokan Kerja terbaik" : `${avgMatch}% Kecocokan Kerja`}
             </h1>
           </div>
 
           {/* stat pill row */}
           <div className="relative z-10 flex gap-2.5">
             {[
-              { label: "Lowongan Cocok", val: cocok, href: "/jobs" },
+              { label: "Kecocokan Kerja", val: cocok, href: "/jobs" },
               { label: "Lamaran", val: dikirim, href: "/applications" },
             ].map(s => (
               <Link
@@ -141,33 +146,33 @@ export default function DashboardPage() {
         {/* ═══ FLOATING MATCH CARD ═══ */}
         <div className="px-5 -mt-12 z-20 relative mb-5">
 
-          {/* Card: AbleMatch Score Card */}
+          {/* Card: Kecocokan Kerja Card */}
           <div className="bg-white rounded-3xl shadow-xl shadow-black/5 border border-slate-100 p-5 flex items-center gap-5">
             {/* donut */}
             <div className="relative shrink-0">
               <DonutRing pct={avgMatch} />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-base font-black text-brand-fg leading-none">{avgMatch}%</span>
-                <span className="text-[8px] text-brand-fg/50 font-bold leading-tight">Match</span>
+                <span className="text-[6.5px] text-brand-fg/50 font-extrabold leading-none uppercase tracking-tighter text-center max-w-[42px]">Kecocokan</span>
               </div>
             </div>
             <div className="flex-1 min-w-0">
               <h2 className="font-black text-sm text-brand-fg mb-1">
                 {avgMatch < 30
-                  ? "Belum Ada Kecocokan"
+                  ? "Belum Ada Kecocokan Kerja"
                   : avgMatch >= 70
-                    ? "Profil Sangat Cocok!"
-                    : "Profil Cukup Cocok"}
+                    ? "Kecocokan Kerja Sangat Baik!"
+                    : "Kecocokan Kerja Cukup Baik"}
               </h2>
               <p className="text-[11px] text-brand-fg/60 leading-snug mb-3">
                 {avgMatch < 30
-                  ? "Tambahkan skill, portofolio, atau target karir untuk meningkatkan skor kecocokanmu."
-                  : `${cocok} dari ${scoredJobs.length} lowongan cocok dengan profil aksesibilitasmu.`}
+                  ? "Tambahkan skill, portofolio, atau target karir untuk meningkatkan Kecocokan Kerja Anda."
+                  : `${cocok} dari ${scoredJobs.length} lowongan sesuai dengan profil aksesibilitas Anda.`}
               </p>
-              <Link href={avgMatch < 30 ? "/skill-passport" : "/profile"}
+              <Link href="/profil-kerja"
                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-brand-primary text-white text-[10px] font-bold hover:bg-brand-primary-hover transition-all">
                 <Accessibility className="w-3.5 h-3.5" />
-                {avgMatch < 30 ? "Lengkapi Profil" : "Perbarui Skill Passport"}
+                {avgMatch < 30 ? "Lengkapi Profil" : "Perbarui Profil Kerja"}
               </Link>
             </div>
           </div>
@@ -183,10 +188,10 @@ export default function DashboardPage() {
               <div className="p-2 bg-white/20 rounded-xl"><Briefcase className="w-5 h-5" /></div>
               <div><div className="font-black text-sm">Cari Kerja</div><div className="text-[10px] text-white/70">Lihat semua lowongan</div></div>
             </Link>
-            <Link href="/skill-passport"
+            <Link href="/profil-kerja"
               className="flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-700 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all">
               <div className="p-2 bg-white/20 rounded-xl"><Award className="w-5 h-5" /></div>
-              <div><div className="font-black text-sm">Skill Passport</div><div className="text-[10px] text-white/70">Update keahlianmu</div></div>
+              <div><div className="font-black text-sm">Profil Kerja</div><div className="text-[10px] text-white/70">Update keahlianmu</div></div>
             </Link>
             <Link href="/interview-prep"
               className="col-span-2 flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all">
@@ -200,7 +205,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-black text-brand-fg">Rekomendasi Untukmu</h2>
-                <p className="text-[11px] text-brand-fg/50">Diurutkan berdasarkan kecocokkan</p>
+                <p className="text-[11px] text-brand-fg/50">Diurutkan berdasarkan Kecocokan Kerja</p>
               </div>
               <Link href="/jobs" className="flex items-center gap-0.5 text-xs font-bold text-brand-primary hover:underline">
                 Lihat Semua<ChevronRight className="w-3.5 h-3.5" />
@@ -283,7 +288,7 @@ export default function DashboardPage() {
             <div className="p-3 bg-white/15 rounded-2xl shrink-0"><Zap className="w-6 h-6" /></div>
             <div className="flex-1 min-w-0">
               <div className="font-black text-sm mb-0.5">Lamar Lebih Mudah</div>
-              <div className="text-[11px] text-white/80 leading-snug">Kirim lamaran dengan satu klik menggunakan Skill Passport Anda</div>
+              <div className="text-[11px] text-white/80 leading-snug">Kirim lamaran dengan satu klik menggunakan Profil Kerja Anda</div>
             </div>
             <Link href="/jobs" className="shrink-0 px-3 py-2 bg-white text-brand-primary rounded-xl text-[10px] font-black hover:bg-blue-50 transition-all">
               Mulai

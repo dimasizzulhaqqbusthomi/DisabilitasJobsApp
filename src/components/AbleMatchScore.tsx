@@ -18,7 +18,7 @@ export const AbleMatchScore: React.FC<AbleMatchScoreProps> = ({ score, className
           : "bg-indigo-50 text-indigo-600 border-indigo-200"
         } ${className}`}
     >
-      {isNotRecommended ? "! Perlu Pertimbangan" : `${score}% Cocok`}
+      {isNotRecommended ? "! Perlu Pertimbangan" : `${score}% Kecocokan`}
     </span>
   );
 };

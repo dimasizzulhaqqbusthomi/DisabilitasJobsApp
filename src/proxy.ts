@@ -43,7 +43,7 @@ export async function proxy(request: NextRequest) {
   const protectedRoutes = [
     "/dashboard",
     "/jobs",
-    "/skill-passport",
+    "/profil-kerja",
     "/apply",
     "/interview-checklist",
     "/feedback",

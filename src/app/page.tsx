@@ -44,12 +44,12 @@ export default function LandingPage() {
         </div>
         
         <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight text-brand-fg">
-          AbleWork membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih inklusif.
+          AksesKerjaMu membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih inklusif.
         </h1>
         
         <p className="text-lg md:text-xl text-brand-fg/70 max-w-3xl mx-auto">
           {simpleLanguage 
-            ? "AbleWork membantu Anda mencari pekerjaan dan melamar dengan mudah sesuai dengan kondisi atau kebutuhan Anda."
+            ? "AksesKerjaMu membantu Anda mencari pekerjaan dan melamar dengan mudah sesuai dengan kondisi atau kebutuhan Anda."
             : "Platform pencarian kerja pertama yang berfokus pada kecocokan akomodasi aksesibilitas (inclusive job matching) untuk membantu penyandang disabilitas berkarir secara mandiri dan setara."
           }
         </p>
@@ -63,10 +63,10 @@ export default function LandingPage() {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link 
-            href="/skill-passport" 
+            href="/profil-kerja" 
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border-2 border-brand-border bg-brand-card hover:bg-black/5 text-base font-extrabold transition-all"
           >
-            <span>Buat Skill Passport</span>
+            <span>Buat Profil Kerja</span>
           </Link>
         </div>
       </section>
@@ -119,17 +119,17 @@ export default function LandingPage() {
       <section className="py-12 bg-brand-primary-light/10 border-t border-b border-brand-border/40">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center space-y-2 mb-12">
-            <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Solusi Inovatif AbleWork</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Solusi Inovatif AksesKerjaMu</h2>
             <p className="text-sm text-brand-fg/70 max-w-xl mx-auto">
-              Bagaimana AbleWork memecahkan rintangan dan menyetarakan akses ketenagakerjaan?
+              Bagaimana AksesKerjaMu memecahkan rintangan dan menyetarakan akses ketenagakerjaan?
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Job Matching Aksesibel", desc: "Mencocokkan kebutuhan disabilitas Anda dengan akomodasi kerja secara otomatis menggunakan kalkulator Match Score." },
+              { title: "Kecocokan Kerja Aksesibel", desc: "Mencocokkan kebutuhan disabilitas Anda dengan akomodasi kerja secara otomatis menggunakan kalkulator Kecocokan Kerja." },
               { title: "Filter Akomodasi Pintar", desc: "Mencari kerja khusus berdasarkan kriteria seperti: kursi roda, bantuan teks rapat, jam kerja fleksibel, atau remote." },
-              { title: "Skill Passport Inklusif", desc: "Profil kerja alternatif yang menonjolkan keterampilan siap kerja dan portofolio praktis alih-alih CV formal." },
+              { title: "Profil Kerja Inklusif", desc: "Profil kerja alternatif yang menonjolkan keterampilan siap kerja dan portofolio praktis alih-alih CV formal." },
               { title: "Template Pesan Akses", desc: "Menyediakan pesan otomatis untuk mengomunikasikan kebutuhan akomodasi Anda kepada HRD secara sopan saat melamar." },
               { title: "Checklist Persiapan Interview", desc: "Membantu kesiapan wawancara kerja Anda dengan checklist kelengkapan dan simulasi pertanyaan." }
             ].map((sol, index) => (
@@ -151,7 +151,7 @@ export default function LandingPage() {
           <div className="text-center space-y-2 mb-10">
             <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Dirancang untuk Semua Kebutuhan</h2>
             <p className="text-sm text-brand-fg/70 max-w-xl mx-auto">
-              AbleWork memprioritaskan ragam aksesibilitas untuk berbagai profil pengguna.
+              AksesKerjaMu memprioritaskan ragam aksesibilitas untuk berbagai profil pengguna.
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function LandingPage() {
 
       {/* Simple Footer */}
       <footer className="py-8 border-t border-brand-border/40 mt-auto bg-brand-card text-center text-xs text-brand-fg/50 space-y-2">
-        <p className="font-bold text-brand-primary">AbleWork © 2026. Lomba UI/UX: “Designing Without Barriers”</p>
+        <p className="font-bold text-brand-primary">AksesKerjaMu © 2026. Lomba UI/UX: “Designing Without Barriers”</p>
         <p>Tagline: “Work Without Barriers” — Subtema: Akses Ketenagakerjaan yang Setara & Inklusif</p>
       </footer>
     </AppLayout>

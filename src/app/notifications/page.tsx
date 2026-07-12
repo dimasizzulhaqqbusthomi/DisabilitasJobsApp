@@ -46,7 +46,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "notif-3",
     title: "Berkas Prioritas Diteruskan",
-    desc: "Berkas lamaran Anda telah dikirim dan masuk dalam antrean prioritas rekrutmen inklusif AbleWork.",
+    desc: "Berkas lamaran Anda telah dikirim dan masuk dalam antrean prioritas rekrutmen inklusif AksesKerjaMu.",
     date: "23 Juni 2026",
     group: "Kemarin",
     read: true,
@@ -55,7 +55,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "notif-4",
     title: "Lamaran Sedang Ditinjau",
-    desc: "Pihak rekruter telah mulai meninjau detail kualifikasi dan skor kecocokan profil AbleMatch Anda.",
+    desc: "Pihak rekruter telah mulai meninjau detail kualifikasi dan skor kecocokan profil Kecocokan Kerja Anda.",
     date: "23 Juni 2026",
     group: "Kemarin",
     read: true,

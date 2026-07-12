@@ -155,7 +155,7 @@ export const PERSONAS: Persona[] = [
       { title: "Data Entry & Dashboard Spreadsheet", role: "Data Entry", tool: "Google Sheets", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300", link: "https://google.com" }
     ],
     certificates: [
-      { title: "Sertifikat Kelulusan Dasar Pengolahan Data Excel", issuer: "AbleWork Academy", date: "Juni 2026", link: "https://excel.com" },
+      { title: "Sertifikat Kelulusan Dasar Pengolahan Data Excel", issuer: "AksesKerjaMu Academy", date: "Juni 2026", link: "https://excel.com" },
       { title: "Pelatihan Customer Service Chat & Bisnis Online", issuer: "Karya Setara", date: "April 2026", link: "https://karyasetara.com" }
     ]
   },
@@ -173,7 +173,7 @@ export const PERSONAS: Persona[] = [
     targetCareers: ["Junior Graphic Designer", "Content Admin UMKM"],
     location: "Bandung",
     portfolios: [
-      { title: "Redesign Landing Page AbleWork", role: "UI/UX Designer", tool: "Figma", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300", link: "https://figma.com" },
+      { title: "Redesign Landing Page AksesKerjaMu", role: "UI/UX Designer", tool: "Figma", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300", link: "https://figma.com" },
       { title: "Desain Poster Edukasi Aksesibilitas", role: "Graphic Designer", tool: "Canva", img: "https://images.unsplash.com/photo-1572044162444-ad60f128bde3?w=300", link: "https://canva.com" }
     ],
     certificates: [
@@ -197,7 +197,7 @@ export const PERSONAS: Persona[] = [
       { title: "Penanganan 500+ Chat Komplain Pelanggan", role: "Customer Support", tool: "WhatsApp Business", img: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=300", link: "https://whatsapp.com" }
     ],
     certificates: [
-      { title: "Pelatihan Komunikasi Efektif Tertulis", issuer: "AbleWork Academy", date: "Februari 2026", link: "https://ablework.id" }
+      { title: "Pelatihan Komunikasi Efektif Tertulis", issuer: "AksesKerjaMu Academy", date: "Februari 2026", link: "https://akseskerjamu.id" }
     ]
   },
   {

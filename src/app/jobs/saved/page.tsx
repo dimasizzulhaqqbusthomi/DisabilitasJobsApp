@@ -44,7 +44,7 @@ const getRecruiter = (jobId: string) => {
     case "8":
       return { name: "Fajar Nugroho", initials: "FN", online: "15 mnt lalu" };
     default:
-      return { name: "Recruiter AbleWork", initials: "RA", online: "1 jam lalu" };
+      return { name: "Recruiter AksesKerjaMu", initials: "RA", online: "1 jam lalu" };
   }
 };
 

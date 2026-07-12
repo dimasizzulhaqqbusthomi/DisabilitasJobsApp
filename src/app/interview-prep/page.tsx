@@ -59,7 +59,7 @@ const QUESTION_CATEGORIES = [
         id: "s1",
         q: "Ceritakan pengalaman atau proyek yang pernah Anda kerjakan.",
         tip: "Gunakan metode STAR: Situasi → Tugas → Aksi → Hasil. Sebutkan proyek nyata (portofolio, magang, pelatihan, tugas mandiri). Fokus pada hasil yang terukur seperti 'menyelesaikan 500 baris data dalam 3 hari'.",
-        example: "Di pelatihan AbleWork, saya menyelesaikan entri 500 baris data produk UMKM menggunakan Google Sheets dalam 3 hari. Hasilnya digunakan untuk laporan bulanan tim dan mendapat penilaian baik dari pembimbing.",
+        example: "Di pelatihan AksesKerjaMu, saya menyelesaikan entri 500 baris data produk UMKM menggunakan Google Sheets dalam 3 hari. Hasilnya digunakan untuk laporan bulanan tim dan mendapat penilaian baik dari pembimbing.",
       },
       {
         id: "s2",
@@ -322,7 +322,7 @@ export default function InterviewPrepPage() {
             <ul className="space-y-1.5">
               {[
                 "Cek koneksi internet & perangkat 30 menit sebelum mulai",
-                "Siapkan dokumen CV & Skill Passport di tab terpisah",
+                "Siapkan dokumen CV & Profil Kerja di tab terpisah",
                 "Beritahu HRD kebutuhan akomodasi Anda di awal percakapan",
                 "Berbicara perlahan dan jelas - HRD menghargai kejujuran",
                 "Tidak apa-apa meminta waktu sejenak untuk berpikir",

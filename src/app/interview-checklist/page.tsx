@@ -22,7 +22,7 @@ export default function InterviewChecklistPage() {
   // Checklist items
   const [checklist, setChecklist] = useState([
     { id: "c1", label: "Dokumen CV pendukung sudah siap", checked: true },
-    { id: "c2", label: "Skill Passport sudah di-update & di-download", checked: true },
+    { id: "c2", label: "Profil Kerja sudah di-update & di-download", checked: true },
     { id: "c3", label: "Pesan akomodasi sudah ditulis & disalin", checked: false },
     { id: "c4", label: "Tautan platform video call (Zoom/Meet) sudah dicoba", checked: false },
     { id: "c5", label: "Headset / Webcam / Screen Reader sudah menyala stabil", checked: false },
@@ -61,7 +61,7 @@ export default function InterviewChecklistPage() {
     { 
       id: "q1", 
       q: "Ceritakan kemampuan utama kamu", 
-      tip: "Fokuskan jawaban Anda pada skill spesifik yang tertera di Skill Passport Anda. Sebutkan portofolio Canva, Excel, atau Chat Support yang pernah Anda buat meskipun itu hasil dari pelatihan mandiri.",
+      tip: "Fokuskan jawaban Anda pada skill spesifik yang tertera di Profil Kerja Anda. Sebutkan portofolio Canva, Excel, atau Chat Support yang pernah Anda buat meskipun itu hasil dari pelatihan mandiri.",
       placeholder: "Contoh: Saya memiliki keahlian dalam data entry menggunakan Google Sheets dan Excel, serta terbiasa mengedit foto menggunakan Canva..."
     },
     { 
@@ -73,8 +73,8 @@ export default function InterviewChecklistPage() {
     { 
       id: "q3", 
       q: "Contoh pekerjaan atau pengalaman yang pernah kamu lakukan?", 
-      tip: "Sebutkan proyek latihan, tugas sekolah/kuliah, magang, atau pelatihan mandiri di AbleWork Academy yang berhasil Anda selesaikan. Fokus pada hasil nyata yang berhasil Anda capai.",
-      placeholder: "Contoh: Di pelatihan AbleWork, saya menyelesaikan entri 500 baris data produk dan membuat template spanduk promosi toko..."
+      tip: "Sebutkan proyek latihan, tugas sekolah/kuliah, magang, atau pelatihan mandiri di AksesKerjaMu Academy yang berhasil Anda selesaikan. Fokus pada hasil nyata yang berhasil Anda capai.",
+      placeholder: "Contoh: Di pelatihan AksesKerjaMu, saya menyelesaikan entri 500 baris data produk dan membuat template spanduk promosi toko..."
     },
   ];
 
