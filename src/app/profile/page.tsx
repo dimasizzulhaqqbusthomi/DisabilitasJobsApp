@@ -211,7 +211,7 @@ export default function ProfilePage() {
   // Profile Form States
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("081234567890");
+  const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("Jakarta");
   const [disabilityType, setDisabilityType] = useState("");
   const [bio, setBio] = useState("");
@@ -262,7 +262,7 @@ export default function ProfilePage() {
 
       // Phone local storage binding
       const savedPhone = localStorage.getItem(`app-phone-${currentPersona.id}`);
-      setPhone(savedPhone || "081234567890");
+      setPhone(savedPhone || "");
 
       // Cover local storage binding
       const savedCover = localStorage.getItem(`app-cover-${currentPersona.id}`);
@@ -757,7 +757,9 @@ export default function ProfilePage() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <span className="block text-[9px] font-black text-slate-400 uppercase tracking-wider">Nomor HP</span>
-                    <span className="block text-xs font-bold text-slate-700">{phone || "Belum diatur"}</span>
+                    <span className={`block font-bold ${phone ? "text-xs text-slate-700" : "text-[10px] text-rose-500"}`}>
+                      {phone || "Belum diisi"}
+                    </span>
                   </div>
                 </div>
 
@@ -768,7 +770,9 @@ export default function ProfilePage() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <span className="block text-[9px] font-black text-slate-400 uppercase tracking-wider">Pendidikan Terakhir</span>
-                    <span className="block text-xs font-bold text-slate-700 truncate">{education || "Belum diatur"}</span>
+                    <span className={`block truncate font-bold ${education ? "text-xs text-slate-700" : "text-[10px] text-rose-500"}`}>
+                      {education || "Belum diisi"}
+                    </span>
                   </div>
                 </div>
 

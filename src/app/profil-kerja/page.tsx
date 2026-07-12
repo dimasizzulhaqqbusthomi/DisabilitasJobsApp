@@ -630,7 +630,9 @@ export default function SkillPassportPage() {
                     </div>
                     <div>
                       <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Pendidikan</span>
-                      <span className="font-extrabold text-brand-fg leading-tight block">{currentPersona.education}</span>
+                      <span className={`font-extrabold leading-tight block ${currentPersona.education ? "text-[11px] text-brand-fg" : "text-[9.5px] text-rose-500"}`}>
+                        {currentPersona.education || "Belum diisi"}
+                      </span>
                     </div>
                   </div>
 
@@ -1791,8 +1793,8 @@ export default function SkillPassportPage() {
             Pendidikan
           </h2>
           <div style={{ fontSize: '11.5px', color: '#334155' }}>
-            <p style={{ margin: '0', fontWeight: 'bold', fontSize: '12px', color: '#1e293b' }}>
-              {currentPersona.education || "Pendidikan belum diatur"}
+            <p style={{ margin: '0', fontWeight: 'bold', fontSize: currentPersona.education ? '12px' : '10.5px', color: currentPersona.education ? '#1e293b' : '#f43f5e' }}>
+              {currentPersona.education || "Pendidikan belum diisi"}
             </p>
           </div>
         </div>
