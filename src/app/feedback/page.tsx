@@ -269,7 +269,7 @@ export default function FeedbackPage() {
                         </div>
                       </div>
 
-                      <p className="text-xs text-brand-fg/80 italic leading-relaxed">
+                      <p className="text-xs text-brand-fg/80 leading-relaxed">
                         "{f.comments}"
                       </p>
 

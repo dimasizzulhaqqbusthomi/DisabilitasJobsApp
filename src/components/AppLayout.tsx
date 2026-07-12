@@ -185,7 +185,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                   {simpleLanguage && <li>Bahasa Sederhana</li>}
                   {screenReaderLabels && <li>Optimasi Pembaca Layar</li>}
                   {!highContrast && largeText === "normal" && !simpleLanguage && !screenReaderLabels && (
-                    <li className="list-none -ml-4 italic text-zinc-500">Standar</li>
+                    <li className="list-none -ml-4 text-zinc-500">Standar</li>
                   )}
                 </ul>
                 <Link 

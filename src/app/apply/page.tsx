@@ -592,7 +592,7 @@ function ApplyContent() {
 
                     <div className="p-3.5 space-y-1">
                       <span className="block text-[9px] font-black text-slate-400 uppercase tracking-wider">Pernyataan Akomodasi</span>
-                      <p className="text-[11px] text-brand-fg/70 leading-relaxed font-semibold italic bg-white p-2.5 rounded-lg border border-slate-100">
+                      <p className="text-[11px] text-brand-fg/70 leading-relaxed font-semibold bg-white p-2.5 rounded-lg border border-slate-100">
                         "{customMessage}"
                       </p>
                     </div>

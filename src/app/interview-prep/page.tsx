@@ -275,7 +275,7 @@ export default function InterviewPrepPage() {
                           {/* Example answer */}
                           <div className="bg-slate-50 border border-slate-100 rounded-xl p-3">
                             <p className="text-[10px] font-black text-slate-500 mb-1.5">📝 Contoh Jawaban:</p>
-                            <p className="text-[11px] text-slate-600 leading-relaxed italic">"{q.example}"</p>
+                            <p className="text-[11px] text-slate-600 leading-relaxed">"{q.example}"</p>
                           </div>
 
                           {/* Draft textarea */}

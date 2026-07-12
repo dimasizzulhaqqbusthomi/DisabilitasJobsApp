@@ -376,7 +376,7 @@ function RegisterForm() {
               <div className="p-3.5 flex justify-between"><span className="font-semibold text-brand-fg/60">Tipe Kerja</span><span className="font-extrabold text-brand-fg capitalize">{prefType}</span></div>
               <div className="p-3.5">
                 <span className="font-semibold text-brand-fg/60 block mb-2">Akomodasi</span>
-                {selectedNeeds.length === 0 ? <span className="italic text-brand-fg/40">Belum dipilih</span> : (
+                {selectedNeeds.length === 0 ? <span className="text-brand-fg/40">Belum dipilih</span> : (
                   <div className="flex flex-wrap gap-1.5">
                     {selectedNeeds.map(key => { const acc = ACCOMMODATIONS.find(a => a.key === key); return <span key={key} className="px-2 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-bold">{acc?.label}</span>; })}
                   </div>
@@ -384,7 +384,7 @@ function RegisterForm() {
               </div>
               <div className="p-3.5">
                 <span className="font-semibold text-brand-fg/60 block mb-2">Gaya Kerja</span>
-                {prefWorkingStyles.length === 0 ? <span className="italic text-brand-fg/40">Belum dipilih</span> : (
+                {prefWorkingStyles.length === 0 ? <span className="text-brand-fg/40">Belum dipilih</span> : (
                   <div className="flex flex-wrap gap-1.5">
                     {prefWorkingStyles.map(key => {
                       const opt = WORKING_STYLE_OPTIONS.find(o => o.value === key);

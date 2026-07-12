@@ -667,7 +667,7 @@ export default function SkillPassportPage() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {hardSkills.length === 0 ? (
-                    <span className="text-[11px] text-slate-400 font-semibold italic pl-0.5">Belum ada hard skill yang ditambahkan.</span>
+                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada hard skill yang ditambahkan.</span>
                   ) : (
                     hardSkills.map((skill) => (
                       <span
@@ -695,7 +695,7 @@ export default function SkillPassportPage() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {softSkills.length === 0 ? (
-                    <span className="text-[11px] text-slate-400 font-semibold italic pl-0.5">Belum ada soft skill yang ditambahkan.</span>
+                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada soft skill yang ditambahkan.</span>
                   ) : (
                     softSkills.map((skill) => (
                       <span
@@ -1087,7 +1087,7 @@ export default function SkillPassportPage() {
                   );
                 })}
                 {portfolios.length === 0 && (
-                  <p className="text-xs text-slate-400 italic font-semibold sm:col-span-2 text-center py-4">Belum ada portofolio kerja.</p>
+                  <p className="text-xs text-slate-400 font-semibold sm:col-span-2 text-center py-4">Belum ada portofolio kerja.</p>
                 )}
               </div>
             </div>
@@ -1143,7 +1143,7 @@ export default function SkillPassportPage() {
                   );
                 })}
                 {certificates.length === 0 && (
-                  <p className="text-xs text-slate-400 italic font-semibold text-center py-4">Belum ada pelatihan &amp; sertifikasi.</p>
+                  <p className="text-xs text-slate-400 font-semibold text-center py-4">Belum ada pelatihan &amp; sertifikasi.</p>
                 )}
               </div>
             </div>
@@ -1770,7 +1770,7 @@ export default function SkillPassportPage() {
               </div>
             ))}
             {currentPersona.skills.length === 0 && (
-              <span style={{ fontStyle: 'italic', color: '#94a3b8' }}>Belum ada keahlian utama yang ditambahkan.</span>
+              <span style={{ color: '#94a3b8' }}>Belum ada keahlian utama yang ditambahkan.</span>
             )}
           </div>
         </div>
@@ -1816,7 +1816,7 @@ export default function SkillPassportPage() {
                       </span>
                     )}
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: '11px', fontStyle: 'italic' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: '11px' }}>
                     <span><strong>Peran:</strong> {item.role}</span>
                     {item.tool && <span><strong>Alat:</strong> {item.tool}</span>}
                   </div>
@@ -1824,7 +1824,7 @@ export default function SkillPassportPage() {
               ))}
             </div>
           ) : (
-            <p style={{ fontSize: '11.5px', fontStyle: 'italic', color: '#94a3b8', margin: '0' }}>Belum ada portofolio kerja.</p>
+            <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '0' }}>Belum ada portofolio kerja.</p>
           )}
         </div>
 
@@ -1853,7 +1853,7 @@ export default function SkillPassportPage() {
               ))}
             </div>
           ) : (
-            <p style={{ fontSize: '11.5px', fontStyle: 'italic', color: '#94a3b8', margin: '0' }}>Belum ada pelatihan & sertifikasi.</p>
+            <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '0' }}>Belum ada pelatihan & sertifikasi.</p>
           )}
         </div>
       </div>
