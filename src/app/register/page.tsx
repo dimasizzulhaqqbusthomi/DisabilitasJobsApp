@@ -26,6 +26,15 @@ const DISABILITY_OPTIONS = [
   { value: "none", label: "Tidak ada / Lebih suka tidak menyebutkan" },
 ];
 
+const WORKING_STYLE_OPTIONS = [
+  { value: "structured_task", label: "Pekerjaan Terstruktur" },
+  { value: "independent_work", label: "Fokus Mandiri" },
+  { value: "team_collaboration", label: "Kolaborasi Tim" },
+  { value: "initial_guidance", label: "Membutuhkan Arahan Awal" },
+  { value: "written_communication", label: "Komunikasi Tertulis" },
+  { value: "quiet_environment", label: "Lingkungan Minim Gangguan" },
+];
+
 const DISABILITY_TEMPLATES: Record<string, { needs: string[]; hint: string }> = {
   neurodivergent: { needs: ["written_instruction", "quiet_environment", "flexible_hours", "remote"], hint: "Instruksi tertulis, lingkungan tenang, jam fleksibel & remote cocok untuk ADHD/Autisme." },
   daksa: { needs: ["wheelchair_access", "flexible_hours", "remote"], hint: "Akses kursi roda, jam fleksibel & remote cocok untuk disabilitas fisik." },
@@ -72,6 +81,10 @@ function RegisterForm() {
   const [prefLocation, setPrefLocation] = useState("Jakarta Barat (Bisa Remote)");
   const [prefType, setPrefType] = useState<"remote" | "hybrid" | "onsite">("remote");
   const [prefSalary, setPrefSalary] = useState("Rp 3.000.000 - Rp 4.500.000");
+  const [prefWorkingStyles, setPrefWorkingStyles] = useState<string[]>(["structured_task"]);
+
+  const toggleWorkingStyle = (key: string) =>
+    setPrefWorkingStyles(p => p.includes(key) ? p.filter(k => k !== key) : [...p, key]);
 
   useEffect(() => {
     if (user) {
@@ -125,6 +138,7 @@ function RegisterForm() {
           accessibility_needs: selectedNeeds,
           purpose: purpose,
           target_careers: [prefRole],
+          working_style: prefWorkingStyles,
           created_at: new Date().toISOString(),
         });
         if (updateErr) {
@@ -139,6 +153,7 @@ function RegisterForm() {
             accessibility_needs: selectedNeeds,
             purpose: purpose,
             target_careers: [prefRole],
+            working_style: prefWorkingStyles,
           }
         });
       } else {
@@ -152,6 +167,7 @@ function RegisterForm() {
               accessibility_needs: selectedNeeds,
               purpose,
               target_careers: [prefRole],
+              working_style: prefWorkingStyles,
             }
           },
         });
@@ -165,11 +181,12 @@ function RegisterForm() {
             accessibility_needs: selectedNeeds,
             purpose: purpose,
             target_careers: [prefRole],
+            working_style: prefWorkingStyles,
             created_at: new Date().toISOString(),
           });
         }
       }
-      updatePersona({ targetCareers: [prefRole] });
+      updatePersona({ targetCareers: [prefRole], workingStyle: prefWorkingStyles });
       updatePreferences({ role: prefRole, location: prefLocation, type: prefType, salary: prefSalary });
       completeOnboarding();
       router.push("/dashboard");
@@ -328,6 +345,21 @@ function RegisterForm() {
                   <option>Rp 3.000.000 - Rp 4.500.000</option><option>Rp 4.500.000 - Rp 5.500.000</option><option>Rp 5.500.000 - Rp 7.000.000</option>
                 </select>
               </div>
+
+              <div className="space-y-2 pt-3 border-t border-brand-border">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-brand-fg/70">Cara bekerja yang nyaman</span>
+                  {prefWorkingStyles.length > 0 && <button type="button" onClick={() => setPrefWorkingStyles([])} className="text-[10px] text-zinc-400 hover:text-red-500 underline">Reset</button>}
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {WORKING_STYLE_OPTIONS.map(opt => (
+                    <label key={opt.value} className={`flex items-start gap-2 p-2.5 rounded-xl border cursor-pointer select-none transition-all text-[11px] font-medium ${prefWorkingStyles.includes(opt.value) ? "border-brand-primary bg-brand-primary/5 text-brand-fg" : "border-brand-border hover:bg-brand-bg text-brand-fg/70"}`}>
+                      <input type="checkbox" checked={prefWorkingStyles.includes(opt.value)} onChange={() => toggleWorkingStyle(opt.value)} className="mt-0.5 rounded text-brand-primary focus:ring-brand-primary shrink-0" />
+                      <span>{opt.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -347,6 +379,17 @@ function RegisterForm() {
                 {selectedNeeds.length === 0 ? <span className="italic text-brand-fg/40">Belum dipilih</span> : (
                   <div className="flex flex-wrap gap-1.5">
                     {selectedNeeds.map(key => { const acc = ACCOMMODATIONS.find(a => a.key === key); return <span key={key} className="px-2 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-bold">{acc?.label}</span>; })}
+                  </div>
+                )}
+              </div>
+              <div className="p-3.5">
+                <span className="font-semibold text-brand-fg/60 block mb-2">Gaya Kerja</span>
+                {prefWorkingStyles.length === 0 ? <span className="italic text-brand-fg/40">Belum dipilih</span> : (
+                  <div className="flex flex-wrap gap-1.5">
+                    {prefWorkingStyles.map(key => {
+                      const opt = WORKING_STYLE_OPTIONS.find(o => o.value === key);
+                      return <span key={key} className="px-2 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-bold">{opt?.label}</span>;
+                    })}
                   </div>
                 )}
               </div>
