@@ -120,7 +120,7 @@ export default function AccessibilityPage() {
                   <div className="min-w-0 flex-1">
                     <span className="block text-xs font-black text-slate-700">Optimalkan Pembaca Layar</span>
                     <span className="block text-[9px] text-slate-400 font-semibold leading-normal mt-0.5">
-                      Gunakan label deskriptif tambahan untuk screen reader
+                      Gunakan label deskriptif tambahan untuk pembaca layar
                     </span>
                   </div>
                 </div>

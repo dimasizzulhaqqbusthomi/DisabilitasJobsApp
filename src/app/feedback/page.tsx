@@ -44,7 +44,7 @@ export default function FeedbackPage() {
     });
     // Reset comments
     setComments("");
-    showToast("Feedback rekrutmen inklusif berhasil dikirim!", "success");
+    showToast("Feedback rekrutmen ramah difabel berhasil dikirim!", "success");
   };
 
   return (
@@ -53,9 +53,9 @@ export default function FeedbackPage() {
         
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-black">Feedback Rekrutmen Inklusif</h1>
+          <h1 className="text-3xl font-black">Feedback Rekrutmen Ramah Disabilitas</h1>
           <p className="text-sm text-brand-fg/70">
-            Bantu kami memantau inklusivitas perusahaan! Ceritakan pengalaman wawancara atau lamaran Anda di sini.
+            Bantu kami memantau keramahan aksesibilitas perusahaan! Ceritakan pengalaman wawancara atau lamaran Anda di sini.
           </p>
         </div>
 
@@ -160,7 +160,7 @@ export default function FeedbackPage() {
 
             {/* Question 3: Description accuracy */}
             <div className="space-y-2">
-              <span className="block text-xs font-bold text-brand-fg/80">3. Apakah info akomodasi di deskripsi lowongan sesuai kenyataan saat interview?</span>
+              <span className="block text-xs font-bold text-brand-fg/80">3. Apakah info akomodasi di deskripsi lowongan sesuai kenyataan saat wawancara?</span>
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 text-xs font-bold cursor-pointer">
                   <input
@@ -187,7 +187,7 @@ export default function FeedbackPage() {
 
             {/* Rating Stars */}
             <div className="space-y-2">
-              <span className="block text-xs font-bold text-brand-fg/80">Rating Inklusivitas Perusahaan (1-5)</span>
+              <span className="block text-xs font-bold text-brand-fg/80">Rating Aksesibilitas Perusahaan (1-5)</span>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button

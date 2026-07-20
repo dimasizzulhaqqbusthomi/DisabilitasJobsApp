@@ -21,8 +21,8 @@ import {
 
 // Recruiter Info Map
 const RECRUITERS: Record<string, { name: string; initials: string; company: string; online: boolean; phone: string }> = {
-  "1": { name: "Riska Amalia", initials: "RA", company: "PT Ruang Inklusif", online: true, phone: "+62 812-3456-7890" },
-  "2": { name: "Beni Setiawan", initials: "BS", company: "Karya Inklusi", online: true, phone: "+62 823-4567-8901" },
+  "1": { name: "Riska Amalia", initials: "RA", company: "PT Ruang Setara", online: true, phone: "+62 812-3456-7890" },
+  "2": { name: "Beni Setiawan", initials: "BS", company: "Karya Setara", online: true, phone: "+62 823-4567-8901" },
   "3": { name: "Yudi Prasetyo", initials: "YP", company: "Harmoni Retail", online: false, phone: "+62 834-5678-9012" },
   "4": { name: "Lina Marlina", initials: "LM", company: "PT Sinergi Utama", online: false, phone: "+62 845-5678-9013" },
   "5": { name: "Dewi Lestari", initials: "DL", company: "Sentra Kreatif", online: true, phone: "+62 856-5678-9014" },
@@ -32,13 +32,13 @@ const RECRUITERS: Record<string, { name: string; initials: string; company: stri
 const INITIAL_MESSAGES_MAP: Record<string, { sender: "recruiter" | "user"; text: string; time: string }[]> = {
   "1": [
     { sender: "recruiter", text: "Halo! Lamaran Anda untuk posisi Admin Online sudah saya terima ya. Saya sangat terkesan dengan profil Anda.", time: "09:05 AM" },
-    { sender: "user", text: "Terima kasih banyak Bu Riska! Saya sangat tertarik untuk berkontribusi di PT Ruang Inklusif.", time: "09:07 AM" },
+    { sender: "user", text: "Terima kasih banyak Bu Riska! Saya sangat tertarik untuk berkontribusi di PT Ruang Setara.", time: "09:07 AM" },
     { sender: "recruiter", text: "Sama-sama. Saya sedang meninjau kebutuhan aksesibilitas Anda. Apakah deskripsi pekerjaan ini sudah cukup jelas?", time: "09:11 AM" },
   ],
   "2": [
-    { sender: "recruiter", text: "Halo, salam kenal. Saya Beni dari Karya Inklusi. Saya melihat Anda terampil menggunakan Microsoft Excel.", time: "10:10 AM" },
+    { sender: "recruiter", text: "Halo, salam kenal. Saya Beni dari Karya Setara. Saya melihat Anda terampil menggunakan Microsoft Excel.", time: "10:10 AM" },
     { sender: "user", text: "Halo Pak Beni, benar. Saya memiliki sertifikat pengolahan data spreadsheet dari AksesKerjaMu Academy.", time: "10:15 AM" },
-    { sender: "recruiter", text: "Luar biasa. Apakah Anda bersedia untuk interview chat hari Selasa besok jam 10 pagi?", time: "10:20 AM" },
+    { sender: "recruiter", text: "Luar biasa. Apakah Anda bersedia untuk wawancara via chat hari Selasa besok jam 10 pagi?", time: "10:20 AM" },
   ],
   "3": [
     { sender: "recruiter", text: "Halo Yudi di sini. Kami sedang membutuhkan Kasir Admin untuk penempatan Yogyakarta.", time: "Kemarin, 03:00 PM" },

@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "AksesKerjaMu - Work Without Barriers",
-  description: "Platform pencarian kerja inklusif untuk penyandang disabilitas dengan job matching berbasis akomodasi.",
+  description: "Platform pencarian kerja ramah disabilitas untuk penyandang disabilitas dengan job matching berbasis akomodasi.",
 };
 
 export default function RootLayout({

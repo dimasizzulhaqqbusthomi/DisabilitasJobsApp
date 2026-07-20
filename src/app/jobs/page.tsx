@@ -55,14 +55,14 @@ const getRecruiter = (jobId: string) => {
 
 const getAccLabel = (accKey: string) => {
   switch (accKey) {
-    case "remote": return "Bekerja Remote / Hybrid";
-    case "caption_meeting": return "Video Call dengan Caption";
+    case "remote": return "Kerja dari Rumah (Remote) / Hybrid";
+    case "caption_meeting": return "Teks Rapat Video (Caption)";
     case "wheelchair_access": return "Akses Kursi Roda";
     case "written_instruction": return "Instruksi Kerja Tertulis";
-    case "screen_reader": return "Screen Reader Friendly";
+    case "screen_reader": return "Mendukung Pembaca Layar (Screen Reader)";
     case "quiet_environment": return "Lingkungan Minim Bising";
     case "flexible_hours": return "Jam Kerja Fleksibel";
-    case "chat_communication": return "Interview & Komunikasi via Chat";
+    case "chat_communication": return "Wawancara & Komunikasi via Chat";
     default: return accKey;
   }
 };
@@ -135,6 +135,10 @@ export default function JobListPage() {
 
           {/* Top Row: Title + Filter sliders */}
           <div className="flex items-center justify-between mb-6 relative z-10">
+            <div className="w-10" /> {/* Spacer */}
+
+            <h1 className="text-base font-black text-white tracking-wide">Cari Lowongan</h1>
+
             <Link
               href="/jobs/saved"
               className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/20 transition-all text-white relative shrink-0"
@@ -147,22 +151,11 @@ export default function JobListPage() {
                 </span>
               )}
             </Link>
-
-            <h1 className="text-base font-black text-white tracking-wide">Cari Lowongan</h1>
-
-            <button
-              type="button"
-              onClick={() => setShowMobileFilters(true)}
-              className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/20 transition-all text-white"
-              aria-label="Filter"
-            >
-              <SlidersHorizontal className="w-4.5 h-4.5" />
-            </button>
           </div>
 
-          {/* Search Capsule Input */}
+          {/* Search Capsule */}
           <div className="bg-white rounded-2xl p-1 flex items-center shadow-2xl shadow-black/10 border border-slate-100 max-w-md mx-auto relative z-10">
-            {/* Left portion: Location Select Dropdown */}
+            {/* Left: Location Select */}
             <div className="relative shrink-0 border-r border-slate-200">
               <select
                 value={selectedLocation}
@@ -184,7 +177,7 @@ export default function JobListPage() {
               </div>
             </div>
 
-            {/* Right portion: Keyword Text Input */}
+            {/* Middle: Keyword Input */}
             <div className="relative flex-1 flex items-center">
               <input
                 type="text"
@@ -195,6 +188,16 @@ export default function JobListPage() {
               />
               <Search className="absolute right-3 text-slate-400 w-4 h-4" />
             </div>
+
+            {/* Right: Filter icon — inside capsule, separated by left border */}
+            <button
+              type="button"
+              onClick={() => setShowMobileFilters(true)}
+              className="shrink-0 border-l border-slate-200 pl-3 pr-2 py-2 flex items-center justify-center text-slate-400 hover:text-indigo-600 transition-colors"
+              aria-label="Filter"
+            >
+              <Filter className="w-4.5 h-4.5" />
+            </button>
           </div>
         </div>
 
@@ -320,7 +323,7 @@ export default function JobListPage() {
                   {/* row 3: type tags */}
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {[
-                      job.type === "remote" ? "Remote" : job.type === "hybrid" ? "Hybrid" : "Onsite",
+                      job.type === "remote" ? "Kerja dari Rumah" : job.type === "hybrid" ? "Hybrid" : "Kerja di Kantor",
                       job.id === "1" || job.id === "5" ? "Penuh Waktu" : "Kontrak",
                       job.id === "2" ? "D3" : job.id === "4" ? "SMA/SMK" : "S1"
                     ].map(tag => (
@@ -355,9 +358,9 @@ export default function JobListPage() {
                     <div className="text-[10px] text-brand-fg/60 flex-1">
                       <span className="font-bold text-brand-fg">{recruiter.name}</span>
                       <span className="mx-1">·</span>
-                      <span className="text-emerald-600 font-semibold">Verified</span>
+                      <span className="text-emerald-600 font-semibold">Terverifikasi</span>
                       <span className="mx-1">·</span>
-                      <span>Online {recruiter.online}</span>
+                      <span>Aktif {recruiter.online}</span>
                     </div>
                   </div>
                 </Link>

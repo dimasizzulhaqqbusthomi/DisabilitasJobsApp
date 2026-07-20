@@ -354,7 +354,7 @@ function ApplyContent() {
             <div className="relative z-10">
               <h1 className="text-xl font-black text-white leading-snug mb-1">Kirim Lamaran Kerja</h1>
               <p className="text-white/70 text-xs leading-relaxed max-w-sm">
-                Melamar secara inklusif dengan melampirkan Profil Kerja digital Anda dan pesan akomodasi.
+                Melamar secara mandiri dengan melampirkan Profil Kerja digital Anda dan pesan akomodasi.
               </p>
             </div>
           </div>
@@ -456,7 +456,7 @@ function ApplyContent() {
                     <div className="p-3.5 space-y-2.5 text-[11px] text-brand-fg/80">
                       <div className="flex items-center gap-2">
                         <GraduationCap className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
-                        <span className="font-semibold">{currentPersona.education}</span>
+                        <span className="font-semibold">{currentPersona.education || "Pendidikan belum diatur"}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Briefcase className="w-3.5 h-3.5 text-indigo-500 shrink-0" />

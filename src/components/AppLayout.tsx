@@ -6,14 +6,14 @@ import { usePathname } from "next/navigation";
 import { useAppState } from "../context/AppContext";
 import { useAccessibility } from "../context/AccessibilityContext";
 import { useAuth } from "../context/AuthContext";
-import { 
-  Briefcase, 
-  CheckSquare, 
-  Settings, 
-  MessageSquare, 
-  Home, 
-  User, 
-  Accessibility, 
+import {
+  Briefcase,
+  CheckSquare,
+  Settings,
+  MessageSquare,
+  Home,
+  User,
+  Accessibility,
   RefreshCw,
   X,
   Menu,
@@ -35,18 +35,18 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children, showNav = true, showHeader = true, mainClassName }: AppLayoutProps) {
   const pathname = usePathname();
-  const { 
-    currentPersona, 
-    toast, 
-    clearToast, 
-    resetAppState 
+  const {
+    currentPersona,
+    toast,
+    clearToast,
+    resetAppState
   } = useAppState();
-  
-  const { 
-    highContrast, 
-    largeText, 
-    simpleLanguage, 
-    screenReaderLabels 
+
+  const {
+    highContrast,
+    largeText,
+    simpleLanguage,
+    screenReaderLabels
   } = useAccessibility();
 
   const { user, signOut } = useAuth();
@@ -61,7 +61,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
     { name: "Profil Saya", href: "/profile", icon: User },
     { name: "Profil Kerja", href: "/profil-kerja", icon: Award },
     { name: "Persiapan Wawancara", href: "/interview-prep", icon: Mic },
-    { name: "Checklist Interview", href: "/interview-checklist", icon: CheckSquare },
+    { name: "Checklist Wawancara", href: "/interview-checklist", icon: CheckSquare },
     { name: "Aksesibilitas", href: "/accessibility", icon: Settings },
     { name: "Feedback", href: "/feedback", icon: MessageSquare },
   ];
@@ -70,7 +70,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
     <div className="h-full flex flex-col bg-brand-bg text-brand-fg overflow-hidden relative">
       {/* Toast Notification */}
       {toast && (
-        <div 
+        <div
           className="absolute bottom-20 inset-x-4 z-50 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border glass-panel animate-toast print:hidden"
           role="alert"
           aria-live="polite"
@@ -79,8 +79,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
           {toast.type === "warning" && <AlertTriangle className="text-brand-warning w-6 h-6 shrink-0" />}
           {toast.type === "info" && <Info className="text-brand-secondary w-6 h-6 shrink-0" />}
           <span className="font-semibold text-xs min-w-0 flex-1 break-words">{toast.message}</span>
-          <button 
-            onClick={clearToast} 
+          <button
+            onClick={clearToast}
             className="ml-auto p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 shrink-0"
             aria-label="Tutup notifikasi"
           >
@@ -95,8 +95,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="flex items-center gap-2 text-2xl font-black text-brand-primary"
                 aria-label="AksesKerjaMu Home"
               >
@@ -163,11 +163,10 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all ${
-                      isActive 
-                        ? "bg-brand-primary text-white shadow-md shadow-brand-primary/20" 
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all ${isActive
+                        ? "bg-brand-primary text-white shadow-md shadow-brand-primary/20"
                         : "hover:bg-brand-primary-light/50 hover:text-brand-primary"
-                    }`}
+                      }`}
                   >
                     <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
                     <span>{item.name}</span>
@@ -188,8 +187,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                     <li className="list-none -ml-4 text-zinc-500">Standar</li>
                   )}
                 </ul>
-                <Link 
-                  href="/accessibility" 
+                <Link
+                  href="/accessibility"
                   className="block mt-2 font-bold text-brand-primary hover:underline"
                 >
                   Ubah Aksesibilitas →
@@ -207,7 +206,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
 
       {/* Mobile Bottom Navigation Bar */}
       {showNav && (
-        <nav 
+        <nav
           className="absolute bottom-0 left-0 right-0 bg-brand-card/95 backdrop-blur-md h-[78px] flex justify-around items-center z-30 shadow-[0_-10px_35px_rgba(0,0,0,0.06)] px-4 rounded-t-[32px] overflow-visible pb-2"
           aria-label="Mobile Navigation"
         >
@@ -229,16 +228,14 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                   href={item.href}
                   className="relative flex flex-col items-center justify-end pb-3 w-20 h-full text-[9px] font-extrabold transition-all select-none"
                 >
-                  <div className={`absolute -top-5 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all ${
-                    isActive 
-                      ? "bg-brand-primary text-white shadow-brand-primary/40 scale-105" 
+                  <div className={`absolute -top-5 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all ${isActive
+                      ? "bg-brand-primary text-white shadow-brand-primary/40 scale-105"
                       : "bg-brand-primary text-white shadow-brand-primary/30 hover:scale-105 active:scale-95"
-                  }`}>
+                    }`}>
                     <Icon className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
-                  <span className={`tracking-wide text-center w-full truncate px-1 transition-colors ${
-                    isActive ? "text-brand-primary font-black" : "text-brand-primary font-bold"
-                  }`}>
+                  <span className={`tracking-wide text-center w-full truncate px-1 transition-colors ${isActive ? "text-brand-primary font-black" : "text-brand-primary font-bold"
+                    }`}>
                     {item.name}
                   </span>
                 </Link>
@@ -249,9 +246,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
               <Link
                 key={item.name}
                 href={item.href}
-                className={`relative flex flex-col items-center justify-center gap-1 w-20 h-full text-[10px] font-bold transition-all pt-1 pb-3 ${
-                  isActive ? "text-brand-primary" : "text-brand-fg/50 hover:text-brand-fg/80"
-                }`}
+                className={`relative flex flex-col items-center justify-center gap-1 w-20 h-full text-[10px] font-bold transition-all pt-1 pb-3 ${isActive ? "text-brand-primary" : "text-brand-fg/50 hover:text-brand-fg/80"
+                  }`}
               >
                 <Icon className={`w-5.5 h-5.5 transition-colors ${isActive ? "text-brand-primary" : "text-zinc-400 dark:text-zinc-500"}`} aria-hidden="true" />
                 <span className="tracking-wide">{item.name}</span>
@@ -267,14 +263,14 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
           <div className="w-64 bg-brand-bg h-full p-4 flex flex-col space-y-4 border-l border-brand-border">
             <div className="flex items-center justify-between pb-4 border-b border-brand-border">
               <span className="font-bold text-sm">Navigasi Menu</span>
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-1 rounded-full bg-black/5 hover:bg-black/10"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
+
             <nav className="flex-1 space-y-2">
               {navItems.map((item) => {
                 const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
@@ -284,9 +280,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                     key={item.name}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-sm ${
-                      isActive ? "bg-brand-primary text-white" : "hover:bg-brand-primary-light/50"
-                    }`}
+                    className={`flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-sm ${isActive ? "bg-brand-primary text-white" : "hover:bg-brand-primary-light/50"
+                      }`}
                   >
                     <Icon className="w-5 h-5" />
                     <span>{item.name}</span>
@@ -303,7 +298,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                 </div>
               )}
               {user ? (
-                <button 
+                <button
                   onClick={() => { signOut(); setMobileMenuOpen(false); }}
                   className="w-full flex items-center justify-center gap-2 p-2.5 rounded-xl border border-brand-danger/30 text-brand-danger text-sm font-semibold hover:bg-brand-danger-light/30 transition-all"
                 >
@@ -319,7 +314,7 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                   Masuk / Daftar
                 </Link>
               )}
-              <button 
+              <button
                 onClick={() => { resetAppState(); setMobileMenuOpen(false); }}
                 className="w-full flex items-center justify-center gap-2 p-2 rounded-xl border border-brand-border text-xs font-semibold hover:bg-black/5 transition-all text-brand-fg/60"
               >

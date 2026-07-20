@@ -68,23 +68,23 @@ const ACC_GROUPS = [
   {
     title: "Cara Bekerja",
     items: [
-      { key: "remote", label: "Remote / Hybrid", desc: "Pilihan bekerja dari rumah untuk mengurangi kebutuhan mobilitas fisik.", simpleDesc: "Bisa kerja dari rumah tanpa harus pergi ke kantor." },
+      { key: "remote", label: "Kerja dari Rumah (Remote) / Hybrid", desc: "Pilihan bekerja dari rumah untuk mengurangi kebutuhan mobilitas fisik.", simpleDesc: "Bisa kerja dari rumah tanpa harus pergi ke kantor." },
       { key: "flexible_hours", label: "Jam Kerja Fleksibel", desc: "Jam kerja dapat disesuaikan untuk kebutuhan terapi, pengobatan, atau manajemen energi.", simpleDesc: "Jam kerja bisa diatur sendiri agar bisa sambil berobat atau istirahat." }
     ]
   },
   {
     title: "Komunikasi",
     items: [
-      { key: "caption_meeting", label: "Video Call dengan Caption", desc: "Setiap pertemuan online menyediakan takarir (caption) otomatis atau juru bahasa isyarat.", simpleDesc: "Rapat online ada teks tulisannya agar mudah dimengerti." },
+      { key: "caption_meeting", label: "Pertemuan Video dengan Teks (Caption)", desc: "Setiap pertemuan online menyediakan takarir (caption) otomatis atau juru bahasa isyarat.", simpleDesc: "Rapat online ada teks tulisannya agar mudah dimengerti." },
       { key: "written_instruction", label: "Instruksi Kerja Tertulis", desc: "Semua arahan, tugas, dan SOP diberikan secara tertulis untuk mengurangi ambiguitas.", simpleDesc: "Tugas kerja diberikan lewat tulisan yang jelas agar tidak membingungkan." },
-      { key: "chat_communication", label: "Interview via Chat", desc: "Wawancara kerja dan koordinasi harian bisa dilakukan menggunakan teks/chat.", simpleDesc: "Bicara dengan bos dan teman kerja lewat ketikan pesan (chat) saja." }
+      { key: "chat_communication", label: "Wawancara via Chat", desc: "Wawancara kerja dan koordinasi harian bisa dilakukan menggunakan teks/chat.", simpleDesc: "Bicara dengan bos dan teman kerja lewat ketikan pesan (chat) saja." }
     ]
   },
   {
     title: "Lingkungan",
     items: [
       { key: "wheelchair_access", label: "Akses Kursi Roda", desc: "Gedung kantor dilengkapi ramp, lift, pintu lebar, dan toilet khusus kursi roda.", simpleDesc: "Kantor punya jalan datar (ramp), lift, dan toilet untuk kursi roda." },
-      { key: "screen_reader", label: "Screen Reader Friendly", desc: "Perangkat lunak dan sistem internal perusahaan kompatibel dengan aplikasi pembaca layar (NVDA/JAWS).", simpleDesc: "Aplikasi komputer bisa mengeluarkan suara untuk membaca teks di layar." },
+      { key: "screen_reader", label: "Mendukung Pembaca Layar (Screen Reader)", desc: "Perangkat lunak dan sistem internal perusahaan mendukung aplikasi pembaca layar (NVDA/JAWS).", simpleDesc: "Aplikasi komputer bisa mengeluarkan suara untuk membaca teks di layar." },
       { key: "quiet_environment", label: "Lingkungan Minim Gangguan", desc: "Ruang kerja tenang dengan tingkat kebisingan rendah, cocok untuk neurodivergent.", simpleDesc: "Tempat kerja tenang, tidak berisik, dan nyaman untuk fokus." }
     ]
   }
@@ -92,13 +92,13 @@ const ACC_GROUPS = [
 
 const getShortAccLabel = (k: string) => {
   const map: Record<string, string> = {
-    remote: "Remote",
+    remote: "Kerja dari Rumah (Remote)",
     flexible_hours: "Jam Kerja Fleksibel",
-    caption_meeting: "Video Call dengan Caption",
+    caption_meeting: "Video Rapat dengan Caption/Teks",
     written_instruction: "Instruksi Kerja Tertulis",
-    chat_communication: "Interview via Chat",
+    chat_communication: "Wawancara via Chat",
     wheelchair_access: "Akses Kursi Roda",
-    screen_reader: "Screen Reader Friendly",
+    screen_reader: "Mendukung Pembaca Layar (Screen Reader)",
     quiet_environment: "Lingkungan Minim Gangguan"
   };
   return map[k] || k;
@@ -679,7 +679,7 @@ export default function ProfilePage() {
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-600 uppercase bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      PROFILE VERIFIED
+                      PROFIL TERVERIFIKASI
                     </span>
                   </div>
 
@@ -724,7 +724,7 @@ export default function ProfilePage() {
                 <div className="grid grid-cols-2 gap-4 bg-white/10 rounded-2xl p-3 shadow-inner text-center">
                   <div>
                     <div className="text-lg font-black text-cyan-200">{skillCount}</div>
-                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Skill Terverifikasi</div>
+                    <div className="text-[9px] text-white/70 font-bold uppercase tracking-wider">Keahlian Terverifikasi</div>
                   </div>
                   <div className="border-l border-white/10">
                     <div className="text-lg font-black text-cyan-200">2</div>
@@ -1078,7 +1078,7 @@ export default function ProfilePage() {
                       >
                         <option value="Cari kerja">Cari kerja</option>
                         <option value="Buat profil skill">Buat profil skill</option>
-                        <option value="Persiapan interview">Persiapan interview</option>
+                        <option value="Persiapan interview">Persiapan wawancara</option>
                       </select>
                     </div>
 

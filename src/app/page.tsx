@@ -27,7 +27,7 @@ export default function LandingPage() {
           <div className="p-1.5 bg-brand-primary text-white rounded-lg">
             <Accessibility className="w-6 h-6" />
           </div>
-          <span>Able<span className="text-brand-secondary">Work</span></span>
+          <span>Akses<span className="text-brand-secondary">KerjaMu</span></span>
         </Link>
         <Link 
           href="/onboarding" 
@@ -40,17 +40,17 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="py-12 md:py-20 max-w-5xl mx-auto text-center px-4 space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-primary-light/50 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-wider">
-          <ShieldCheck className="w-4 h-4" /> Subtema: Akses Ketenagakerjaan yang Setara & Inklusif
+          <ShieldCheck className="w-4 h-4" /> Subtema: Akses Ketenagakerjaan yang Setara & Ramah Disabilitas
         </div>
         
         <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight text-brand-fg">
-          AksesKerjaMu membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih inklusif.
+          AksesKerjaMu membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih ramah aksesibilitas.
         </h1>
         
         <p className="text-lg md:text-xl text-brand-fg/70 max-w-3xl mx-auto">
           {simpleLanguage 
             ? "AksesKerjaMu membantu Anda mencari pekerjaan dan melamar dengan mudah sesuai dengan kondisi atau kebutuhan Anda."
-            : "Platform pencarian kerja pertama yang berfokus pada kecocokan akomodasi aksesibilitas (inclusive job matching) untuk membantu penyandang disabilitas berkarir secara mandiri dan setara."
+            : "Platform pencarian kerja pertama yang berfokus pada kecocokan akomodasi aksesibilitas (pencarian kerja berbasis akomodasi) untuk membantu penyandang disabilitas berkarir secara mandiri dan setara."
           }
         </p>
 
@@ -129,9 +129,9 @@ export default function LandingPage() {
             {[
               { title: "Kecocokan Kerja Aksesibel", desc: "Mencocokkan kebutuhan disabilitas Anda dengan akomodasi kerja secara otomatis menggunakan kalkulator Kecocokan Kerja." },
               { title: "Filter Akomodasi Pintar", desc: "Mencari kerja khusus berdasarkan kriteria seperti: kursi roda, bantuan teks rapat, jam kerja fleksibel, atau remote." },
-              { title: "Profil Kerja Inklusif", desc: "Profil kerja alternatif yang menonjolkan keterampilan siap kerja dan portofolio praktis alih-alih CV formal." },
+              { title: "Profil Kerja Ramah Disabilitas", desc: "Profil kerja alternatif yang menonjolkan keterampilan siap kerja dan portofolio praktis alih-alih CV formal." },
               { title: "Template Pesan Akses", desc: "Menyediakan pesan otomatis untuk mengomunikasikan kebutuhan akomodasi Anda kepada HRD secara sopan saat melamar." },
-              { title: "Checklist Persiapan Interview", desc: "Membantu kesiapan wawancara kerja Anda dengan checklist kelengkapan dan simulasi pertanyaan." }
+              { title: "Checklist Persiapan Wawancara", desc: "Membantu kesiapan wawancara kerja Anda dengan checklist kelengkapan dan simulasi pertanyaan." }
             ].map((sol, index) => (
               <div key={index} className="p-6 rounded-2xl bg-brand-card border border-brand-border flex gap-4">
                 <CheckCircle className="text-brand-accent w-6 h-6 shrink-0 mt-0.5" />
@@ -180,7 +180,7 @@ export default function LandingPage() {
       {/* Simple Footer */}
       <footer className="py-8 border-t border-brand-border/40 mt-auto bg-brand-card text-center text-xs text-brand-fg/50 space-y-2">
         <p className="font-bold text-brand-primary">AksesKerjaMu © 2026. Lomba UI/UX: “Designing Without Barriers”</p>
-        <p>Tagline: “Work Without Barriers” — Subtema: Akses Ketenagakerjaan yang Setara & Inklusif</p>
+        <p>Tagline: “Work Without Barriers” — Subtema: Akses Ketenagakerjaan yang Setara & Ramah Disabilitas</p>
       </footer>
     </AppLayout>
   );

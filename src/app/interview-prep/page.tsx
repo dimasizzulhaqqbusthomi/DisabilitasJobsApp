@@ -45,7 +45,7 @@ const QUESTION_CATEGORIES = [
         id: "p3",
         q: "Mengapa Anda tertarik melamar di posisi ini?",
         tip: "Hubungkan keahlian Anda dengan kebutuhan posisi secara spesifik. Tunjukkan Anda sudah riset tentang perusahaan. Sebutkan nilai atau fasilitas aksesibel yang membuat Anda yakin bisa berkontribusi optimal di sini.",
-        example: "Saya tertarik karena posisi ini 100% remote dengan instruksi tertulis, yang sangat sesuai dengan cara kerja terbaik saya. Saya juga senang dengan misi perusahaan yang inklusif dan mendukung penyandang disabilitas.",
+        example: "Saya tertarik karena posisi ini 100% remote dengan instruksi tertulis, yang sangat sesuai dengan cara kerja terbaik saya. Saya juga senang dengan misi perusahaan yang ramah disabilitas dan mendukung karir setara.",
       },
     ],
   },

@@ -50,14 +50,14 @@ const getRecruiter = (jobId: string) => {
 
 const getAccLabel = (accKey: string) => {
   switch (accKey) {
-    case "remote": return "Bekerja Remote / Hybrid";
-    case "caption_meeting": return "Video Call dengan Caption";
+    case "remote": return "Kerja dari Rumah (Remote) / Hybrid";
+    case "caption_meeting": return "Video Rapat dengan Caption/Teks";
     case "wheelchair_access": return "Akses Kursi Roda";
     case "written_instruction": return "Instruksi Kerja Tertulis";
-    case "screen_reader": return "Screen Reader Friendly";
+    case "screen_reader": return "Mendukung Pembaca Layar (Screen Reader)";
     case "quiet_environment": return "Lingkungan Minim Bising";
     case "flexible_hours": return "Jam Kerja Fleksibel";
-    case "chat_communication": return "Interview & Komunikasi via Chat";
+    case "chat_communication": return "Wawancara & Komunikasi via Chat";
     default: return accKey;
   }
 };
@@ -173,7 +173,7 @@ export default function SavedJobsPage() {
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pt-1">
                       <div className="flex flex-wrap gap-1.5">
                         {[
-                          job.type === "remote" ? "Remote" : job.type === "hybrid" ? "Hybrid" : "Onsite",
+                          job.type === "remote" ? "Kerja dari Rumah" : job.type === "hybrid" ? "Hybrid" : "Di Kantor",
                           job.id === "1" || job.id === "5" ? "Penuh Waktu" : "Kontrak",
                         ].map(tag => (
                           <span key={tag} className="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-lg">{tag}</span>
@@ -216,7 +216,7 @@ export default function SavedJobsPage() {
                       <div className="text-[10px] text-slate-500 flex-1">
                         <span className="font-bold text-slate-700">{recruiter.name}</span>
                         <span className="mx-1">·</span>
-                        <span className="text-emerald-600 font-semibold">Verified</span>
+                        <span className="text-emerald-600 font-semibold">Terverifikasi</span>
                       </div>
                     </div>
 

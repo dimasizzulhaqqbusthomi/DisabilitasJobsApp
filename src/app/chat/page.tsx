@@ -14,8 +14,8 @@ import {
 
 // Mock recruiters listing
 const RECRUITERS = [
-  { id: "1", name: "Riska Amalia", initials: "RA", company: "PT Ruang Inklusif", lastMsg: "Halo! Lamaran Anda sudah saya terima ya. Saya akan segera kabari.", time: "09:11 AM", unread: 2, online: true },
-  { id: "2", name: "Beni Setiawan", initials: "BS", company: "Karya Inklusi", lastMsg: "Apakah Anda bersedia untuk interview chat hari Selasa besok?", time: "10:20 AM", unread: 1, online: true },
+  { id: "1", name: "Riska Amalia", initials: "RA", company: "PT Ruang Setara", lastMsg: "Halo! Lamaran Anda sudah saya terima ya. Saya akan segera kabari.", time: "09:11 AM", unread: 2, online: true },
+  { id: "2", name: "Beni Setiawan", initials: "BS", company: "Karya Setara", lastMsg: "Apakah Anda bersedia untuk wawancara via chat hari Selasa besok?", time: "10:20 AM", unread: 1, online: true },
   { id: "3", name: "Yudi Prasetyo", initials: "YP", company: "Harmoni Retail", lastMsg: "You: Terima kasih sudah melamar, mohon info selanjutnya.", time: "Kemarin", unread: 0, read: true, online: false },
   { id: "4", name: "Lina Marlina", initials: "LM", company: "PT Sinergi Utama", lastMsg: "You: Baik Bu, berkas portofolio sudah saya perbarui.", time: "2 hari lalu", unread: 0, read: true, online: false },
   { id: "5", name: "Dewi Lestari", initials: "DL", company: "Sentra Kreatif", lastMsg: "Bisa kirimkan link portofolio Canva atau Figma Anda?", time: "3 hari lalu", unread: 0, read: false, online: true }

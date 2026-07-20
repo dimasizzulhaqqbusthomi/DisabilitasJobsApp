@@ -48,7 +48,7 @@ export default function InterviewChecklistPage() {
       // count completed
       const completedCount = next.filter(i => i.checked).length;
       if (completedCount === next.length) {
-        showToast("Luar biasa! Persiapan interview Anda sudah 100% matang!", "success");
+        showToast("Luar biasa! Persiapan wawancara Anda sudah 100% matang!", "success");
       }
       return next;
     });
@@ -84,7 +84,7 @@ export default function InterviewChecklistPage() {
         
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-black">Persiapan & Checklist Interview</h1>
+          <h1 className="text-3xl font-black">Persiapan & Checklist Wawancara</h1>
           <p className="text-sm text-brand-fg/70">
             Panduan lengkap kesiapan wawancara kerja Anda serta sarana draf jawaban simulasi pertanyaan HRD.
           </p>
@@ -95,7 +95,7 @@ export default function InterviewChecklistPage() {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
             <h2 className="font-extrabold text-sm flex items-center gap-2">
               <CheckSquare className="w-5 h-5 text-brand-primary" />
-              <span>Progress Kesiapan Interview</span>
+              <span>Progress Kesiapan Wawancara</span>
             </h2>
             <span className="text-xs font-bold text-brand-primary">{completedCount} dari {checklist.length} Tugas Selesai ({progressPercent}%)</span>
           </div>

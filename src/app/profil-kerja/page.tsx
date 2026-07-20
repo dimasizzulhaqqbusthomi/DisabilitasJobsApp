@@ -557,7 +557,7 @@ export default function SkillPassportPage() {
               <div>
                 <h1 className="text-xl font-black text-white leading-snug mb-1">Profil Kerja Saya</h1>
                 <p className="text-white/70 text-xs leading-relaxed max-w-sm">
-                  CV digital inklusif dengan verifikasi keahlian nyata dan deklarasi akomodasi kerja.
+                  CV digital ramah disabilitas dengan verifikasi keahlian nyata dan deklarasi akomodasi kerja.
                 </p>
               </div>
             </div>
@@ -573,7 +573,7 @@ export default function SkillPassportPage() {
                 <span className="text-[10px] font-black tracking-widest uppercase">PROFIL KERJA AKSESKERJAMU</span>
                 <span className="text-[8px] font-black bg-emerald-500 text-white border border-emerald-400/20 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
                   <BadgeCheck className="w-2.5 h-2.5" />
-                  Verified
+                  Terverifikasi
                 </span>
               </div>
 
@@ -608,7 +608,7 @@ export default function SkillPassportPage() {
                       {currentPersona.location || "Jakarta"}
                     </div>
                     <div className="text-[9px] text-slate-400 font-bold mt-1.5 pl-0.5">
-                      ID: ABLE-{currentPersona.name.substring(0, 3).toUpperCase()}-2026
+                      ID: AKM-{currentPersona.name.substring(0, 3).toUpperCase()}-2026
                     </div>
                   </div>
                 </div>
@@ -626,7 +626,9 @@ export default function SkillPassportPage() {
                     </div>
                     <div>
                       <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Tipe Kerja</span>
-                      <span className="font-extrabold text-brand-fg leading-tight capitalize block">{jobPreferences.type}</span>
+                      <span className="font-extrabold text-brand-fg leading-tight block">
+                        {jobPreferences.type === "remote" ? "Kerja dari Rumah" : jobPreferences.type === "hybrid" ? "Hybrid" : "Kerja di Kantor"}
+                      </span>
                     </div>
                     <div>
                       <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">Pendidikan</span>
@@ -663,11 +665,11 @@ export default function SkillPassportPage() {
               {/* Hard Skills Section */}
               <div className="space-y-2">
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider pl-0.5">
-                  Hard Skills
+                  Keterampilan Teknis (Hard Skills)
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {hardSkills.length === 0 ? (
-                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada hard skill yang ditambahkan.</span>
+                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada keterampilan teknis yang ditambahkan.</span>
                   ) : (
                     hardSkills.map((skill) => (
                       <span
@@ -691,11 +693,11 @@ export default function SkillPassportPage() {
               {/* Soft Skills Section */}
               <div className="space-y-2 pt-3 border-t border-slate-100">
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider pl-0.5">
-                  Soft Skills
+                  Keterampilan Non-Teknis (Soft Skills)
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {softSkills.length === 0 ? (
-                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada soft skill yang ditambahkan.</span>
+                    <span className="text-[11px] text-slate-400 font-semibold pl-0.5">Belum ada keterampilan non-teknis yang ditambahkan.</span>
                   ) : (
                     softSkills.map((skill) => (
                       <span
@@ -727,7 +729,7 @@ export default function SkillPassportPage() {
                       type="button"
                     >
                       <Plus className="w-3.5 h-3.5 text-slate-400" />
-                      <span>+ Hard Skill</span>
+                      <span>Keterampilan Teknis</span>
                     </button>
                     <button
                       onClick={() => { setIsAddingSkill(true); setNewSkillType("soft"); }}
@@ -735,7 +737,7 @@ export default function SkillPassportPage() {
                       type="button"
                     >
                       <Plus className="w-3.5 h-3.5 text-slate-400" />
-                      <span>+ Soft Skill</span>
+                      <span>Keterampilan Non-Teknis</span>
                     </button>
                   </div>
                 ) : (
@@ -744,7 +746,7 @@ export default function SkillPassportPage() {
                       type="text"
                       value={newSkillText}
                       onChange={(e) => setNewSkillText(e.target.value)}
-                      placeholder={newSkillType === "hard" ? "Ketik hard skill..." : "Ketik soft skill..."}
+                      placeholder={newSkillType === "hard" ? "Ketik keterampilan teknis..." : "Ketik keterampilan non-teknis..."}
                       className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
                       onKeyDown={(e) => {
                         if (e.key === "Enter") handleAddSkill();

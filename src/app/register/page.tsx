@@ -44,9 +44,9 @@ const DISABILITY_TEMPLATES: Record<string, { needs: string[]; hint: string }> = 
 };
 
 const PURPOSES = [
-  { label: "Cari kerja", Icon: Briefcase, desc: "Temukan lowongan kerja inklusif" },
+  { label: "Cari kerja", Icon: Briefcase, desc: "Temukan lowongan kerja ramah difabel" },
   { label: "Buat profil skill", Icon: UserCheck, desc: "Siapkan profil kerja digital" },
-  { label: "Persiapan interview", Icon: HelpCircle, desc: "Latihan simulasi wawancara" },
+  { label: "Persiapan wawancara", Icon: HelpCircle, desc: "Latihan simulasi wawancara" },
 ];
 
 const INPUT_CLS = "w-full pl-10 pr-4 py-3.5 rounded-2xl border border-brand-border bg-brand-bg text-sm text-brand-fg placeholder:text-zinc-400 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all";
@@ -303,7 +303,7 @@ function RegisterForm() {
         {/* ── STEP 3: TUJUAN ── */}
         {step === 3 && (
           <div className="space-y-4">
-            <div className="mb-4"><h2 className="text-xl font-black text-brand-fg">Apa tujuan utama Anda?</h2><p className="text-xs text-brand-fg/50 mt-0.5">Pilih satu untuk menyesuaikan tampilan dashboard Anda.</p></div>
+            <div className="mb-4"><h2 className="text-xl font-black text-brand-fg">Apa tujuan utama Anda?</h2><p className="text-xs text-brand-fg/50 mt-0.5">Pilih satu untuk menyesuaikan tampilan beranda Anda.</p></div>
             <div className="grid gap-3">
               {PURPOSES.map(({ label, Icon, desc }) => {
                 const sel = purpose === label;
@@ -373,7 +373,7 @@ function RegisterForm() {
               <div className="p-3.5 flex justify-between"><span className="font-semibold text-brand-fg/60">Email</span><span className="font-extrabold text-brand-fg truncate max-w-[55%] text-right">{email}</span></div>
               <div className="p-3.5 flex justify-between items-start gap-2"><span className="font-semibold text-brand-fg/60 shrink-0">Disabilitas</span><span className="font-extrabold text-brand-fg text-right">{DISABILITY_OPTIONS.find(d => d.value === disabilityType)?.label}</span></div>
               <div className="p-3.5 flex justify-between"><span className="font-semibold text-brand-fg/60">Tujuan</span><span className="font-extrabold text-brand-fg">{purpose}</span></div>
-              <div className="p-3.5 flex justify-between"><span className="font-semibold text-brand-fg/60">Tipe Kerja</span><span className="font-extrabold text-brand-fg capitalize">{prefType}</span></div>
+              <div className="p-3.5 flex justify-between"><span className="font-semibold text-brand-fg/60">Tipe Kerja</span><span className="font-extrabold text-brand-fg">{prefType === "remote" ? "Kerja dari Rumah (Remote)" : prefType === "hybrid" ? "Hybrid" : "Kerja di Kantor (Onsite)"}</span></div>
               <div className="p-3.5">
                 <span className="font-semibold text-brand-fg/60 block mb-2">Akomodasi</span>
                 {selectedNeeds.length === 0 ? <span className="text-brand-fg/40">Belum dipilih</span> : (

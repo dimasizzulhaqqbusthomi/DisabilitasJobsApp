@@ -278,7 +278,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                       metaDisabilityType === "wicara" ? "Disabilitas Wicara" :
                       metaDisabilityType === "other" ? "Disabilitas lainnya" : "Umum",
       needs: metaNeeds,
-      bio: "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir inklusif.",
+      bio: "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir yang ramah disabilitas.",
       skills: ["Komunikasi", "Kerjasama Tim"],
       experience: "Pengalaman baru dimulai",
       education: "",
@@ -316,7 +316,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
               disability_type: metaDisabilityType === "Umum" ? "none" : metaDisabilityType,
               accessibility_needs: metaNeeds,
               avatar: user.user_metadata?.avatar_url || user.user_metadata?.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
-              bio: "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir inklusif.",
+              bio: "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir yang ramah disabilitas.",
               skills: ["Komunikasi", "Kerjasama Tim"],
               experience: "Pengalaman baru dimulai",
               education: "",
@@ -414,7 +414,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                               data.disability_type === "wicara" ? "Disabilitas Wicara" :
                               data.disability_type === "other" ? "Disabilitas lainnya" : "Umum",
               needs: data.accessibility_needs || [],
-              bio: data.bio || "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir inklusif.",
+              bio: data.bio || "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir yang ramah disabilitas.",
               skills: data.skills && data.skills.length > 0 ? data.skills : ["Komunikasi", "Kerjasama Tim"],
               experience: data.experience || "Pengalaman baru dimulai",
               education: data.education || "",
@@ -631,7 +631,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return next;
     });
 
-    showToast("Terima kasih atas feedback rekrutmen inklusif Anda!", "success");
+    showToast("Terima kasih atas feedback rekrutmen ramah difabel Anda!", "success");
   };
 
   const refreshProfile = async () => {
@@ -707,7 +707,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                           data.disability_type === "wicara" ? "Disabilitas Wicara" :
                           data.disability_type === "other" ? "Disabilitas lainnya" : "Umum",
           needs: data.accessibility_needs || [],
-          bio: data.bio || "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir inklusif.",
+          bio: data.bio || "Profil pengguna terdaftar di AksesKerjaMu. Siap mencari karir yang ramah disabilitas.",
           skills: data.skills && data.skills.length > 0 ? data.skills : ["Komunikasi", "Kerjasama Tim"],
           experience: data.experience || "Pengalaman baru dimulai",
           education: data.education || "",

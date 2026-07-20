@@ -47,7 +47,7 @@ const STATUS_CONFIG: Record<Application["status"], {
     step: 2,
   },
   interview: {
-    label: "Dipanggil Interview",
+    label: "Dipanggil Wawancara",
     color: "text-sky-600",
     bgColor: "bg-sky-50",
     borderColor: "border-sky-200",
@@ -76,7 +76,7 @@ const STATUS_CONFIG: Record<Application["status"], {
 const TIMELINE_STEPS = [
   { key: "applied", label: "Terkirim", icon: <Send className="w-3 h-3" /> },
   { key: "review", label: "Ditinjau", icon: <Eye className="w-3 h-3" /> },
-  { key: "interview", label: "Interview", icon: <Users className="w-3 h-3" /> },
+  { key: "interview", label: "Wawancara", icon: <Users className="w-3 h-3" /> },
   { key: "accepted", label: "Diterima", icon: <CheckCircle2 className="w-3 h-3" /> },
 ];
 
@@ -282,7 +282,7 @@ export default function ApplicationsPage() {
               { key: "all", label: "Semua" },
               { key: "applied", label: "Terkirim" },
               { key: "review", label: "Ditinjau" },
-              { key: "interview", label: "Interview" },
+              { key: "interview", label: "Wawancara" },
               { key: "accepted", label: "Diterima" },
               { key: "rejected", label: "Tidak Lolos" },
             ] as const).map(tab => (

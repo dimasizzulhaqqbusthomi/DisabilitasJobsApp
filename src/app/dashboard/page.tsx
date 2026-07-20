@@ -19,9 +19,9 @@ const fmtSalary = (s: string) =>
     .replace(/\.200\.000/g, ",2jt").replace(/\s?-\s?Rp\s?/g, "–");
 
 const getAccLabel = (k: string) => ({
-  remote: "Remote / Hybrid", caption_meeting: "Caption Video Call",
+  remote: "Kerja dari Rumah (Remote) / Hybrid", caption_meeting: "Teks Rapat Video (Caption)",
   wheelchair_access: "Akses Kursi Roda", written_instruction: "Instruksi Tertulis",
-  screen_reader: "Screen Reader", quiet_environment: "Minim Bising",
+  screen_reader: "Mendukung Pembaca Layar", quiet_environment: "Minim Bising",
   flexible_hours: "Jam Fleksibel", chat_communication: "Komunikasi Chat",
 }[k] ?? k);
 
@@ -115,14 +115,6 @@ export default function DashboardPage() {
               <Bell className="w-5 h-5 text-white" />
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[8px] font-black rounded-full flex items-center justify-center border-2 border-[#4338ca] animate-pulse">6</span>
             </Link>
-          </div>
-
-          {/* headline */}
-          <div className="relative z-10 mb-6">
-            <p className="text-white/80 text-xs font-medium mb-0.5">Tingkat Kecocokan Kerja Anda</p>
-            <h1 className="text-white text-xl font-black leading-snug">
-              {avgMatch < 30 ? "Lengkapi profil untuk Kecocokan Kerja terbaik" : `${avgMatch}% Kecocokan Kerja`}
-            </h1>
           </div>
 
           {/* stat pill row */}
@@ -274,7 +266,7 @@ export default function DashboardPage() {
                       <div className="text-[10px] text-brand-fg/60">
                         <span className="font-bold text-brand-fg">{rec.name}</span>
                         <span className="mx-1">·</span>
-                        <span className="text-emerald-600 font-semibold">Verified</span>
+                        <span className="text-emerald-600 font-semibold">Terverifikasi</span>
                       </div>
                     </div>
                   </Link>

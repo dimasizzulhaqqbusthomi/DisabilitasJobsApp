@@ -80,14 +80,14 @@ export interface MessageTemplate {
 export const ACCOMMODATIONS: AccommodationType[] = [
   {
     key: "remote",
-    label: "Bekerja Remote / Hybrid",
+    label: "Kerja dari Rumah (Remote) / Hybrid",
     icon: "Home",
     description: "Pilihan bekerja dari rumah untuk mengurangi kebutuhan mobilitas fisik.",
     simpleDescription: "Bisa kerja dari rumah tanpa harus pergi ke kantor."
   },
   {
     key: "caption_meeting",
-    label: "Video Call dengan Caption",
+    label: "Teks Rapat Video (Caption)",
     icon: "Subtitles",
     description: "Setiap pertemuan online menyediakan takarir (caption) otomatis atau juru bahasa isyarat.",
     simpleDescription: "Rapat online ada teks tulisannya agar mudah dimengerti."
@@ -108,9 +108,9 @@ export const ACCOMMODATIONS: AccommodationType[] = [
   },
   {
     key: "screen_reader",
-    label: "Screen Reader Friendly",
+    label: "Mendukung Pembaca Layar (Screen Reader)",
     icon: "Eye",
-    description: "Perangkat lunak dan sistem internal perusahaan kompatibel dengan aplikasi pembaca layar (NVDA/JAWS).",
+    description: "Perangkat lunak dan sistem internal perusahaan mendukung aplikasi pembaca layar (NVDA/JAWS).",
     simpleDescription: "Aplikasi komputer bisa mengeluarkan suara untuk membaca teks di layar."
   },
   {
@@ -129,7 +129,7 @@ export const ACCOMMODATIONS: AccommodationType[] = [
   },
   {
     key: "chat_communication",
-    label: "Interview & Komunikasi via Chat",
+    label: "Wawancara & Komunikasi via Chat",
     icon: "MessageSquare",
     description: "Wawancara kerja dan koordinasi harian bisa dilakukan menggunakan teks/chat.",
     simpleDescription: "Bicara dengan bos dan teman kerja lewat ketikan pesan (chat) saja."
@@ -226,14 +226,14 @@ export const JOBS: Job[] = [
   {
     id: "1",
     title: "Admin Online",
-    company: "PT Ruang Inklusif",
+    company: "PT Ruang Setara",
     logo: "🏢",
     location: "Jakarta Barat (Bisa Remote)",
     type: "remote",
     salary: "Rp 4.500.000 - Rp 5.500.000",
     defaultMatchScore: 94,
     accommodations: ["remote", "written_instruction", "chat_communication", "flexible_hours"],
-    description: "Kami mencari Admin Online yang bertugas mengelola pesanan masuk, membalas chat pelanggan, dan memperbarui stok barang di e-commerce secara berkala. Perusahaan kami berkomitmen penuh menciptakan lingkungan kerja inklusif bagi penyandang disabilitas daksa dan rungu.",
+    description: "Kami mencari Admin Online yang bertugas mengelola pesanan masuk, membalas chat pelanggan, dan memperbarui stok barang di e-commerce secara berkala. Perusahaan kami berkomitmen penuh menciptakan lingkungan kerja yang ramah difabel bagi penyandang disabilitas daksa dan rungu.",
     simpleDescription: "Pekerjaan mengurus toko online. Tugasnya membalas pesan pembeli, mendata barang masuk, dan mengupdate stok produk di aplikasi HP/komputer.",
     tasks: [
       "Membalas chat calon pembeli dengan sopan dan cepat",

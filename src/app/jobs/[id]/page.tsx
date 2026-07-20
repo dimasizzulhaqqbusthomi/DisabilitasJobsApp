@@ -137,7 +137,7 @@ export default function JobDetailPage() {
     showToast(isSaved ? "Lowongan dihapus dari simpanan" : "Lowongan berhasil disimpan!", "info");
   };
 
-  const typeLabel = job.type === "remote" ? "Remote" : job.type === "hybrid" ? "Hybrid" : "Onsite";
+  const typeLabel = job.type === "remote" ? "Kerja dari Rumah (Remote)" : job.type === "hybrid" ? "Hybrid" : "Kerja di Kantor (Onsite)";
 
   /* ─────────────────── JSX ─────────────────── */
   return (
@@ -212,21 +212,29 @@ export default function JobDetailPage() {
             <div className="flex-1 flex flex-col items-center border-r border-slate-100 pr-3">
               <Briefcase className="w-4 h-4 text-indigo-500 mb-0.5" />
               <span className="text-[10px] text-slate-400 font-semibold">Tipe</span>
-              <span className="text-xs font-black text-brand-fg">{typeLabel}</span>
+              <span className="text-xs font-black text-brand-fg text-center">{typeLabel}</span>
             </div>
             <div className="flex-1 flex flex-col items-center border-r border-slate-100 pr-3">
               <Clock className="w-4 h-4 text-emerald-500 mb-0.5" />
               <span className="text-[10px] text-slate-400 font-semibold">Status</span>
-              <span className="text-xs font-black text-emerald-600">Dibuka</span>
+              <span className="text-xs font-black text-emerald-600 text-center">Dibuka</span>
             </div>
             <div className="flex-1 flex flex-col items-center">
               <GraduationCap className="w-4 h-4 text-indigo-500 mb-0.5" />
               <span className="text-[10px] text-slate-400 font-semibold">Pendidikan</span>
-              <span className="text-xs font-black text-brand-fg">
+              <span className="text-xs font-black text-brand-fg text-center">
                 {job.id === "2" ? "D3" : job.id === "4" ? "SMA/SMK" : "S1"}
               </span>
             </div>
           </div>
+
+          {/* ── Analisis Kecocokan Kerja — dipindah ke atas untuk visibilitas ── */}
+          <MatchReasonCard
+            accessibilityScore={matchDetails.accessibilityScore}
+            skillScore={matchDetails.skillScore}
+            portfolioScore={matchDetails.portfolioScore}
+            jobInterestScore={matchDetails.jobInterestScore}
+          />
 
           {/* Kontak Rekruter (HRD) */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 space-y-3">
@@ -242,10 +250,10 @@ export default function JobDetailPage() {
                 <div className="flex items-center gap-1.5">
                   <span className="font-extrabold text-slate-800 text-xs truncate">{recruiter.name}</span>
                   <span className="text-slate-300 mx-1 text-xs">·</span>
-                  <span className="text-emerald-600 font-bold text-[11px]">Verified</span>
+                  <span className="text-emerald-600 font-bold text-[11px]">Terverifikasi</span>
                 </div>
                 <p className="text-[10px] text-slate-400 font-semibold mt-0.5">
-                  Online {recruiter.online} · Aktif di AksesKerjaMu
+                  Aktif {recruiter.online} · Terverifikasi di AksesKerjaMu
                 </p>
               </div>
 
@@ -258,13 +266,6 @@ export default function JobDetailPage() {
               </Link>
             </div>
           </div>
-
-          <MatchReasonCard
-            accessibilityScore={matchDetails.accessibilityScore}
-            skillScore={matchDetails.skillScore}
-            portfolioScore={matchDetails.portfolioScore}
-            jobInterestScore={matchDetails.jobInterestScore}
-          />
 
           {/* Akomodasi Aksesibilitas */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
@@ -365,7 +366,7 @@ export default function JobDetailPage() {
               ))}
               <li className="flex items-start gap-2 text-[11px] text-amber-800/80">
                 <span className="shrink-0 mt-0.5">•</span>
-                <span className="leading-relaxed">Interview online tersedia via Google Meet/Zoom dengan opsi teks penuh jika dibutuhkan.</span>
+                <span className="leading-relaxed">Wawancara online tersedia via Google Meet/Zoom dengan opsi teks penuh jika dibutuhkan.</span>
               </li>
             </ul>
           </div>
