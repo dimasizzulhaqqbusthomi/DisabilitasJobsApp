@@ -77,46 +77,26 @@ function LoginForm() {
   return (
     <div className="min-h-screen bg-brand-bg flex flex-col">
       {/* Top illustration area */}
-      <div className="relative bg-gradient-to-br from-brand-primary/10 via-brand-primary/5 to-transparent flex flex-col items-center pt-12 pb-8 px-6 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-brand-primary/10 via-brand-primary/5 to-transparent flex flex-col items-center justify-center pt-10 pb-7 px-6 overflow-hidden">
         {/* Background decorative circles */}
         <div className="absolute top-4 right-8 w-16 h-16 rounded-full bg-brand-primary/15" />
         <div className="absolute bottom-0 left-4 w-10 h-10 rounded-full bg-brand-primary/10" />
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 mb-6 group" aria-label="AXES Home">
+        {/* Logo AXES */}
+        <Link
+          href="/"
+          className="group relative flex flex-col items-center justify-center my-2 transition-transform hover:scale-105"
+          aria-label="AXES Home"
+        >
           <Image
             src="/logo.png"
             alt="Logo AXES"
-            width={48}
-            height={48}
-            className="w-12 h-12 object-contain transition-transform group-hover:scale-105 drop-shadow-sm"
+            width={112}
+            height={112}
+            className="w-28 h-28 object-contain drop-shadow-md"
             priority
           />
-          <span className="text-2xl font-black text-brand-fg tracking-tight">
-            AX<span className="text-brand-primary">ES</span>
-          </span>
         </Link>
-
-        {/* Illustration placeholder — decorative SVG */}
-        <div className="w-48 h-36 flex items-center justify-center">
-          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            {/* Phone mockup */}
-            <rect x="70" y="10" width="60" height="100" rx="10" fill="white" stroke="#e2e8f0" strokeWidth="1.5" />
-            <rect x="78" y="22" width="44" height="28" rx="4" fill="#e0e7ff" />
-            <rect x="78" y="56" width="30" height="4" rx="2" fill="#e2e8f0" />
-            <rect x="78" y="64" width="44" height="4" rx="2" fill="#e2e8f0" />
-            <rect x="78" y="72" width="44" height="4" rx="2" fill="#e2e8f0" />
-            <rect x="82" y="84" width="36" height="12" rx="6" fill="#4f46e5" />
-            {/* Person silhouette */}
-            <circle cx="155" cy="60" r="12" fill="#4f46e5" opacity="0.15" />
-            <circle cx="155" cy="52" r="7" fill="#4f46e5" opacity="0.5" />
-            <path d="M143 75 Q155 68 167 75" stroke="#4f46e5" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
-            {/* Shield/lock icon */}
-            <path d="M100 25 L112 30 L112 42 Q112 50 100 55 Q88 50 88 42 L88 30 Z" fill="#4f46e5" opacity="0.15" />
-            <rect x="96" y="36" width="8" height="7" rx="2" fill="#4f46e5" opacity="0.7" />
-            <path d="M96 36 Q100 31 104 36" stroke="#4f46e5" strokeWidth="1.5" fill="none" opacity="0.7" />
-          </svg>
-        </div>
       </div>
 
       {/* Card form */}
