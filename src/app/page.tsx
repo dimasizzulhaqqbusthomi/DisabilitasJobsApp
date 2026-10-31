@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import AppLayout from "../components/AppLayout";
 import { 
   Briefcase, 
@@ -23,10 +24,15 @@ export default function LandingPage() {
     <AppLayout showNav={false}>
       {/* Top Simple Header */}
       <header className="py-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center justify-between w-full border-b border-brand-border/40">
-        <Link href="/" className="flex items-center gap-2 text-2xl font-black text-brand-primary">
-          <div className="p-1.5 bg-brand-primary text-white rounded-lg">
-            <Accessibility className="w-6 h-6" />
-          </div>
+        <Link href="/" className="flex items-center gap-2 text-2xl font-black text-brand-primary group">
+          <Image
+            src="/logo.png"
+            alt="AXES"
+            width={34}
+            height={34}
+            className="w-8.5 h-8.5 object-contain transition-transform group-hover:scale-105"
+            priority
+          />
           <span>AX<span className="text-brand-secondary">ES</span></span>
         </Link>
         <Link 

@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import AppLayout from "../../components/AppLayout";
 import { useAppState } from "../../context/AppContext";
-import { 
-  ArrowLeft, 
-  Bell, 
-  MoreVertical, 
-  Check, 
-  Trash2, 
+import {
+  ArrowLeft,
+  Bell,
+  MoreVertical,
+  Check,
+  Trash2,
   Inbox,
   CheckSquare
 } from "lucide-react";
@@ -94,12 +94,12 @@ export default function NotificationsPage() {
   const yesterdayNotifs = notifications.filter(n => n.group === "Kemarin");
 
   return (
-    <AppLayout 
-      showHeader={false} 
+    <AppLayout
+      showHeader={false}
       mainClassName="flex-1 overflow-y-auto bg-brand-bg pb-24"
     >
       <div className="max-w-2xl mx-auto w-full flex flex-col relative bg-brand-bg">
-        
+
         {/* ─── GRADIENT HEADER ─── */}
         <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-cyan-500 pt-5 pb-4 px-5 text-white shadow-md shadow-indigo-900/5 relative overflow-hidden select-none mb-4">
           {/* decorative circles */}
@@ -154,13 +154,12 @@ export default function NotificationsPage() {
 
                   <div className="space-y-3">
                     {todayNotifs.map(item => (
-                      <div 
+                      <div
                         key={item.id}
-                        className={`bg-white rounded-2xl border transition-all p-4 relative ${
-                          item.read 
-                            ? "border-slate-100 opacity-75" 
+                        className={`bg-white rounded-2xl border transition-all p-4 relative ${item.read
+                            ? "border-slate-100 opacity-75"
                             : "border-slate-100 shadow-sm shadow-blue-500/5 bg-gradient-to-r from-blue-50/10 to-white"
-                        }`}
+                          }`}
                       >
                         {/* Unread indicator dot */}
                         {!item.read && (
@@ -234,13 +233,12 @@ export default function NotificationsPage() {
 
                   <div className="space-y-3">
                     {yesterdayNotifs.map(item => (
-                      <div 
+                      <div
                         key={item.id}
-                        className={`bg-white rounded-2xl border transition-all p-4 relative ${
-                          item.read 
-                            ? "border-slate-100 opacity-75" 
+                        className={`bg-white rounded-2xl border transition-all p-4 relative ${item.read
+                            ? "border-slate-100 opacity-75"
                             : "border-slate-100 shadow-sm shadow-blue-500/5 bg-gradient-to-r from-blue-50/10 to-white"
-                        }`}
+                          }`}
                       >
                         {/* Unread indicator dot */}
                         {!item.read && (

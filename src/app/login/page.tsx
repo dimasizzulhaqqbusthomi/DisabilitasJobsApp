@@ -2,8 +2,9 @@
 
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2, Accessibility } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2 } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -82,11 +83,16 @@ function LoginForm() {
         <div className="absolute bottom-0 left-4 w-10 h-10 rounded-full bg-brand-primary/10" />
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 mb-6">
-          <div className="p-2 bg-brand-primary rounded-xl shadow-lg shadow-brand-primary/30">
-            <Accessibility className="w-6 h-6 text-white" />
-          </div>
-          <span className="text-2xl font-black text-brand-fg">
+        <Link href="/" className="flex items-center gap-2.5 mb-6 group" aria-label="AXES Home">
+          <Image
+            src="/logo.png"
+            alt="Logo AXES"
+            width={48}
+            height={48}
+            className="w-12 h-12 object-contain transition-transform group-hover:scale-105 drop-shadow-sm"
+            priority
+          />
+          <span className="text-2xl font-black text-brand-fg tracking-tight">
             AX<span className="text-brand-primary">ES</span>
           </span>
         </Link>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAppState } from "../context/AppContext";
 import { useAccessibility } from "../context/AccessibilityContext";
@@ -97,12 +98,17 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="flex items-center gap-2 text-2xl font-black text-brand-primary"
+                className="flex items-center gap-2 text-2xl font-black text-brand-primary group"
                 aria-label="AXES Home"
               >
-                <div className="p-1.5 bg-brand-primary text-white rounded-lg" aria-hidden="true">
-                  <Accessibility className="w-6 h-6" />
-                </div>
+                <Image
+                  src="/logo.png"
+                  alt="AXES"
+                  width={34}
+                  height={34}
+                  className="w-8.5 h-8.5 object-contain transition-transform group-hover:scale-105"
+                  priority
+                />
                 <span>AX<span className="text-brand-secondary">ES</span></span>
               </Link>
               <span className="hidden sm:inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full bg-brand-primary-light text-brand-primary dark:bg-zinc-800 dark:text-zinc-200">
@@ -164,8 +170,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                     key={item.name}
                     href={item.href}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all ${isActive
-                        ? "bg-brand-primary text-white shadow-md shadow-brand-primary/20"
-                        : "hover:bg-brand-primary-light/50 hover:text-brand-primary"
+                      ? "bg-brand-primary text-white shadow-md shadow-brand-primary/20"
+                      : "hover:bg-brand-primary-light/50 hover:text-brand-primary"
                       }`}
                   >
                     <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
@@ -229,8 +235,8 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
                   className="relative flex flex-col items-center justify-end pb-3 w-20 h-full text-[9px] font-extrabold transition-all select-none"
                 >
                   <div className={`absolute -top-5 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all ${isActive
-                      ? "bg-brand-primary text-white shadow-brand-primary/40 scale-105"
-                      : "bg-brand-primary text-white shadow-brand-primary/30 hover:scale-105 active:scale-95"
+                    ? "bg-brand-primary text-white shadow-brand-primary/40 scale-105"
+                    : "bg-brand-primary text-white shadow-brand-primary/30 hover:scale-105 active:scale-95"
                     }`}>
                     <Icon className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>

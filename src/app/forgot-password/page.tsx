@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Accessibility, Lock, Eye, EyeOff, Mail, AlertCircle, Loader2, ChevronLeft, CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { Lock, Eye, EyeOff, Mail, AlertCircle, Loader2, ChevronLeft, CheckCircle } from "lucide-react";
 
 type ForgotStep = "email" | "sent" | "reset";
 
@@ -71,11 +72,16 @@ export default function ForgotPasswordPage() {
         </Link>
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 mb-5">
-          <div className="p-2 bg-brand-primary rounded-xl shadow-lg shadow-brand-primary/30">
-            <Accessibility className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-xl font-black text-brand-fg">
+        <Link href="/" className="flex items-center gap-2.5 mb-5 group" aria-label="AXES Home">
+          <Image
+            src="/logo.png"
+            alt="Logo AXES"
+            width={40}
+            height={40}
+            className="w-10 h-10 object-contain transition-transform group-hover:scale-105 drop-shadow-sm"
+            priority
+          />
+          <span className="text-xl font-black text-brand-fg tracking-tight">
             AX<span className="text-brand-primary">ES</span>
           </span>
         </Link>

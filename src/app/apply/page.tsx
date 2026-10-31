@@ -46,8 +46,8 @@ function StarRating({ value, onChange }: { value: number; onChange: (v: number) 
         >
           <Star
             className={`w-8 h-8 transition-colors ${i <= (hovered || value)
-                ? "fill-amber-400 text-amber-400"
-                : "text-slate-200 fill-slate-200"
+              ? "fill-amber-400 text-amber-400"
+              : "text-slate-200 fill-slate-200"
               }`}
           />
         </button>
@@ -258,13 +258,13 @@ function ApplyContent() {
                             type="button"
                             onClick={() => toggleFeature(f.id)}
                             className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-left transition-all ${active
-                                ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-400/20"
-                                : "border-slate-100 bg-slate-50 hover:bg-slate-100"
+                              ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-400/20"
+                              : "border-slate-100 bg-slate-50 hover:bg-slate-100"
                               }`}
                           >
                             <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border transition-colors ${active
-                                ? "bg-indigo-500 border-indigo-500 text-white"
-                                : "bg-white border-slate-200 text-transparent"
+                              ? "bg-indigo-500 border-indigo-500 text-white"
+                              : "bg-white border-slate-200 text-transparent"
                               }`}>
                               <Check className="w-3 h-3" />
                             </div>
@@ -378,10 +378,10 @@ function ApplyContent() {
                     <div key={s} className="z-10 flex flex-col items-center gap-1">
                       <div
                         className={`w-7 h-7 rounded-full flex items-center justify-center font-black text-xs border transition-all ${isCompleted
-                            ? "bg-emerald-500 border-emerald-500 text-white"
-                            : isActive
-                              ? "bg-indigo-600 border-indigo-600 text-white shadow-md ring-4 ring-indigo-50"
-                              : "bg-white border-slate-200 text-slate-400"
+                          ? "bg-emerald-500 border-emerald-500 text-white"
+                          : isActive
+                            ? "bg-indigo-600 border-indigo-600 text-white shadow-md ring-4 ring-indigo-50"
+                            : "bg-white border-slate-200 text-slate-400"
                           }`}
                       >
                         {isCompleted ? <Check className="w-3.5 h-3.5" /> : s}
@@ -496,8 +496,8 @@ function ApplyContent() {
                           key={tmpl.id}
                           onClick={() => handleTemplateSelect(tmpl.id)}
                           className={`p-3 rounded-xl border text-left text-[11px] transition-all relative ${isSelected
-                              ? "border-indigo-500 bg-indigo-50/30 ring-1 ring-indigo-500/20"
-                              : "border-slate-100 bg-slate-50/50 hover:bg-slate-50"
+                            ? "border-indigo-500 bg-indigo-50/30 ring-1 ring-indigo-500/20"
+                            : "border-slate-100 bg-slate-50/50 hover:bg-slate-50"
                             }`}
                           type="button"
                         >
@@ -522,8 +522,8 @@ function ApplyContent() {
                         setCustomMessage("");
                       }}
                       className={`p-3 rounded-xl border text-left text-[11px] transition-all relative ${selectedTemplateId === ""
-                          ? "border-indigo-500 bg-indigo-50/30 ring-1 ring-indigo-500/20"
-                          : "border-slate-100 bg-slate-50/50 hover:bg-slate-50"
+                        ? "border-indigo-500 bg-indigo-50/30 ring-1 ring-indigo-500/20"
+                        : "border-slate-100 bg-slate-50/50 hover:bg-slate-50"
                         }`}
                       type="button"
                     >
