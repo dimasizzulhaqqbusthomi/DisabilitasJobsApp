@@ -90,26 +90,26 @@ export default function ForgotPasswordPage() {
         <div className="w-44 h-32 flex items-center justify-center">
           <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             {/* Form/screen background */}
-            <rect x="45" y="10" width="110" height="90" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5"/>
+            <rect x="45" y="10" width="110" height="90" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5" />
             {/* Input rows */}
-            <rect x="58" y="30" width="84" height="14" rx="7" fill="#f1f5f9" stroke="#e2e8f0" strokeWidth="1"/>
-            <rect x="64" y="36" width="6" height="3" rx="1.5" fill="#94a3b8"/>
-            <rect x="72" y="36" width="40" height="3" rx="1.5" fill="#cbd5e1"/>
-            <rect x="58" y="52" width="84" height="14" rx="7" fill="#f1f5f9" stroke="#e2e8f0" strokeWidth="1"/>
-            <rect x="64" y="58" width="6" height="3" rx="1.5" fill="#94a3b8"/>
-            <rect x="72" y="58" width="30" height="3" rx="1.5" fill="#cbd5e1"/>
+            <rect x="58" y="30" width="84" height="14" rx="7" fill="#f1f5f9" stroke="#e2e8f0" strokeWidth="1" />
+            <rect x="64" y="36" width="6" height="3" rx="1.5" fill="#94a3b8" />
+            <rect x="72" y="36" width="40" height="3" rx="1.5" fill="#cbd5e1" />
+            <rect x="58" y="52" width="84" height="14" rx="7" fill="#f1f5f9" stroke="#e2e8f0" strokeWidth="1" />
+            <rect x="64" y="58" width="6" height="3" rx="1.5" fill="#94a3b8" />
+            <rect x="72" y="58" width="30" height="3" rx="1.5" fill="#cbd5e1" />
             {/* Button */}
-            <rect x="58" y="74" width="84" height="16" rx="8" fill="#4f46e5"/>
-            <rect x="78" y="80" width="44" height="4" rx="2" fill="white" opacity="0.8"/>
+            <rect x="58" y="74" width="84" height="16" rx="8" fill="#4f46e5" />
+            <rect x="78" y="80" width="44" height="4" rx="2" fill="white" opacity="0.8" />
             {/* Lock icon */}
-            <rect x="92" y="102" width="16" height="12" rx="3" fill="#4f46e5" opacity="0.8"/>
-            <path d="M95 102 L95 98 Q100 93 105 98 L105 102" stroke="#4f46e5" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-            <circle cx="100" cy="108" r="2" fill="white"/>
+            <rect x="92" y="102" width="16" height="12" rx="3" fill="#4f46e5" opacity="0.8" />
+            <path d="M95 102 L95 98 Q100 93 105 98 L105 102" stroke="#4f46e5" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <circle cx="100" cy="108" r="2" fill="white" />
             {/* People silhouettes */}
-            <circle cx="162" cy="55" r="10" fill="#4f46e5" opacity="0.10"/>
-            <circle cx="162" cy="49" r="6" fill="#4f46e5" opacity="0.35"/>
-            <path d="M153 66 Q162 61 171 66" stroke="#4f46e5" strokeWidth="2" strokeLinecap="round" opacity="0.35"/>
-            <circle cx="32" cy="80" r="6" fill="#4f46e5" opacity="0.07"/>
+            <circle cx="162" cy="55" r="10" fill="#4f46e5" opacity="0.10" />
+            <circle cx="162" cy="49" r="6" fill="#4f46e5" opacity="0.35" />
+            <path d="M153 66 Q162 61 171 66" stroke="#4f46e5" strokeWidth="2" strokeLinecap="round" opacity="0.35" />
+            <circle cx="32" cy="80" r="6" fill="#4f46e5" opacity="0.07" />
           </svg>
         </div>
 
@@ -180,7 +180,7 @@ export default function ForgotPasswordPage() {
             <div>
               <h1 className="text-xl font-black text-brand-fg">Email Terkirim!</h1>
               <p className="text-xs text-brand-fg/50 mt-2 leading-relaxed max-w-xs mx-auto">
-                Kami telah mengirimkan tautan reset kata sandi ke <strong className="text-brand-fg">{email}</strong>. 
+                Kami telah mengirimkan tautan reset kata sandi ke <strong className="text-brand-fg">{email}</strong>.
                 Cek kotak masuk dan folder spam Anda.
               </p>
             </div>
