@@ -570,7 +570,7 @@ export default function SkillPassportPage() {
             <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
               {/* Passport Header Banner */}
               <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-cyan-500 px-4 py-3 text-white flex items-center justify-between">
-                <span className="text-[10px] font-black tracking-widest uppercase">PROFIL KERJA AKSESKERJAMU</span>
+                <span className="text-[10px] font-black tracking-widest uppercase">PROFIL KERJA AXES</span>
                 <span className="text-[8px] font-black bg-emerald-500 text-white border border-emerald-400/20 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
                   <BadgeCheck className="w-2.5 h-2.5" />
                   Terverifikasi
@@ -608,7 +608,7 @@ export default function SkillPassportPage() {
                       {currentPersona.location || "Jakarta"}
                     </div>
                     <div className="text-[9px] text-slate-400 font-bold mt-1.5 pl-0.5">
-                      ID: AKM-{currentPersona.name.substring(0, 3).toUpperCase()}-2026
+                      ID: AXES-{currentPersona.name.substring(0, 3).toUpperCase()}-2026
                     </div>
                   </div>
                 </div>
@@ -1450,7 +1450,7 @@ export default function SkillPassportPage() {
                       required
                       value={certIssuer}
                       onChange={(e) => setCertIssuer(e.target.value)}
-                      placeholder="Contoh: AksesKerjaMu Academy"
+                      placeholder="Contoh: AXES Academy"
                       className="w-full p-2.5 rounded-xl border border-slate-200 font-semibold focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
                     />
                   </div>

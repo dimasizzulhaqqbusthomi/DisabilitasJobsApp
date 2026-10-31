@@ -286,7 +286,7 @@ export default function ProfilePage() {
     if (user) {
       setEmail(user.email || "");
     } else {
-      setEmail("mode-simulasi@akseskerjamu.com");
+      setEmail("mode-simulasi@axes.id");
     }
   }, [currentPersona, user]);
 

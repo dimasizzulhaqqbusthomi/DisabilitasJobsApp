@@ -31,7 +31,7 @@ const getRecruiter = (id: string) => ({
   "3": { initials: "YP", name: "Yudi P." },
   "4": { initials: "LM", name: "Lina M." },
   "5": { initials: "DL", name: "Dewi L." },
-}[id] ?? { initials: "AKM", name: "AksesKerjaMu" });
+}[id] ?? { initials: "AXES", name: "AXES" });
 
 /* ─── Donut ring component ─────────────────────────────────── */
 function DonutRing({ pct, size = 88, stroke = 9 }: { pct: number; size?: number; stroke?: number }) {
@@ -102,7 +102,7 @@ export default function DashboardPage() {
               {initials}
             </div>
             <div className="flex flex-col flex-1">
-              <span className="text-[10px] text-white/70 font-medium">Selamat datang di AksesKerjaMu</span>
+              <span className="text-[10px] text-white/70 font-medium">Selamat datang di AXES</span>
               <span className="text-base font-black text-white leading-tight">{currentPersona.name}</span>
             </div>
             <Link href="/chat" aria-label="Pesan (Chat)"

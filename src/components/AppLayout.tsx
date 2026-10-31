@@ -98,12 +98,12 @@ export default function AppLayout({ children, showNav = true, showHeader = true,
               <Link
                 href="/"
                 className="flex items-center gap-2 text-2xl font-black text-brand-primary"
-                aria-label="AksesKerjaMu Home"
+                aria-label="AXES Home"
               >
                 <div className="p-1.5 bg-brand-primary text-white rounded-lg" aria-hidden="true">
                   <Accessibility className="w-6 h-6" />
                 </div>
-                <span>Akses<span className="text-brand-secondary">KerjaMu</span></span>
+                <span>AX<span className="text-brand-secondary">ES</span></span>
               </Link>
               <span className="hidden sm:inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full bg-brand-primary-light text-brand-primary dark:bg-zinc-800 dark:text-zinc-200">
                 PROTOTYPE UI

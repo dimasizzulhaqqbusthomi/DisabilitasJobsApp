@@ -1,5 +1,5 @@
 -- ============================================================
--- SQL SCRIPT UNTUK SETUP TABLE DAN SEED DATA PERSONA ABLEWORK
+-- SQL SCRIPT UNTUK SETUP TABLE DAN SEED DATA PERSONA AXES
 -- ============================================================
 -- Petunjuk:
 -- 1. Buka Supabase Dashboard (https://supabase.com/dashboard)
@@ -67,9 +67,9 @@ CREATE POLICY "Profil dapat ditambahkan oleh pemilik"
 -- Password untuk semua akun di bawah ini adalah: password123
 
 -- Hapus user lama jika ada agar bersih dan bisa di-insert ulang secara utuh
-DELETE FROM auth.users WHERE email IN ('sinta@ablework.com', 'budi@ablework.com', 'adi@ablework.com', 'dina@ablework.com');
+DELETE FROM auth.users WHERE email IN ('sinta@axes.id', 'budi@axes.id', 'adi@axes.id', 'dina@axes.id');
 
--- A. Persona 1: Sinta (sinta@ablework.com)
+-- A. Persona 1: Sinta (sinta@axes.id)
 INSERT INTO auth.users (
   id,
   instance_id,
@@ -97,7 +97,7 @@ INSERT INTO auth.users (
 SELECT
   'de32252a-995a-4bbf-85f0-5c6218d6e3c1',
   '00000000-0000-0000-0000-000000000000',
-  'sinta@ablework.com',
+  'sinta@axes.id',
   crypt('password123', gen_salt('bf')),
   now(),
   '{"provider":"email","providers":["email"]}',
@@ -118,10 +118,10 @@ SELECT
   false,
   false
 WHERE NOT EXISTS (
-  SELECT 1 FROM auth.users WHERE email = 'sinta@ablework.com'
+  SELECT 1 FROM auth.users WHERE email = 'sinta@axes.id'
 );
 
--- B. Persona 2: Budi (budi@ablework.com)
+-- B. Persona 2: Budi (budi@axes.id)
 INSERT INTO auth.users (
   id,
   instance_id,
@@ -149,7 +149,7 @@ INSERT INTO auth.users (
 SELECT
   'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2',
   '00000000-0000-0000-0000-000000000000',
-  'budi@ablework.com',
+  'budi@axes.id',
   crypt('password123', gen_salt('bf')),
   now(),
   '{"provider":"email","providers":["email"]}',
@@ -170,10 +170,10 @@ SELECT
   false,
   false
 WHERE NOT EXISTS (
-  SELECT 1 FROM auth.users WHERE email = 'budi@ablework.com'
+  SELECT 1 FROM auth.users WHERE email = 'budi@axes.id'
 );
 
--- C. Persona 3: Adi (adi@ablework.com)
+-- C. Persona 3: Adi (adi@axes.id)
 INSERT INTO auth.users (
   id,
   instance_id,
@@ -201,7 +201,7 @@ INSERT INTO auth.users (
 SELECT
   'ad12252a-995a-4bbf-85f0-5c6218d6e3c3',
   '00000000-0000-0000-0000-000000000000',
-  'adi@ablework.com',
+  'adi@axes.id',
   crypt('password123', gen_salt('bf')),
   now(),
   '{"provider":"email","providers":["email"]}',
@@ -222,10 +222,10 @@ SELECT
   false,
   false
 WHERE NOT EXISTS (
-  SELECT 1 FROM auth.users WHERE email = 'adi@ablework.com'
+  SELECT 1 FROM auth.users WHERE email = 'adi@axes.id'
 );
 
--- D. Persona 4: Dina (dina@ablework.com) - 100% Completeness & 100% Match for Admin Online
+-- D. Persona 4: Dina (dina@axes.id) - 100% Completeness & 100% Match for Admin Online
 INSERT INTO auth.users (
   id,
   instance_id,
@@ -253,7 +253,7 @@ INSERT INTO auth.users (
 SELECT
   'd1ea9999-9999-9999-9999-999999999999',
   '00000000-0000-0000-0000-000000000000',
-  'dina@ablework.com',
+  'dina@axes.id',
   crypt('password123', gen_salt('bf')),
   now(),
   '{"provider":"email","providers":["email"]}',
@@ -274,7 +274,7 @@ SELECT
   false,
   false
 WHERE NOT EXISTS (
-  SELECT 1 FROM auth.users WHERE email = 'dina@ablework.com'
+  SELECT 1 FROM auth.users WHERE email = 'dina@axes.id'
 );
 
 
@@ -295,7 +295,7 @@ INSERT INTO auth.identities (
 SELECT
   'de32252a-995a-4bbf-85f0-5c6218d6e3c1',
   'de32252a-995a-4bbf-85f0-5c6218d6e3c1',
-  jsonb_build_object('sub', 'de32252a-995a-4bbf-85f0-5c6218d6e3c1', 'email', 'sinta@ablework.com', 'email_verified', true),
+  jsonb_build_object('sub', 'de32252a-995a-4bbf-85f0-5c6218d6e3c1', 'email', 'sinta@axes.id', 'email_verified', true),
   'email',
   'de32252a-995a-4bbf-85f0-5c6218d6e3c1',
   now(),
@@ -319,7 +319,7 @@ INSERT INTO auth.identities (
 SELECT
   'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2',
   'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2',
-  jsonb_build_object('sub', 'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2', 'email', 'budi@ablework.com', 'email_verified', true),
+  jsonb_build_object('sub', 'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2', 'email', 'budi@axes.id', 'email_verified', true),
   'email',
   'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2',
   now(),
@@ -343,7 +343,7 @@ INSERT INTO auth.identities (
 SELECT
   'ad12252a-995a-4bbf-85f0-5c6218d6e3c3',
   'ad12252a-995a-4bbf-85f0-5c6218d6e3c3',
-  jsonb_build_object('sub', 'ad12252a-995a-4bbf-85f0-5c6218d6e3c3', 'email', 'adi@ablework.com', 'email_verified', true),
+  jsonb_build_object('sub', 'ad12252a-995a-4bbf-85f0-5c6218d6e3c3', 'email', 'adi@axes.id', 'email_verified', true),
   'email',
   'ad12252a-995a-4bbf-85f0-5c6218d6e3c3',
   now(),
@@ -367,7 +367,7 @@ INSERT INTO auth.identities (
 SELECT
   'd1ea9999-9999-9999-9999-999999999999',
   'd1ea9999-9999-9999-9999-999999999999',
-  jsonb_build_object('sub', 'd1ea9999-9999-9999-9999-999999999999', 'email', 'dina@ablework.com', 'email_verified', true),
+  jsonb_build_object('sub', 'd1ea9999-9999-9999-9999-999999999999', 'email', 'dina@axes.id', 'email_verified', true),
   'email',
   'd1ea9999-9999-9999-9999-999999999999',
   now(),
@@ -400,7 +400,7 @@ INSERT INTO public.profiles (
 VALUES (
   'de32252a-995a-4bbf-85f0-5c6218d6e3c1',
   'Sinta',
-  'sinta@ablework.com',
+  'sinta@axes.id',
   'Neurodivergent (ADHD & Autisme)',
   ARRAY['written_instruction', 'quiet_environment', 'flexible_hours', 'remote'],
   'Saya tertarik pada pekerjaan administrasi dan pelayanan pelanggan. Saya memiliki kemampuan komunikasi tertulis dan nyaman bekerja dengan tugas yang terstruktur.',
@@ -412,7 +412,7 @@ VALUES (
   ARRAY['Admin Online', 'Customer Support', 'Data Entry'],
   'Jakarta',
   '[{"title": "Desain Konten Sosmed UMKM", "role": "Graphic Design", "tool": "Canva & Figma", "img": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300", "link": "https://figma.com"}, {"title": "Data Entry & Dashboard Spreadsheet", "role": "Data Entry", "tool": "Google Sheets", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300", "link": "https://google.com"}]'::jsonb,
-  '[{"title": "Sertifikat Kelulusan Dasar Pengolahan Data Excel", "issuer": "AbleWork Academy", "date": "Juni 2026", "link": "https://excel.com"}, {"title": "Pelatihan Customer Service Chat & Bisnis Online", "issuer": "Karya Setara", "date": "April 2026", "link": "https://karyasetara.com"}]'::jsonb
+  '[{"title": "Sertifikat Kelulusan Dasar Pengolahan Data Excel", "issuer": "AXES Academy", "date": "Juni 2026", "link": "https://excel.com"}, {"title": "Pelatihan Customer Service Chat & Bisnis Online", "issuer": "Karya Setara", "date": "April 2026", "link": "https://karyasetara.com"}]'::jsonb
 )
 ON CONFLICT (id) DO UPDATE SET
   full_name = EXCLUDED.full_name,
@@ -450,7 +450,7 @@ INSERT INTO public.profiles (
 VALUES (
   'b00d1e34-995a-4bbf-85f0-5c6218d6e3c2',
   'Budi',
-  'budi@ablework.com',
+  'budi@axes.id',
   'Disabilitas Fisik (Pengguna Kursi Roda)',
   ARRAY['wheelchair_access', 'flexible_hours', 'remote'],
   'Desainer Grafis lepas yang ingin mencari tantangan kerja tetap secara hybrid. Membutuhkan akses gedung ramah kursi roda dan toilet aksesibel.',
@@ -461,7 +461,7 @@ VALUES (
   ARRAY['independent_work', 'team_collaboration', 'quiet_environment'],
   ARRAY['Junior Graphic Designer', 'Content Admin UMKM'],
   'Bandung',
-  '[{"title": "Redesign Landing Page AbleWork", "role": "UI/UX Designer", "tool": "Figma", "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300", "link": "https://figma.com"}, {"title": "Desain Poster Edukasi Aksesibilitas", "role": "Graphic Designer", "tool": "Canva", "img": "https://images.unsplash.com/photo-1572044162444-ad60f128bde3?w=300", "link": "https://canva.com"}]'::jsonb,
+  '[{"title": "Redesign Landing Page AXES", "role": "UI/UX Designer", "tool": "Figma", "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300", "link": "https://figma.com"}, {"title": "Desain Poster Edukasi Aksesibilitas", "role": "Graphic Designer", "tool": "Canva", "img": "https://images.unsplash.com/photo-1572044162444-ad60f128bde3?w=300", "link": "https://canva.com"}]'::jsonb,
   '[{"title": "Sertifikat Adobe Certified Professional in Visual Design", "issuer": "Adobe", "date": "Mei 2025", "link": "https://adobe.com"}]'::jsonb
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -500,7 +500,7 @@ INSERT INTO public.profiles (
 VALUES (
   'ad12252a-995a-4bbf-85f0-5c6218d6e3c3',
   'Adi',
-  'adi@ablework.com',
+  'adi@axes.id',
   'Tuli / Hard of Hearing',
   ARRAY['caption_meeting', 'chat_communication', 'written_instruction', 'remote'],
   'Spesialis Customer Support berbasis chat yang berpengalaman merespons komplain pelanggan dengan ramah dan cepat. Berkomunikasi optimal menggunakan teks tertulis.',
@@ -512,7 +512,7 @@ VALUES (
   ARRAY['Customer Support Chat', 'Data Entry Assistant'],
   'Surabaya',
   '[{"title": "Penanganan 500+ Chat Komplain Pelanggan", "role": "Customer Support", "tool": "WhatsApp Business", "img": "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=300", "link": "https://whatsapp.com"}]'::jsonb,
-  '[{"title": "Pelatihan Komunikasi Efektif Tertulis", "issuer": "AbleWork Academy", "date": "Februari 2026", "link": "https://ablework.id"}]'::jsonb
+  '[{"title": "Pelatihan Komunikasi Efektif Tertulis", "issuer": "AXES Academy", "date": "Februari 2026", "link": "https://axes.id"}]'::jsonb
 )
 ON CONFLICT (id) DO UPDATE SET
   full_name = EXCLUDED.full_name,
@@ -550,7 +550,7 @@ INSERT INTO public.profiles (
 VALUES (
   'd1ea9999-9999-9999-9999-999999999999',
   'Dina',
-  'dina@ablework.com',
+  'dina@axes.id',
   'Tidak ada / Lebih suka tidak menyebutkan',
   ARRAY['remote', 'written_instruction'],
   'Saya seorang profesional administrasi yang teliti, terorganisir, dan berfokus pada hasil. Siap memberikan dukungan operasional terbaik secara remote.',
@@ -608,9 +608,9 @@ UPDATE public.profiles
 SET certificates = '[
   {
     "title": "Sertifikat Kelulusan Dasar Pengolahan Data Excel", 
-    "issuer": "AbleWork Academy", 
+    "issuer": "AXES Academy", 
     "date": "Juni 2026", 
-    "link": "https://ablework.id"
+    "link": "https://axes.id"
   }, 
   {
     "title": "Pelatihan Customer Service Chat & Bisnis Online", 
@@ -878,7 +878,7 @@ BEGIN
     ARRAY['Admin Online', 'Customer Support'],
     'Jakarta',
     '[{"title": "Laporan Kerja Praktik Digital Marketing", "role": "Researcher", "tool": "Google Docs", "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300", "link": "https://google.com"}]'::jsonb,
-    '[{"title": "Sertifikat Digital Marketing Dasar", "issuer": "AbleWork Academy", "date": "Mei 2026", "link": "https://ablework.id"}]'::jsonb
+    '[{"title": "Sertifikat Digital Marketing Dasar", "issuer": "AXES Academy", "date": "Mei 2026", "link": "https://axes.id"}]'::jsonb
   )
   ON CONFLICT (id) DO NOTHING;
 

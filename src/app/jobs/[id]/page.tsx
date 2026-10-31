@@ -98,7 +98,7 @@ const getRecruiter = (jobId: string) => {
     case "8":
       return { name: "Fajar Nugroho", initials: "FN", phone: "+62 889-5678-9017", waLink: "https://wa.me/6288956789017", online: "15 mnt lalu" };
     default:
-      return { name: "Recruiter AksesKerjaMu", initials: "RA", phone: "+62 812-3456-7890", waLink: "https://wa.me/6281234567890", online: "1 jam lalu" };
+      return { name: "Recruiter AXES", initials: "RA", phone: "+62 812-3456-7890", waLink: "https://wa.me/6281234567890", online: "1 jam lalu" };
   }
 };
 
@@ -253,7 +253,7 @@ export default function JobDetailPage() {
                   <span className="text-emerald-600 font-bold text-[11px]">Terverifikasi</span>
                 </div>
                 <p className="text-[10px] text-slate-400 font-semibold mt-0.5">
-                  Aktif {recruiter.online} · Terverifikasi di AksesKerjaMu
+                  Aktif {recruiter.online} · Terverifikasi di AXES
                 </p>
               </div>
 

@@ -46,7 +46,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "notif-3",
     title: "Berkas Prioritas Diteruskan",
-    desc: "Berkas lamaran Anda telah dikirim dan masuk dalam antrean prioritas rekrutmen ramah difabel AksesKerjaMu.",
+    desc: "Berkas lamaran Anda telah dikirim dan masuk dalam antrean prioritas rekrutmen ramah difabel AXES.",
     date: "23 Juni 2026",
     group: "Kemarin",
     read: true,

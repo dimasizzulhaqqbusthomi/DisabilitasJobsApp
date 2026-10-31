@@ -59,7 +59,7 @@ const QUESTION_CATEGORIES = [
         id: "s1",
         q: "Ceritakan pengalaman atau proyek yang pernah Anda kerjakan.",
         tip: "Gunakan metode STAR: Situasi → Tugas → Aksi → Hasil. Sebutkan proyek nyata (portofolio, magang, pelatihan, tugas mandiri). Fokus pada hasil yang terukur seperti 'menyelesaikan 500 baris data dalam 3 hari'.",
-        example: "Di pelatihan AksesKerjaMu, saya menyelesaikan entri 500 baris data produk UMKM menggunakan Google Sheets dalam 3 hari. Hasilnya digunakan untuk laporan bulanan tim dan mendapat penilaian baik dari pembimbing.",
+        example: "Di pelatihan AXES, saya menyelesaikan entri 500 baris data produk UMKM menggunakan Google Sheets dalam 3 hari. Hasilnya digunakan untuk laporan bulanan tim dan mendapat penilaian baik dari pembimbing.",
       },
       {
         id: "s2",

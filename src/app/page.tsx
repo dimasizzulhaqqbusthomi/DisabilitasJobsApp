@@ -27,7 +27,7 @@ export default function LandingPage() {
           <div className="p-1.5 bg-brand-primary text-white rounded-lg">
             <Accessibility className="w-6 h-6" />
           </div>
-          <span>Akses<span className="text-brand-secondary">KerjaMu</span></span>
+          <span>AX<span className="text-brand-secondary">ES</span></span>
         </Link>
         <Link 
           href="/onboarding" 
@@ -44,12 +44,12 @@ export default function LandingPage() {
         </div>
         
         <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight text-brand-fg">
-          AksesKerjaMu membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih ramah aksesibilitas.
+          AXES membantu pencari kerja difabel menemukan lowongan dan proses rekrutmen yang lebih ramah aksesibilitas.
         </h1>
         
         <p className="text-lg md:text-xl text-brand-fg/70 max-w-3xl mx-auto">
           {simpleLanguage 
-            ? "AksesKerjaMu membantu Anda mencari pekerjaan dan melamar dengan mudah sesuai dengan kondisi atau kebutuhan Anda."
+            ? "AXES membantu Anda mencari pekerjaan dan melamar dengan mudah sesuai dengan kondisi atau kebutuhan Anda."
             : "Platform pencarian kerja pertama yang berfokus pada kecocokan akomodasi aksesibilitas (pencarian kerja berbasis akomodasi) untuk membantu penyandang disabilitas berkarir secara mandiri dan setara."
           }
         </p>
@@ -119,9 +119,9 @@ export default function LandingPage() {
       <section className="py-12 bg-brand-primary-light/10 border-t border-b border-brand-border/40">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center space-y-2 mb-12">
-            <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Solusi Inovatif AksesKerjaMu</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Solusi Inovatif AXES</h2>
             <p className="text-sm text-brand-fg/70 max-w-xl mx-auto">
-              Bagaimana AksesKerjaMu memecahkan rintangan dan menyetarakan akses ketenagakerjaan?
+              Bagaimana AXES memecahkan rintangan dan menyetarakan akses ketenagakerjaan?
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function LandingPage() {
           <div className="text-center space-y-2 mb-10">
             <h2 className="text-2xl md:text-3xl font-black text-brand-fg">Dirancang untuk Semua Kebutuhan</h2>
             <p className="text-sm text-brand-fg/70 max-w-xl mx-auto">
-              AksesKerjaMu memprioritaskan ragam aksesibilitas untuk berbagai profil pengguna.
+              AXES memprioritaskan ragam aksesibilitas untuk berbagai profil pengguna.
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function LandingPage() {
 
       {/* Simple Footer */}
       <footer className="py-8 border-t border-brand-border/40 mt-auto bg-brand-card text-center text-xs text-brand-fg/50 space-y-2">
-        <p className="font-bold text-brand-primary">AksesKerjaMu © 2026. Lomba UI/UX: “Designing Without Barriers”</p>
+        <p className="font-bold text-brand-primary">AXES © 2026. Lomba UI/UX: “Designing Without Barriers”</p>
         <p>Tagline: “Work Without Barriers” — Subtema: Akses Ketenagakerjaan yang Setara & Ramah Disabilitas</p>
       </footer>
     </AppLayout>

@@ -87,7 +87,7 @@ function LoginForm() {
             <Accessibility className="w-6 h-6 text-white" />
           </div>
           <span className="text-2xl font-black text-brand-fg">
-            Akses<span className="text-brand-primary">KerjaMu</span>
+            AX<span className="text-brand-primary">ES</span>
           </span>
         </Link>
 

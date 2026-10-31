@@ -215,7 +215,7 @@ function ApplyContent() {
                   <Heart className="w-8 h-8 text-emerald-500 fill-emerald-500" />
                 </div>
                 <h3 className="text-base font-black text-brand-fg">Terima Kasih!</h3>
-                <p className="text-xs text-slate-400 font-medium">Feedback kamu sangat berarti untuk AksesKerjaMu 🙌</p>
+                <p className="text-xs text-slate-400 font-medium">Feedback kamu sangat berarti untuk AXES 🙌</p>
               </div>
             ) : (
               <>
@@ -235,7 +235,7 @@ function ApplyContent() {
                     </div>
                     <span className="text-xs font-black text-white/80">Lamaran berhasil dikirim</span>
                   </div>
-                  <h2 className="text-base font-black leading-snug">Bagaimana pengalaman kamu menggunakan AksesKerjaMu?</h2>
+                  <h2 className="text-base font-black leading-snug">Bagaimana pengalaman kamu menggunakan AXES?</h2>
                 </div>
 
                 {/* Body */}
@@ -585,7 +585,7 @@ function ApplyContent() {
                         </div>
                         <div className="min-w-0">
                           <div className="truncate">Profil Kerja - {currentPersona.name}.pdf</div>
-                          <div className="text-[8px] font-black text-emerald-600 uppercase tracking-wide">Terverifikasi AksesKerjaMu</div>
+                          <div className="text-[8px] font-black text-emerald-600 uppercase tracking-wide">Terverifikasi AXES</div>
                         </div>
                       </div>
                     </div>

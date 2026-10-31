@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
             <Accessibility className="w-5 h-5 text-white" />
           </div>
           <span className="text-xl font-black text-brand-fg">
-            Able<span className="text-brand-primary">Work</span>
+            AX<span className="text-brand-primary">ES</span>
           </span>
         </Link>
 

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../components/Providers";
 import { PathnameWatcher } from "../components/PathnameWatcher";
+import { HIGH_CONTRAST_INIT_SCRIPT } from "../context/AccessibilityContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,8 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AksesKerjaMu - Work Without Barriers",
-  description: "Platform pencarian kerja ramah disabilitas untuk penyandang disabilitas dengan job matching berbasis akomodasi.",
+  title: "AXES - Work Without Barriers",
+  description:
+    "Platform pencarian kerja ramah disabilitas untuk penyandang disabilitas dengan job matching berbasis akomodasi.",
 };
 
 export default function RootLayout({
@@ -24,15 +26,24 @@ export default function RootLayout({
       lang="id"
       className={`${inter.variable} h-full antialiased overflow-hidden`}
     >
+      <head>
+        {/*
+          Flash-prevention: inject theme class BEFORE first paint so there
+          is no flash of unstyled / wrong-contrast content.
+          dangerouslySetInnerHTML is intentional and safe here — it only
+          reads localStorage and sets a class on <html>.
+        */}
+        <script
+          dangerouslySetInnerHTML={{ __html: HIGH_CONTRAST_INIT_SCRIPT }}
+        />
+      </head>
       <body className="h-full w-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-950 text-brand-fg overflow-hidden">
         <PathnameWatcher />
-        
+
         {/* Centered Mobile Layout Container */}
         <div className="w-full max-w-[430px] h-full bg-brand-bg flex flex-col shadow-2xl relative overflow-hidden border-x border-zinc-200/80 dark:border-zinc-800/80">
           <div className="flex-1 relative overflow-hidden flex flex-col">
-            <Providers>
-              {children}
-            </Providers>
+            <Providers>{children}</Providers>
           </div>
         </div>
       </body>

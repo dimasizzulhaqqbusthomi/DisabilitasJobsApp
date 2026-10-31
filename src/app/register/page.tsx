@@ -394,7 +394,7 @@ function RegisterForm() {
                 )}
               </div>
             </div>
-            <p className="text-[10px] text-brand-fg/40 leading-relaxed">Dengan mendaftar, Anda menyetujui syarat penggunaan AksesKerjaMu. Data aksesibilitas Anda hanya digunakan untuk mencocokkan lowongan kerja.</p>
+            <p className="text-[10px] text-brand-fg/40 leading-relaxed">Dengan mendaftar, Anda menyetujui syarat penggunaan AXES. Data aksesibilitas Anda hanya digunakan untuk mencocokkan lowongan kerja.</p>
           </div>
         )}
 

@@ -73,8 +73,8 @@ export default function InterviewChecklistPage() {
     { 
       id: "q3", 
       q: "Contoh pekerjaan atau pengalaman yang pernah kamu lakukan?", 
-      tip: "Sebutkan proyek latihan, tugas sekolah/kuliah, magang, atau pelatihan mandiri di AksesKerjaMu Academy yang berhasil Anda selesaikan. Fokus pada hasil nyata yang berhasil Anda capai.",
-      placeholder: "Contoh: Di pelatihan AksesKerjaMu, saya menyelesaikan entri 500 baris data produk dan membuat template spanduk promosi toko..."
+      tip: "Sebutkan proyek latihan, tugas sekolah/kuliah, magang, atau pelatihan mandiri di AXES Academy yang berhasil Anda selesaikan. Fokus pada hasil nyata yang berhasil Anda capai.",
+      placeholder: "Contoh: Di pelatihan AXES, saya menyelesaikan entri 500 baris data produk dan membuat template spanduk promosi toko..."
     },
   ];
 
